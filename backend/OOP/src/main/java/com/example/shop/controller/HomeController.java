@@ -18,33 +18,24 @@ public class HomeController {
         this.productRepo = productRepo;
     }
 
+    //tạo trang home
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("products", productRepo.findAll());
         return "home";
     }
 
-    @GetMapping("/cart")
-    public String cart(Model model) {
-        model.addAttribute("products", productRepo.findAll());
-        return "cart";
-    }
-
-    @GetMapping("/login")
-    public String logout(Model model) {
-        return "login";
-    }
-
+    //hàm tìm sản phẩm
     @GetMapping("/search")
     public String searchProduct(@RequestParam(required = false) String keyword, Model model) {
         if (keyword == null || keyword.trim().isEmpty()) {
-            return "redirect:/";
+            return "redirect:/home";
         }
 
         List<Product> matchingProducts = productRepo.findByTitleContainingIgnoreCase(keyword);
         if (matchingProducts.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp");
-            return "search-result";
+            return "redirect:/search-result";
         }
 
         if (matchingProducts.size() == 1) {
@@ -53,38 +44,40 @@ public class HomeController {
         }
 
         model.addAttribute("products", matchingProducts);
-        return "search-result";
+        return "redirect:/search-result";
     }
 
-    @GetMapping("/brand/{brandName}")
-    public String viewByBrand(@PathVariable String brandName, Model model) {
-        List<Product> productsByBrand = productRepo.findByBrandIgnoreCase(brandName);
+    //hàm tạo trang brand name
+    @GetMapping("/brand/{name}")
+    public String viewByBrand(@PathVariable String name, Model model) {
+        List<Product> productsByBrand = productRepo.findByBrandIgnoreCase(name);
         model.addAttribute("products", productsByBrand);
-        model.addAttribute("brand", brandName);
-        return "brand-products";
+        model.addAttribute("brand", name);
+        return "redirect:/brand-products";
     }
 
+    //hàm tạo trang theo giá tiền
     @GetMapping("/price/{price}")
-    public String viewByPrice(@PathVariable double price, Model model) {
-        List<Product> productsByPrice = productRepo.findByPrice(price);
+    public String viewByPrice(@PathVariable double minPrice, @PathVariable double maxPrice,Model model) {
+        List<Product> productsByPrice = productRepo.findByPriceBetween(minPrice, maxPrice);
         model.addAttribute("products", productsByPrice);
-        model.addAttribute("price", price);
-        return "price-products";
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        return "redirect:/price-products";
     }
 
+    //tạo trang hot product
     @GetMapping("/product/{id}")
     public String viewHotProduct(@PathVariable Long id, Model model) {
         Product product = productRepo.findById(id).orElse(null);
 
         if (product == null) {
             model.addAttribute("message", "Không tìm thấy sản phẩm.");
-            return "error";
+            return "redirect:/error";
         }
 
         model.addAttribute("product", product);
-        return "hot-product";
+        return "redirect:/hot-product";
     }
-
-
 
 }

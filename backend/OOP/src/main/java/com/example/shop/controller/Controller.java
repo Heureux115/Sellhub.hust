@@ -31,10 +31,10 @@ class AuthController {
         User user = userService.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
-            return "redirect:/";
+            return "home"; // hoặc return "redirect:/home";
         } else {
-            model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
-            return "login";
+            model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
+            return "login"; // phải forward về login, không redirect
         }
     }
 
@@ -61,6 +61,12 @@ class AuthController {
         if (userService.findByUsername(username) != null) {
             model.addAttribute("error", "Tên đăng nhập đã tồn tại");
             return "register";
+        } else if (userService.findByEmail(email) != null) {
+            model.addAttribute("error", "Email đã tồn tại");
+            return "register";
+        }else if (userService.findByPhone(phone) != null) {
+            model.addAttribute("error", "Số điện thoại đã tồn tại");
+            return "register";
         } else if (!password.equals(confirmpassword)) {
             model.addAttribute("error", "mật khẩu không trùng nhau");
             return "register";
@@ -74,7 +80,7 @@ class AuthController {
         return "redirect:/login";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";

@@ -1,26 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
-<head>
-    <title>Đăng nhập</title>
-</head>
-<body>
-<h2>Đăng nhập</h2>
-<form th:action="@{/login}" method="post">
-    <p>
-        <label>Tên đăng nhập:</label>
-        <label>
-            <input type="text" name="username" required/>
-        </label>
-    </p>
-    <p>
-        <label>Mật khẩu:</label>
-        <label>
-            <input type="password" name="password" required/>
-        </label>
-    </p>
-    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
-    <p><button type="submit">Đăng nhập</button></p>
-</form>
-<p><a th:href="@{/register}">Đăng ký tài khoản mới</a></p>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SELLHUB - Đăng nhập tài khoản</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to our mall!!</h1>
+    </header>
+
+    <div id = "big">
+      <h1 id="dang_nhap" class="top">Đăng nhập</h1>
+
+  <!-- Hiển thị lỗi -->
+    <div id = "error" th:if="${error}" style="color: red;">
+      <p th:text="${error}">Lỗi đăng nhập</p>
+    </div >
+
+  <!-- Form đăng nhập -->
+    <form th:action="@{/login}" method="post">
+      <label for="tai_khoan"></label><input
+            type="text"
+            id="tai_khoan"
+            name="username"
+            class="login_form"
+            size="40"
+            placeholder="Nhập email, tên đăng nhập, số điện thoại"
+            required
+      />
+      <br/>
+      <label for="mat_khau"></label><input
+            type="password"
+            id="mat_khau"
+            name="password"
+            class="login_form"
+            size="40"
+            placeholder="Nhập mật khẩu"
+            required
+      />
+      <br/>
+      <p class="top">
+      <button type="submit" id="dangnhap_button">Đăng nhập</button>
+      </p>
+    </form>
+
+  <!-- Link đăng ký -->
+  <p>
+    Bạn chưa có tài khoản?
+    <a th:href="@{/register}">
+      <button type="button" id = "dangky_button">Đăng ký</button>
+    </a>
+  </p>
+</div>
 </body>
 </html>

@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(-90deg, #333, #ccc);
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    background: #000000;
+    padding: 10px 20px;
+    color: white;
+  }
+  .logo img{
+    width: 200px;
+    height: auto;
+   
+  }
+  .search{
+    margin-left: 50px;
+    margin-top: 10px;
+    width: 600px;
+    height: 50px;
+    display: flex;
+  }
+  #tim_kiem{
+    height: 40px;
+    width: 500px;
+  }
+  #search_button{
+    height: 40px;
+    width: 40px;
+  }
+  .extra{
+    display: flex;
+  }
+  
+  .hotline{
+    justify-content: center;
+    padding-top: 5px;
+  }
+
+  #cart_button{
+    height: 40px;
+    width: 40px;
+    margin-left: 40px;
+  }
+  .log_out{
+    width: 80px;
+    height: 40px;
+    background-color:#FFA500;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: #FFA500;
+  }
+  #brand_list{
+    background-color: #000000;
+    border-top: 2px solid white;
+    height: 40px;
+    width: 100%;
+  }
+  #brand_list ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    list-style-type: none;
+  }
+  #brand_list ul button{
+    height: 36px;
+    width: 120px;
+    color: white;
+    background-color: #000000;
+    border-right: 2px solid white;
+    border-top: none;
+    border-left: none;
+    border-bottom:none;
+    box-sizing: border-box;
+  }
+  #brand_list ul #ten_hang{
+    height: 36px;
+    width: 120px;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    border-right: 2px solid white;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    box-sizing: border-box;
+  }
+
+  #price_list ul button{
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-bottom:2px solid #000000;
+    box-sizing: border-box;
+  }
+
+  #price_list ul #muc_gia{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #000000;
+    background-color: white;
+  }
+  
+  

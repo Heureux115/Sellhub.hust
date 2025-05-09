@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SELLHUB - Giỏ hàng</title>
+  <link rel="stylesheet" th:href="@{/css/cart.css}" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="header">
+    <div class="home-button">
+      <a th:href="@{/back-to-home}">
+        <button type="button" id = "home-button">Trang chủ</button>
+      </a>
+    </div>
+    <div class="cart-info">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+      </svg>
+      <h5>Giỏ hàng của bạn</h5>
+    </div>
+  </div>
+  <div id="list">
+    <h3>Sản phẩm</h3>
+    <div class="product-list">
+      <div class="product-item" th:each="item : ${cart.values()}">
+        <img th:src="${item.product.imageUrl}" alt="Hình ảnh sản phẩm" />
+        <div class="product-info">
+          <h4 th:text="${item.product.title}">Tên sản phẩm</h4>
+          <p th:text="${item.product.description}">Mô tả</p>
+          <span class="product-price" th:text="'Giá: ' + ${item.product.price} + '₫'">Giá</span>
+          <form th:action="@{/cart/remove}" method="post">
+            <input type="hidden" name="productId" th:value="${item.product.id}" />
+            <button type="submit" class="remove-button">Xóa</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="total-section">
+    <h4>Tổng cộng: <span th:text="${total} + '₫'">0₫</span></h4>
+    <form th:action="@{/checkout}" method="post">
+      <button type="submit">Thanh toán</button>
+    </form>
+    <div th:if="${message}">
+      <p th:text="${message}" style="color: green;"></p>
+    </div>
+  </div>
+
+
+</body>
+
+
+</html>

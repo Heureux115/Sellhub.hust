@@ -1,0 +1,51 @@
+.top{
+    text-align: center;
+  }
+header {
+  font-weight: bold;
+    font-family: Georgia, serif;
+  text-align: center;
+  font-size: 45px;
+}
+body{
+  background-color: #87ceeb ;
+}
+#dang_ky{
+  font-size : 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+div{
+    margin:auto;
+    justify-content: center;
+    width: 400px;
+    height: 500px;
+    border: 2px solid #f5f5f5;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-sizing: border-box;
+}
+#dangky_button{
+  font-size: 15px;
+  padding: 5px;
+  border: 2px solid #1e90ff;
+  border-radius: 6px;
+  background-color: #1e90ff;
+  width: 120px;
+  height: 40px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.signup_form{
+    border: 2px none #1e90ff;
+    border-bottom-style: solid;
+    padding-left: 10px;
+  height: 40px;
+  margin-left: 25px;
+}
+button {
+    cursor: pointer;
+  }
+  

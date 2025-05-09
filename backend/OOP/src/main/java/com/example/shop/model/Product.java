@@ -27,12 +27,9 @@ public class Product {
         this.stock = stock;
     }
 
-
-
     public Product() {
 
     }
-
 
     public Long getId() {
         return id;

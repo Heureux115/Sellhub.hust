@@ -20,6 +20,14 @@ public class ProductController {
         this.cart = cart;
     }
 
+    public void init() {
+            Product product1 = new Product(1,"Áo thun nam", "Áo thun cotton, thoáng mát", 150000, "https://link-to-image.com/ao-thun.jpg", "Nike", 100);
+            Product product2 = new Product(2,"Giày thể thao", "Giày thể thao chạy bộ, bền bỉ", 350000, "https://link-to-image.com/giaithao.jpg", "Adidas", 50);
+            Product product3 = new Product(3,"Quần jeans nữ", "Quần jeans nữ thời trang, phù hợp mùa hè", 200000, "https://link-to-image.com/quan-jeans.jpg", "Levi's", 200);
+            Product product4 = new Product(4, "Túi xách", "Túi xách thời trang cho các nàng", 250000, "https://link-to-image.com/tui-xach.jpg", "Michael Kors", 150);
+    }
+
+
     @PostMapping("/product/buyNow/{productId}")
     public String buyNow(@PathVariable Long productId) {
         Product product = productRepo.findById(productId).orElse(null);
@@ -42,7 +50,7 @@ public class ProductController {
         Product product = productRepo.findById(productId).orElse(null);
         if (product != null) {
             model.addAttribute("product", product);
-            return "product-detail";
+            return "redirect:/product-detail";
         }
         return "redirect:/home";
 }

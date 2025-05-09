@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="payment.css" />
+</head>
+
+<body>
+<div class="header">
+    <button class="return" onclick="window.location.href= 'cart.html'">Quay lại giỏ hàng</button>
+</div>
+
+<!-- Loop through Cart Items -->
+<div id="cart-list">
+    <h3>Sản phẩm trong giỏ hàng</h3>
+    <div class="product-list">
+        <!-- Example of Thymeleaf iteration -->
+        <div class="product-item" th:each="item : ${cart.values()}">
+            <img th:src="${item.product.imageUrl}" alt="Hình ảnh sản phẩm" />
+            <div class="product-info">
+                <h4 th:text="${item.product.title}">Tên sản phẩm</h4>
+                <p th:text="${item.product.description}">Mô tả</p>
+                <span class="product-price" th:text="'Giá: ' + ${item.product.price} + '₫'">Giá</span>
+                <form th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" name="productId" th:value="${item.product.id}" />
+                    <button type="submit" class="remove-button">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Methods -->
+<h3>Vui lòng chọn 1 phương thức thanh toán</h3>
+<div class="select1">
+    <button id="select1" onclick="window.location.href='thank.html'">
+        <h3> Thanh toán khi nhận hàng </h3>
+    </button>
+</div>
+
+<div class="select2">
+    <button id="select2" onclick="showBankTransferPopup()">
+        <h3> Thanh toán bằng chuyển khoản ngân hàng</h3>
+    </button>
+</div>
+
+<!-- Popup for Bank Transfer -->
+<div id="image-popup" class="popup-overlay">
+    <div class="popup-content">
+        <img src="qr.jpg" alt="QR Code" class="popup-image" />
+        <button id="finish" onclick="window.location.href='thank.html'">Đã hoàn thành thanh toán</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+    function showBankTransferPopup() {
+        document.getElementById('image-popup').style.display = 'flex';
+    }
+</script>
+</body>
+
+</html>
