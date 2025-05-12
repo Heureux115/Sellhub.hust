@@ -1,6 +1,6 @@
 package com.example.shop.controller;
 
-import com.example.shop.model.Product;
+import com.example.shop.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,7 +57,7 @@ public class HomeController {
     }
 
     //hàm tạo trang theo giá tiền
-    @GetMapping("/price/{price}")
+    @GetMapping("/price/{minPrice}/{maxPrice}")
     public String viewByPrice(@PathVariable double minPrice, @PathVariable double maxPrice,Model model) {
         List<Product> productsByPrice = productRepo.findByPriceBetween(minPrice, maxPrice);
         model.addAttribute("products", productsByPrice);
@@ -78,6 +78,33 @@ public class HomeController {
 
         model.addAttribute("product", product);
         return "redirect:/hot-product";
+    }
+
+    @GetMapping("/category/{category}")
+    public String viewByCategory(@PathVariable String category, Model model) {
+        List<Product> filteredProducts;
+
+        switch (category.toLowerCase()) {
+            case "laptop":
+                filteredProducts = productRepo.findByType(Laptop.class);
+                break;
+            case "phone":
+                filteredProducts = productRepo.findByType(Phone.class);
+                break;
+            case "tablet":
+                filteredProducts = productRepo.findByType(TabletComputer.class);
+                break;
+            case "accessories":
+                filteredProducts = productRepo.findByType(Accessories.class);
+                break;
+            default:
+                model.addAttribute("message", "Không tìm thấy sản phẩm thuộc loại " + category);
+                return "redirect:/home";  // Quay lại trang chủ nếu không tìm thấy loại
+        }
+
+        model.addAttribute("products", filteredProducts);
+        model.addAttribute("category", category);
+        return "category-products";  // Trả về view hiển thị sản phẩm đã lọc
     }
 
 }
