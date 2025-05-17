@@ -10,10 +10,7 @@ public class Store {
     private final Map<String, User> users = new HashMap<>();
 
     public Store() {
-        // Thêm sản phẩm mẫu
-        //products.add(new Product(1, "Áo Thun", 150000));
-        //products.add(new Product(2, "Quần Jeans", 350000));
-        //products.add(new Product(3, "Giày Thể Thao", 750000));
+
     }
 
     public List<Product> getProducts() {
