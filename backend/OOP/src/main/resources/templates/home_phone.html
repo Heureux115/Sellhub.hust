@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Điện thoại</title>
+    <link rel="stylesheet" th:href="@{/css/home_phone.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo">
+    </div>
+
+    <div class = "search">
+        <form>
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    id = "tim_kiem"
+                    size = "80"
+            >
+        </form>
+        <button id = "search_button" class="fa-solid fa-magnifying-glass"></button>
+    </div>
+
+    <div class = "extra">
+        <span class="hotline">Hotline:<br> 0834784586</span>
+        <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+        <button type="submit" class="log_out">Đăng xuất</button>
+    </div>
+</header>
+
+<nav id="brand_list">
+    <ul>
+        <li id="ten_hang">Hãng</li>
+        <li>
+            <form th:action="@{/brand/Apple}" method="get">
+                <button type="submit">Apple</button>
+            </form>
+        </li>
+
+
+        <li>
+            <form th:action="@{/brand/Samsung}" method="get">
+                <button type="submit">Samsung</button>
+            </form>
+        </li>
+
+
+        <li>
+            <form th:action="@{/brand/Xiaomi}" method="get">
+                <button type="submit">Xiaomi</button>
+            </form>
+        </li>
+
+
+        <li>
+            <form th:action="@{/brand/Nokia}" method="get">
+                <button type="submit">Nokia</button>
+            </form>
+        </li>
+
+
+        <li>
+            <form th:action="@{/brand/Huawei}" method="get">
+                <button type="submit">Huawei</button>
+            </form>
+        </li>
+
+
+        <li>
+            <form th:action="@{/brand/Vivo}" method="get">
+                <button type="submit">Vivo</button>
+            </form>
+        </li>
+
+
+        <li>
+            <form th:action="@{/brand/Oppo}" method="get">
+                <button type="submit">Oppo</button>
+            </form>
+        </li>
+
+        <li>
+            <form th:action="@{/brand/Vertu}" method="get">
+                <button type="submit">Vertu</button>
+            </form>
+        </li>
+
+    </ul>
+</nav>
+
+<div class = "content">
+    <nav id = "price_list">
+        <ul>
+            <li id = "muc_gia">Mức giá</li>
+            <li>
+                <form th:action = "/price/3/5" method = "get">
+                    <button type = "submit">Từ 3-5 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "/price/5/8" method = "get">
+                    <button type = "submit">Từ 5-8 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "/price/8/11" method = "get">
+                    <button type = "submit">Từ 8-11 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "/price/11/15" method = "get">
+                    <button type = "submit">Từ 11-15 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "/price/15/20" method = "get">
+                    <button type = "submit">Từ 15-20 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "/price/20/99999999" method = "get">
+                    <button type = "submit">Trên 20 triệu</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class = "best_sellers">
+        <h2>Gợi ý cho bạn: </h2>
+        <nav id = "best_sellers">
+            <ul>
+                <li>
+                    <img th:src="@{/css/imgs_oop/Logo.png}">
+                    <h3>Iphone 16 Pro Max</h3>
+                </li>
+                <li>
+                    <img src = "imgs_folder/HuaweiPura70.jpg"/>
+                    <h3>Huawei Pura 70</h3>
+                </li>
+                <li>
+                    <img src = "imgs_folder/SamsungGalaxyZFold6.jpg"/>
+                    <h3>Samsung Galaxy ZFold 6</h3>
+                </li>
+                <li>
+                    <img src = "imgs_folder/XiaomiRedmiNote11.jpg"/>
+                    <h3>Xiaomi Redmi Note 11</h3>
+                </li>
+                <li>
+                    <img src = "imgs_folder/VertuSignatureCobra.jpg"/>
+                    <h3>Vertu Signature Cobra</h3>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

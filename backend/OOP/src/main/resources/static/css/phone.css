@@ -50,7 +50,7 @@
     width: 40px;
     margin-left: 40px;
   }
-  .log_out button{
+  .log_out{
     width: 80px;
     height: 40px;
     background-color:#FFA500;
@@ -79,7 +79,7 @@
   }
   #brand_list ul button{
     height: 36px;
-    width: 308px;
+    width: 120px;
     color: white;
     background-color: #000000;
     border-right: 2px solid white;
@@ -88,12 +88,9 @@
     border-bottom:none;
     box-sizing: border-box;
   }
-  #brand_list ul button:hover{
-    background-color: #ccc;
-  }
   #brand_list ul #ten_hang{
     height: 36px;
-    width: 200px;
+    width: 120px;
     color: white;
     text-align: center;
     padding-top: 10px;
@@ -104,7 +101,28 @@
     box-sizing: border-box;
   }
 
-  
+
+
+  #price_list{
+    width: 220px;
+  }
+  #price_list ul button{
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-bottom:2px solid #000000;
+    box-sizing: border-box;
+  }
+  #price_list ul #muc_gia{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #000000;
+    background-color: white;
+  }
+
   .best_seller{
     display: block;
   }
@@ -125,8 +143,8 @@
   padding: 0;
 }
 .best_sellers #best_sellers li img {
-  width: 350px;
-  height: 250px;;
+  width: 250px;
+  height: 320px;;
   border-radius: 8px;
 }
 .best_sellers #best_sellers li {
@@ -134,7 +152,7 @@
   padding: 10px;                 /* Khoảng cách bên trong box */
   border-radius: 8px;            /* Bo góc nhẹ */
   box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Bóng đổ nhẹ */
-  width: 380px;                  /* Đảm bảo box gọn gàng */
+  width: 270px;                  /* Đảm bảo box gọn gàng */
   text-align: center;           /* Căn giữa nội dung */
 }
 .best_sellers #best_sellers li h3 {

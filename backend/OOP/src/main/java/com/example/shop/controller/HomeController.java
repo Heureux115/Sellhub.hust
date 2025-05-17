@@ -1,6 +1,6 @@
 package com.example.shop.controller;
 
-import com.example.shop.model.Product;
+import com.example.shop.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,11 +53,11 @@ public class HomeController {
         List<Product> productsByBrand = productRepo.findByBrandIgnoreCase(name);
         model.addAttribute("products", productsByBrand);
         model.addAttribute("brand", name);
-        return "redirect:/brand-products";
+        return "brand-products";
     }
 
     //hàm tạo trang theo giá tiền
-    @GetMapping("/price/{price}")
+    @GetMapping("/price/{minPrice}/{maxPrice}")
     public String viewByPrice(@PathVariable double minPrice, @PathVariable double maxPrice,Model model) {
         List<Product> productsByPrice = productRepo.findByPriceBetween(minPrice, maxPrice);
         model.addAttribute("products", productsByPrice);
@@ -79,5 +79,60 @@ public class HomeController {
         model.addAttribute("product", product);
         return "redirect:/hot-product";
     }
+
+    @GetMapping("/category/{category}")
+    public String viewByCategory(@PathVariable String category, Model model) {
+        List<Product> filteredProducts;
+
+        switch (category.toLowerCase()) {
+            case "laptop":
+                filteredProducts = productRepo.findByType(Laptop.class);
+                break;
+            case "phone":
+                filteredProducts = productRepo.findByType(Phone.class);
+                break;
+            case "tablet":
+                filteredProducts = productRepo.findByType(TabletComputer.class);
+                break;
+            case "accessories":
+                filteredProducts = productRepo.findByType(Accessories.class);
+                break;
+            default:
+                model.addAttribute("message", "Không tìm thấy sản phẩm thuộc loại " + category);
+                return "redirect:/home";  // Quay lại trang chủ nếu không tìm thấy loại
+        }
+
+        model.addAttribute("products", filteredProducts);
+        model.addAttribute("category", category);
+        return "category-products";  // Trả về view hiển thị sản phẩm đã lọc
+    }
+
+    @GetMapping("/sort")
+    public String sortProducts(@RequestParam String by, Model model) {
+        List<Product> sortedProducts;
+
+        switch (by.toLowerCase()) {
+            case "price-desc":
+                sortedProducts = productRepo.findAllByOrderByPriceDesc();
+                break;
+            case "price-asc":
+                sortedProducts = productRepo.findAllByOrderByPriceAsc();
+                break;
+            case "title-desc":
+                sortedProducts = productRepo.findAllByOrderByTitleDesc();
+                break;
+            case "title-asc":
+                sortedProducts = productRepo.findAllByOrderByTitleAsc();
+                break;
+            default:
+                sortedProducts = productRepo.findAll(); // mặc định không sắp xếp
+                break;
+        }
+
+        model.addAttribute("products", sortedProducts);
+        model.addAttribute("sortBy", by);
+        return "home"; // hoặc một view cụ thể khác nếu bạn muốn
+    }
+
 
 }
