@@ -1,150 +1,133 @@
-  button {
-    cursor: pointer;
-  }
+button {
+  cursor: pointer;
+}
 
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
 
-  .cart-info h5 {
-    margin-block-start: 1px;
-    margin-block-end: 1px;
-  }
+.cart-info h5 {
+  margin-block-start: 1px;
+  margin-block-end: 1px;
+}
 
-  .remove-button {
-    margin-top: 10px;
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .remove-button:hover {
-    background-color: #cc0000;
-  }
+.remove-button {
+  margin-top: 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.remove-button:hover {
+  background-color: #cc0000;
+}
 
-  /* Khối nút Trang chủ */
-  .home-button button {
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: white;
-    border: 2px solid gray;
-    border-radius: 8px;
-    width: 120px;
-  }
+/* Khối nút Trang chủ */
+.home-button #home-button{
+  background-color: #FFA500;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #FFA500;
+  border-radius: 8px;
+  width: 120px;
+}
 
-  .cart-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .icon {
-    width: 60px;
-    height: 40px;
-  }
+.icon {
+  width: 60px;
+  height: 40px;
+}
 
-  #list h3 {
-    margin-inline-start: 30px;
-    font-family: 'Poppins', sans-serif;
-  }
+#list h3 {
+  margin-inline-start: 30px;
+  font-family: 'Poppins', sans-serif;
+}
 
-  .product-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px 30px;
-  }
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 30px;
+}
 
-  .product-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid #555454;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #fefefe;
-  }
+.product-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #555454;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fefefe;
+}
 
-  .product-check {
-    margin-right: 15px;
-    width: 20px;
-    height: 20px;
-  }
+.product-check {
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+}
 
-  .product-item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 15px;
-    border-radius: 8px;
-  }
+.product-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 15px;
+  border-radius: 8px;
+}
 
-  .product-info h4 {
-    margin: 10px;
-    font-size: 18px;
-    font-weight: 600;
-  }
+.product-info h4 {
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
 
-  .product-info p {
-    margin: 5px 0 0;
-    color: #555;
-    font-size: 14px;
-  }
+.product-info p {
+  margin: 5px 0 0;
+  color: #555;
+  font-size: 14px;
+}
 
-  .list {
-    text-align: center;
-  }
+.list {
+  text-align: center;
+}
 
-  .total-section {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 30px;
-    border-top: 2px solid #cbc8c8;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: right;
-    background-color: #f8f8f8;
-  }
+.total-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+  border-top: 2px solid #cbc8c8;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+  background-color: #f8f8f8;
+}
 
-  #total-price {
-    margin: 0;
-    color: #e53935;
-  }
+.total-section button{
+  background-color: #FFA500;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid #FFA500;
+  border-radius: 8px;
+  width: 120px;
+}
+#total-price {
+  margin: 0;
+  color: #e53935;
+}
 
-  #payment {
-    margin: auto 1px auto auto;
-  }
-
-  #payment button {
-    background-color: rgb(237, 61, 61);
-    border-radius: 8px;
-    border: 2px solid white;
-  }
-
-  #payment h1 {
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .remove {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: rgb(237, 61, 61);
-    color: white;
-    margin: auto 1px auto auto;
-  }

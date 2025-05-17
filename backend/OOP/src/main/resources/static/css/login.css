@@ -1,17 +1,17 @@
 .top{
     text-align: center;
-  }
+}
 header {
-  font-weight: bold;
+    font-weight: bold;
     font-family: Georgia, serif;
-  text-align: center;
-  font-size: 45px;
+    text-align: center;
+    font-size: 45px;
 }
 body{
-  background-color: #87ceeb ;
+    background-color: #708090;
 }
 #dang_nhap{
-  font-size : 40px;
+    font-size : 40px;
 }
 #big{
     margin:auto;
@@ -26,25 +26,25 @@ body{
 }
 
 #dangnhap_button{
-  font-size: 15px;
-  padding: 5px;
-  border: 2px solid #1e90ff;
-  border-radius: 6px;
-  background-color: #1e90ff;
-  width: 120px;
-  height: 40px;
-  box-sizing: border-box;
+    font-size: 15px;
+    padding: 5px;
+    border: 2px solid #FFA500;
+    border-radius: 6px;
+    background-color: #FFA500;
+    width: 120px;
+    height: 40px;
+    box-sizing: border-box;
 }
 #dangky_button{
-  font-size: 15px;
-  padding: 5px;
-  border: 2px solid #1e90ff;
-  border-radius: 6px;
-  background-color: #1e90ff;
-  width: 120px;
-  height: 40px;
-  box-sizing: border-box;
-  margin-top: 5px;
+    font-size: 15px;
+    padding: 5px;
+    border: 2px solid #FFA500;
+    border-radius: 6px;
+    background-color: #FFA500;
+    width: 120px;
+    height: 40px;
+    box-sizing: border-box;
+    margin-top: 5px;
 }
 
 #error{
@@ -53,14 +53,14 @@ body{
     margin-left: 25px;
 }
 .login_form{
-    border: 2px none #1e90ff;
+    border: 2px none #000000;
     border-bottom-style: solid;
     padding-left: 10px;
-  height: 50px;
-  margin-left: 25px;
-  margin-bottom: 15px;
+    height: 50px;
+    margin-left: 25px;
+    margin-bottom: 15px;
 }
 
 button{
-  cursor: pointer;
+    cursor: pointer;
 }
