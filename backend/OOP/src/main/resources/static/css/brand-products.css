@@ -64,44 +64,6 @@ body {
     width: 100%;
 }
 
-#brand_list{
-    background-color: #000000;
-    border-top: 2px solid white;
-    height: 40px;
-    width: 100%;
-}
-#brand_list ul{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    list-style-type: none;
-}
-#brand_list ul button{
-    height: 36px;
-    width: 160px;
-    color: white;
-    background-color: #000000;
-    border-right: 2px solid white;
-    border-top: none;
-    border-left: none;
-    border-bottom:none;
-    box-sizing: border-box;
-}
-#brand_list ul #ten_hang{
-    height: 36px;
-    width: 120px;
-    color: white;
-    text-align: center;
-    padding-top: 10px;
-    border-right: 2px solid white;
-    border-top: none;
-    border-left: none;
-    border-bottom: none;
-    box-sizing: border-box;
-}
-
-
 
 #price_list{
     width: 220px;
@@ -159,5 +121,3 @@ body {
     font-size: 16px;
     color: #333;
 }
-
-

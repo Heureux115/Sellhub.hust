@@ -11,11 +11,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByTitleContainingIgnoreCase(String keyword);
     List<Product> findByBrandIgnoreCase(String brand);
     List<Product> findByPriceBetween(double min, double max);
-
     List<Product> findAllByOrderByPriceDesc();
     List<Product> findAllByOrderByPriceAsc();
     List<Product> findAllByOrderByTitleDesc();
     List<Product> findAllByOrderByTitleAsc();
     @Query("SELECT p FROM Product p WHERE TYPE(p) = :type") List<Product> findByType(@Param("type") Class<? extends Product> type);
+
 }
 

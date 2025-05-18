@@ -16,12 +16,12 @@
 
     <div class = "search">
      <form th:action="@{/search}" method="get">
-        <input
+         <input
             placeholder = "Tìm kiếm sản phẩm"
             name = "keyword"
             id = "tim_kiem"
             size = "80"
-        >
+        />
          <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
      </form>
     </div>
@@ -46,10 +46,32 @@
   <nav id="brand_list">
       <ul>
           <li id="ten_hang">Danh mục sản phẩm</li>
-          <li><button type="submit">Điện thoại</button></li>
-          <li><button type="submit">Laptop</button></li>
-          <li><button type="submit">Tai nghe</button></li>
-          <li><button type="submit">Đồng hồ</button></li>
+          <!-- Trang home.html -->
+          <li>
+              <form th:action="@{/category/phone}" method="get">
+                  <button type="submit">Điện thoại</button>
+              </form>
+          </li>
+          <li>
+              <form th:action="@{/category/laptop}" method="get">
+                  <button type="submit">Laptop</button>
+              </form>
+          </li>
+          <li>
+              <form th:action="@{/category/tablet}" method="get">
+                  <button type="submit">Máy tính bảng</button>
+              </form>
+          </li>
+          <li>
+              <form th:action="@{/category/accessories}" method="get">
+                  <button type="submit">Phụ kiện</button>
+              </form>
+          </li>
+          <li>
+              <form th:action="@{/category/secondHand}" method="get">
+                  <button type="submit">Secondhand</button>
+              </form>
+          </li>
       </ul>
   </nav>
 

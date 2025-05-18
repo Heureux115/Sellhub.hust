@@ -76,10 +76,14 @@
     align-items: center;
     height: 40px;
     list-style-type: none;
+    width: 100%;
+  }
+  #brand_list ul li{
+    width: calc(86%/5);
   }
   #brand_list ul button{
     height: 36px;
-    width: 308px;
+    width: 100%;
     color: white;
     background-color: #000000;
     border-right: 2px solid white;
@@ -93,7 +97,7 @@
   }
   #brand_list ul #ten_hang{
     height: 36px;
-    width: 200px;
+    width: 14%;
     color: white;
     text-align: center;
     padding-top: 10px;
