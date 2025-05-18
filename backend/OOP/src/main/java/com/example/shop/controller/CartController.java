@@ -40,16 +40,26 @@ public class CartController extends BaseCartController {
         return "redirect:/cart"; // Sau khi thêm sản phẩm, chuyển đến trang giỏ hàng
     }
 
+    private void prepareCartModel(Model model, HttpSession session) {
+        Map<Long, CartItem> cartItems = getCartFromSession(session);
+        double total = cartItems.values().stream()
+                .mapToDouble(CartItem::getTotal)
+                .sum();
+        model.addAttribute("cart", cartItems);
+        model.addAttribute("total", total);
+        model.addAttribute("message", null);
+    }
+
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
-        Map<Long, CartItem> cartItems = getCartFromSession(session); // Lấy giỏ hàng từ session
+        prepareCartModel(model, session);
+        return "cart";
+    }
 
-        double total = cart.getTotal();
-        model.addAttribute("cart", cartItems); // Thêm giỏ hàng vào model
-        model.addAttribute("total", total);    // Thêm tổng vào model
-        model.addAttribute("message", null);   // Thêm message nếu cần
-
-        return "cart"; // Trả về trang giỏ hàng
+    @GetMapping("/payment")
+    public String viewPayment(Model model, HttpSession session) {
+        prepareCartModel(model, session);
+        return "payment";
     }
 
     @PostMapping("/cart/remove")

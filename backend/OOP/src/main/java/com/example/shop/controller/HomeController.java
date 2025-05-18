@@ -80,33 +80,6 @@ public class HomeController {
         return "redirect:/hot-product";
     }
 
-    @GetMapping("/category/{category}")
-    public String viewByCategory(@PathVariable String category, Model model) {
-        List<Product> filteredProducts;
-
-        switch (category.toLowerCase()) {
-            case "laptop":
-                filteredProducts = productRepo.findByType(Laptop.class);
-                break;
-            case "phone":
-                filteredProducts = productRepo.findByType(Phone.class);
-                break;
-            case "tablet":
-                filteredProducts = productRepo.findByType(TabletComputer.class);
-                break;
-            case "accessories":
-                filteredProducts = productRepo.findByType(Accessories.class);
-                break;
-            default:
-                model.addAttribute("message", "Không tìm thấy sản phẩm thuộc loại " + category);
-                return "redirect:/home";  // Quay lại trang chủ nếu không tìm thấy loại
-        }
-
-        model.addAttribute("products", filteredProducts);
-        model.addAttribute("category", category);
-        return "category-products";  // Trả về view hiển thị sản phẩm đã lọc
-    }
-
     @GetMapping("/sort")
     public String sortProducts(@RequestParam String by, Model model) {
         List<Product> sortedProducts;
@@ -132,6 +105,71 @@ public class HomeController {
         model.addAttribute("products", sortedProducts);
         model.addAttribute("sortBy", by);
         return "home"; // hoặc một view cụ thể khác nếu bạn muốn
+    }
+
+    @GetMapping("/category/{name}")
+    public String showCategory(@PathVariable("name") String name, Model model) {
+        // Truy vấn danh sách hãng theo category (phone, laptop, ipad)
+        List<String> brands = getBrandsByCategory(name);
+        List<String> images = getItemsByBrand(name);
+        List<String> names = getNameByBrand(name);
+        model.addAttribute("images", images);
+        model.addAttribute("names", names);
+        model.addAttribute("category", name);
+        model.addAttribute("brands", brands);
+
+        return "category"; // trả về category.html để hiển thị danh sách hãng
+    }
+
+    private List<String> getNameByBrand(String category) {
+        switch(category.toLowerCase()) {
+            case "phone":
+                return List.of("Iphone16ProMax", "HuaweiPura70", "SamsungGalaxyZFold6", "XiaomiRedmiNote11", "VertuSignatureCobra");
+            case "laptop":
+                return List.of("Apple", "Dell", "Lenovo", "Asus", "HP", "MSI", "Acer", "Razer");
+            case "accessories":
+                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech");
+            case "tablet":
+                return List.of("Apple", "Samsung", "Xiaomi", "Sony", "Huawei");
+            case "secondhand":
+                return List.of();
+            default:
+                return List.of();
+        }
+    }
+
+    private List<String> getItemsByBrand(String category) {
+        switch(category.toLowerCase()) {
+            case "phone":
+                return List.of("Iphone16ProMax.jpg", "HuaweiPura70.jpg", "SamsungGalaxyZFold6.jpg", "XiaomiRedmiNote11.jpg", "VertuSignatureCobra.jpg");
+            case "laptop":
+                return List.of("Apple", "Dell", "Lenovo", "Asus", "HP", "MSI", "Acer", "Razer");
+            case "accessories":
+                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech");
+            case "tablet":
+                return List.of("Apple", "Samsung", "Xiaomi", "Sony", "Huawei");
+            case "secondhand":
+                return List.of();
+            default:
+                return List.of();
+        }
+    }
+
+    private List<String> getBrandsByCategory(String category) {
+        switch(category.toLowerCase()) {
+            case "phone":
+                return List.of("Apple", "Samsung", "Xiaomi", "Nokia", "Huawei", "Vivo", "Oppo", "Vertu");
+            case "laptop":
+                return List.of("Apple", "Dell", "Lenovo", "Asus", "HP", "MSI", "Acer", "Razer");
+            case "accessories":
+                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech");
+            case "tablet":
+                return List.of("Apple", "Samsung", "Xiaomi", "Sony", "Huawei");
+            case "secondhand":
+                return List.of();
+            default:
+                return List.of();
+        }
     }
 
 
