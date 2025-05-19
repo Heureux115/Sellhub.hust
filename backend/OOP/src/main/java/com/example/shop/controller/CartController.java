@@ -18,8 +18,7 @@ public class CartController extends BaseCartController {
 
     private final ProductRepository productRepo;
 
-    public CartController(ProductRepository productRepo, Cart cart) {
-        super(cart);
+    public CartController(ProductRepository productRepo) {
         this.productRepo = productRepo;
     }
 

@@ -1,0 +1,98 @@
+#brand_list{
+    background-color: #000000;
+    border-top: 2px solid white;
+    height: 40px;
+    width: 100%;
+}
+#brand_list ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    list-style-type: none;
+}
+#brand_list ul li{
+    width: calc(91.6%/8);
+}
+#brand_list ul button{
+    height: 36px;
+    width: 100%;
+    color: white;
+    background-color: #000000;
+    border-right: 2px solid white;
+    border-top: none;
+    border-left: none;
+    border-bottom:none;
+    box-sizing: border-box;
+}
+#brand_list ul #ten_hang{
+    height: 36px;
+    width: 8.4%;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    border-right: 2px solid white;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    box-sizing: border-box;
+}
+
+
+
+#price_list{
+    width: 220px;
+}
+#price_list ul button{
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-bottom:2px solid #000000;
+    box-sizing: border-box;
+}
+#price_list ul #muc_gia{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #000000;
+    background-color: white;
+}
+
+.best_seller{
+    display: block;
+}
+.best_sellers h2{
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.best_sellers #best_sellers {
+    width: 100%;
+    margin-left: 10px;
+}
+.best_sellers #best_sellers ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+.best_sellers #best_sellers li img {
+    width: 250px;
+    height: 250px;;
+    border-radius: 8px;
+}
+.best_sellers #best_sellers li {
+    background-color: white;       /* Màu nền box */
+    padding: 10px;                 /* Khoảng cách bên trong box */
+    border-radius: 8px;            /* Bo góc nhẹ */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Bóng đổ nhẹ */
+    width: 270px;                  /* Đảm bảo box gọn gàng */
+    text-align: center;           /* Căn giữa nội dung */
+}
+.best_sellers #best_sellers li h3 {
+    font-size: 16px;
+    color: #333;
+}

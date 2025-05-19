@@ -12,22 +12,19 @@ public class PaymentController extends BaseCartController {
 
     private final ProductRepository productRepo;
 
-    public PaymentController(ProductRepository productRepo, Cart cart) {
-        super(cart);
+    public PaymentController(ProductRepository productRepo) {
         this.productRepo = productRepo;
     }
 
     @PostMapping("/checkout")
     public String checkout(HttpSession session, RedirectAttributes redirectAttributes) {
-        Cart cart = (Cart) session.getAttribute("cart");
-
-        if (isCartEmpty(cart)) {
+        if (isCartEmpty(session)) {
             redirectAttributes.addFlashAttribute("message", "Không có gì trong giỏ hàng!");
             return "redirect:/cart";
         }
 
-        updateInventory(cart, productRepo);  // kế thừa từ lớp cha
-        clearCart(session, cart);           // kế thừa từ lớp cha
+        updateInventory(session, productRepo);   // trừ số lượng tồn kho
+        clearCart(session);                      // xóa giỏ hàng
 
         redirectAttributes.addFlashAttribute("message", "Thanh toán thành công!");
         return "redirect:/home";
