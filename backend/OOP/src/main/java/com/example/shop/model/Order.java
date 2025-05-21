@@ -1,14 +1,30 @@
 package com.example.shop.model;
 
+import jakarta.persistence.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity
+@Table(name = "orders")
 public class Order {
-    private static int orderCounter = 1;
-    private final int orderId;
-    private final User user;
-    private final Map<Product, Integer> items;
-    private final double total;
+    private static long orderCounter = 1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // hoặc AUTO
+    private Long orderId;
+
+    @ManyToOne
+    private User user;
+
+    @Transient // Vì JPA không map Map<Product, Integer> tự động được
+    private Map<Product, Integer> items;
+
+    private double total;
+
+    protected Order() {
+        this.orderId = orderCounter++;
+        this.items = new HashMap<>();
+    }
 
     public Order(User user, Map<Product, Integer> items, double total) {
         this.orderId = orderCounter++;
