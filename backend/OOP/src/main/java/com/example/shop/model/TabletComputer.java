@@ -4,7 +4,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("TabletComputer")
+@DiscriminatorValue("Tablet")
 public class TabletComputer extends Product {
     private String screenSize;        // Screen size (e.g., 10.5 inches)
     private String batteryLife;       // Battery life (e.g., 12 hours)

@@ -79,7 +79,7 @@
     width: 100%;
   }
   #brand_list ul li{
-    width: calc(86%/5);
+    width: calc(86%/4);
   }
   #brand_list ul button{
     height: 36px;

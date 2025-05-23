@@ -28,11 +28,18 @@
   <div id="list">
     <h3>Sản phẩm</h3>
     <div class="product-list">
+
       <div class="product-item" th:each="item : ${cart.values()}">
         <img th:src="@{'/css/imgs_oop/' + ${item.product.imageUrl}}" alt="Hình ảnh sản phẩm" />
         <div class="product-info">
           <h4 th:text="${item.product.title}">Tên sản phẩm</h4>
-          <span class="product-price" th:text="'Giá: ' + ${item.product.price} + '₫'">Giá</span>
+          <span class="product-price" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + '₫'">Giá</span>
+
+        </div>
+
+        <span class="product-quantity">Số lượng: <span th:text="${item.quantity}">1</span></span>
+
+        <div class="remove-wrapper">
           <form th:action="@{/cart/remove}" method="post">
             <input type="hidden" name="productId" th:value="${item.product.id}" />
             <button type="submit" class="remove-button">Xóa</button>
@@ -43,7 +50,7 @@
   </div>
 
   <div class="total-section">
-    <h4>Tổng cộng: <span th:text="${total} + '₫'">0₫</span></h4>
+    <h4>Tổng cộng: <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + '₫'">0₫</span></h4>
     <form th:action="@{/payment}" method="post">
       <button type="submit">Thanh toán</button>
     </form>
