@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial'; /* Giữ Poppins như yêu cầu trước */
+    background-image: linear-gradient(-90deg, #333, #ccc); /* Màu nền gốc */
+    /* color: #333;  Màu chữ mặc định của body có thể để trình duyệt tự xử lý hoặc theo style gốc */
+    line-height: 1.6;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    padding: 10px 20px;
+    color: white;
+}
+.logo img{
+    width: 200px;
+    height: auto;
+
+}
+.search{
+    margin-left: 50px;
+    margin-top: 10px;
+    width: 600px;
+    height: 50px;
+    display: flex;
+}
+#tim_kiem{
+    height: 40px;
+    width: 500px;
+}
+#search_button{
+    height: 40px;
+    width: 40px;
+}
+.extra{
+    display: flex;
+}
+
+.hotline{
+    justify-content: center;
+    padding-top: 5px;
+}
+
+#cart_button{
+    height: 40px;
+    width: 40px;
+    margin-left: 40px;
+}
+.log_out button{
+    width: 80px;
+    height: 40px;
+    background-color:#FFA500;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: #FFA500;
+}
+
+.content{
+    display: flex;
+    width: 100%;
+}
+.product .product-item img{
+    height: 80%;
+    width: auto;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.product {
+    width: 90%;
+    height: 100%;
+    min-height: 400px;
+    margin: 60px auto;
+    background-image: linear-gradient(-90deg, #f0e89f, #f7a252);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    display: flex;
+    gap:20px;
+}
+
+
+.details {
+    height: 80%;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    color:#ffffff;
+}
+h3{
+    font-size: 25px;
+}
+.feature-list {
+    padding-left: 20px;
+    list-style-type: disc;
+    line-height: 1.8;
+    font-size: 20px;
+}
+.details::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+.productdetails{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-price{
+    color: #ffffff;
+    text-align: center;
+    font-size: 50px;
+}
+
+.select{
+    display: flex;
+    gap:20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.add, .buy{
+    background-color: #FFA500;
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: large;
+}
+.product-info p{
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.product .product-item {
+    display: flex;
+    align-items: center;       /* ✅ Căn giữa ảnh theo chiều dọc */
+    justify-content: center;   /* ✅ Căn giữa ảnh theo chiều ngang (nếu cần) */
+    height: 100%;              /* Chiều cao kế thừa từ .product */
+}

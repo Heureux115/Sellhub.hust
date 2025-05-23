@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle} ?: 'Danh mục sản phẩm'">Sản phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/price-products.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo">
+    </div>
+
+    <div class = "search">
+        <form>
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    id = "tim_kiem"
+                    size = "80"
+            >
+        </form>
+        <button id = "search_button" class="fa-solid fa-magnifying-glass"></button>
+    </div>
+
+    <div class = "extra">
+        <span class="hotline">Hotline:<br> 0834784586</span>
+        <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+        <button type="submit" class="log_out">Đăng xuất</button>
+    </div>
+</header>
+
+
+<div class = "content">
+    <nav id = "price_list">
+        <ul>
+            <li id = "muc_gia">Mức giá</li>
+            <li>
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=3, maxPrice=5)}" method = "get">
+                    <button type = "submit">Từ 3-5 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=5, maxPrice=8)}" method = "get">
+                    <button type = "submit">Từ 5-8 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=8, maxPrice=11)}" method = "get">
+                    <button type = "submit">Từ 8-11 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=11, maxPrice=15)}" method = "get">
+                    <button type = "submit">Từ 11-15 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=15, maxPrice=20)}" method = "get">
+                    <button type = "submit">Từ 15-20 triệu</button>
+                </form>
+            </li>
+            <li>
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=20, maxPrice=9999)}" method = "get">
+                    <button type = "submit">Trên 20 triệu</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class = "best_sellers">
+        <h2>Sản phẩm trong mức giá: </h2>
+        <nav>
+            <ul>
+                <li th:each="product : ${products}">
+                    <a th:href="@{'/product/' + ${product.id}}">
+                        <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:100px; height:auto">
+                    </a>
+                    <h3 th:text="${product.title}">Tên sản phẩm</h3>
+                    <p th:text="'Giá: ' + ${product.price} + ' VNĐ'">Giá</p>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

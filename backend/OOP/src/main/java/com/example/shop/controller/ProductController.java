@@ -1,13 +1,17 @@
 package com.example.shop.controller;
 
 import com.example.shop.model.Cart;
+import com.example.shop.model.CartItem;
 import com.example.shop.model.Product;
 import com.example.shop.repository.ProductRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Map;
 
 @Controller
 public class ProductController extends BaseCartController {
@@ -19,41 +23,50 @@ public class ProductController extends BaseCartController {
         this.productRepo = productRepo;
     }
 
-    public void init() {
-        Product product1 = new Product(1,"Áo thun nam", "Áo thun cotton, thoáng mát", 150000, "https://link-to-image.com/ao-thun.jpg", "Nike", 100);
-        Product product2 = new Product(2,"Giày thể thao", "Giày thể thao chạy bộ, bền bỉ", 350000, "https://link-to-image.com/giaithao.jpg", "Adidas", 50);
-        Product product3 = new Product(3,"Quần jeans nữ", "Quần jeans nữ thời trang, phù hợp mùa hè", 200000, "https://link-to-image.com/quan-jeans.jpg", "Levi's", 200);
-        Product product4 = new Product(4, "Túi xách", "Túi xách thời trang cho các nàng", 250000, "https://link-to-image.com/tui-xach.jpg", "Michael Kors", 150);
 
-        addToCart(product1);
-        addToCart(product2);
-        addToCart(product3);
-        addToCart(product4);
-    }
-
-    @PostMapping("/product/buyNow/{productId}")
-    public String buyNow(@PathVariable Long productId) {
-        Product product = productRepo.findById(productId).orElse(null);
+    @PostMapping("/product/buyNow/{id}")
+    public String buyNow(@PathVariable Long id, HttpSession session) {
+        Product product = productRepo.findById(id).orElse(null);
         if (product != null) {
-            clearCart();
-            addToCart(product);
-            return "redirect:/checkout";
+            clearCart(session, cart);
+            addToCart(session, new CartItem(product, 1));
+            return "payment";
         }
         return "redirect:/home";
     }
 
-    @PostMapping("/product/addToCart/{productId}")
-    public String addToCartHandler(@PathVariable Long productId) {
-        productRepo.findById(productId).ifPresent(this::addToCart);
-        return "redirect:/cart";
+    @PostMapping("/product/addToCart/{id}")
+    public String addToCartHandler(@PathVariable Long id, HttpSession session) {
+        productRepo.findById(id).ifPresent(product -> {
+            addToCart(session, product); // gọi addToCart từ ProductController hoặc BaseCartController
+        });
+        return "redirect:/product/{id}";
     }
 
-    @GetMapping("/product/{productId}")
-    public String viewProduct(@PathVariable Long productId, Model model) {
-        Product product = productRepo.findById(productId).orElse(null);
+    private void addToCart(HttpSession session, Product product) {
+        Map<Long, CartItem> cartItems = getCartFromSession(session);
+
+        // Nếu sản phẩm đã tồn tại trong giỏ thì tăng số lượng, ngược lại thêm mới
+        CartItem cartItem = cartItems.get(product.getId());
+        if (cartItem == null) {
+            cartItem = new CartItem(product, 1);
+            cartItems.put(product.getId(), cartItem);
+        } else {
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+        }
+
+        // Cập nhật lại giỏ hàng trong session
+        session.setAttribute("cart", cartItems);
+    }
+
+
+
+    @GetMapping("/product/{id}")
+    public String viewProduct(@PathVariable Long id, Model model) {
+        Product product = productRepo.findById(id).orElse(null);
         if (product != null) {
             model.addAttribute("product", product);
-            return "redirect:/product-detail";
+            return "product-detail";
         }
         return "redirect:/home";
     }

@@ -13,20 +13,29 @@
     </div>
 
     <div class = "search">
-        <form>
+        <form th:action="@{/search}" method="get">
             <input
                     placeholder = "Tìm kiếm sản phẩm"
+                    name = "keyword"
                     id = "tim_kiem"
                     size = "80"
-            >
+            />
+            <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
         </form>
-        <button id = "search_button" class="fa-solid fa-magnifying-glass"></button>
     </div>
 
     <div class = "extra">
         <span class="hotline">Hotline:<br> 0834784586</span>
-        <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
-        <button type="submit" class="log_out">Đăng xuất</button>
+        <div class ="cart_button">
+            <a th:href="@{/cart}">
+                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+            </a>
+        </div>
+        <div class = "log_out">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Đăng xuất</button>
+            </form>
+        </div>
     </div>
 </header>
 
@@ -36,32 +45,32 @@
         <ul>
             <li id = "muc_gia">Mức giá</li>
             <li>
-                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=3, maxPrice=5)}" method = "get">
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=3000000, maxPrice=5000000)}" method = "get">
                     <button type = "submit">Từ 3-5 triệu</button>
                 </form>
             </li>
             <li>
-                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=5, maxPrice=8)}" method = "get">
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=5000000, maxPrice=8000000)}" method = "get">
                     <button type = "submit">Từ 5-8 triệu</button>
                 </form>
             </li>
             <li>
-                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=8, maxPrice=11)}" method = "get">
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=8000000, maxPrice=11000000)}" method = "get">
                     <button type = "submit">Từ 8-11 triệu</button>
                 </form>
             </li>
             <li>
-                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=11, maxPrice=15)}" method = "get">
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=11000000, maxPrice=15000000)}" method = "get">
                     <button type = "submit">Từ 11-15 triệu</button>
                 </form>
             </li>
             <li>
-                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=15, maxPrice=20)}" method = "get">
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=15000000, maxPrice=20000000)}" method = "get">
                     <button type = "submit">Từ 15-20 triệu</button>
                 </form>
             </li>
             <li>
-                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=20, maxPrice=9999)}" method = "get">
+                <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=20000000, maxPrice=99990000000)}" method = "get">
                     <button type = "submit">Trên 20 triệu</button>
                 </form>
             </li>
@@ -69,14 +78,15 @@
     </nav>
     <div class = "best_sellers">
         <h2>Sản phẩm trong kho: </h2>
-        <nav>
+        <nav id = "best_sellers">
             <ul>
                 <li th:each="product : ${products}">
-                    <img th:src="@{'/css/imgs_oop/' + ${product.imageName}}" alt="Ảnh" style="width:100px; height:auto">
+                    <a th:href="@{'/product/' + ${product.id}}">
+                        <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:100px; height:auto">
+                    </a>
                     <h3 th:text="${product.title}">Tên sản phẩm</h3>
                     <p th:text="'Giá: ' + ${product.price} + ' VNĐ'">Giá</p>
                 </li>
-
             </ul>
         </nav>
     </div>

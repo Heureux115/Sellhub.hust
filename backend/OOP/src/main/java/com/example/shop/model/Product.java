@@ -3,6 +3,7 @@ package com.example.shop.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "[product]")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
 public class Product {
@@ -11,12 +12,12 @@ public class Product {
     private Long id;
     private String title;
     private String description;
-    private double price;
+    private int price;
     private String imageUrl;
     private String brand;
     private int stock;
 
-    public Product(int id, String title,String description ,double price, String imageUrl,String brand, int stock) {
+    public Product(int id, String title,String description ,int price, String imageUrl,String brand, int stock) {
         this.id = (long) id;
         this.title = title;
         this.price = price;
@@ -46,7 +47,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

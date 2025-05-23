@@ -16,7 +16,7 @@ public class SecondHand extends Product {
     }
 
     // Constructor with parameters
-    public SecondHand(int id, String title, String description, double price, String imageUrl, String brand, int stock,
+    public SecondHand(int id, String title, String description, int price, String imageUrl, String brand, int stock,
                       String condition, String previousOwner, boolean hasOriginalPackaging) {
         super(id, title, description, price, imageUrl, brand, stock); // Calls the parent Product constructor
         this.condition = condition;

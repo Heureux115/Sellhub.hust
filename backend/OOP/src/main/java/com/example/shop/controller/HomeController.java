@@ -35,7 +35,7 @@ public class HomeController {
         List<Product> matchingProducts = productRepo.findByTitleContainingIgnoreCase(keyword);
         if (matchingProducts.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp");
-            return "redirect:/search-result";
+            return "search-result";
         }
 
         if (matchingProducts.size() == 1) {
@@ -44,7 +44,7 @@ public class HomeController {
         }
 
         model.addAttribute("products", matchingProducts);
-        return "redirect:/search-result";
+        return "search-result";
     }
 
     //hàm tạo trang brand name
@@ -65,22 +65,9 @@ public class HomeController {
         model.addAttribute("products", productsByPrice);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
-        return "redirect:/price-products";
+        return "price-products";
     }
 
-    //tạo trang hot product
-    @GetMapping("/product/{id}")
-    public String viewHotProduct(@PathVariable Long id, Model model) {
-        Product product = productRepo.findById(id).orElse(null);
-
-        if (product == null) {
-            model.addAttribute("message", "Không tìm thấy sản phẩm.");
-            return "redirect:/error";
-        }
-
-        model.addAttribute("product", product);
-        return "redirect:/hot-product";
-    }
 
     @GetMapping("/sort")
     public String sortProducts(@RequestParam String by, Model model) {

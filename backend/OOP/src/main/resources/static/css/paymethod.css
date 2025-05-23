@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(-90deg, #333, #ccc);
+}
+
+button {
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    padding: 10px 20px;
+    color: white;
+}
+.logo img{
+    width: 200px;
+    height: auto;
+
+}
+.search{
+    margin-left: 50px;
+    margin-top: 10px;
+    width: 600px;
+    height: 50px;
+    display: flex;
+}
+#tim_kiem{
+    height: 40px;
+    width: 500px;
+}
+#search_button{
+    height: 40px;
+    width: 40px;
+}
+.extra{
+    display: flex;
+}
+
+.hotline{
+    justify-content: center;
+    padding-top: 5px;
+}
+
+#cart_button{
+    height: 40px;
+    width: 40px;
+    margin-left: 40px;
+}
+.log_out button{
+    width: 80px;
+    height: 40px;
+    background-color:#FFA500;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: #FFA500;
+}
+
+.content{
+    display: flex;
+    width: 100%;
+}
+.underhead {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap : 50px;
+    padding: 20px 40px;
+    margin: 100px;
+}
+.return{
+    background-color: orange;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    width: 400px;
+    height: 60px;
+}
+.payment-option-btn { /* Shared styling for all buttons in this row */
+    background-color: orange;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 25px; /* Increased padding for better touch targets */
+    font-weight: 600;
+    min-width: 200px; /* Minimum width for better appearance */
+    height: 60px;
+    color: #000000; /* Added text color */
+    font-size: 16px; /* Explicit font size */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+
+
+.payment-content {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    margin: 0 40px 40px 40px; /* Add some margin around the content */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+/* ... (your existing CSS above) ... */
+
+.payment-content {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    margin: 0 40px 40px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity - backdrop */
+    padding-top: 60px; /* Location of the box */
+    align-items: center; /* For vertical centering if content is smaller */
+    justify-content: center; /* For horizontal centering */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px; /* Maximum width */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    position: relative; /* For positioning the close button */
+    text-align: center; /* Center content inside modal */
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.modal-content img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border: 1px solid #ddd; /* Optional border for image */
+    border-radius: 4px;
+}
+.modal-content p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+
+.close-btn {
+    color: #aaa;
+    position: absolute; /* Position relative to modal-content */
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

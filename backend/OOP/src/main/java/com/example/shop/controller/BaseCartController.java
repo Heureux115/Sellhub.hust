@@ -6,6 +6,7 @@ import com.example.shop.model.Product;
 import com.example.shop.repository.ProductRepository;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseCartController {
@@ -15,13 +16,6 @@ public abstract class BaseCartController {
         this.cart = cart;
     }
 
-    protected void addToCart(Product product) {
-        cart.addItem(product, 1);
-    }
-
-    protected void clearCart() {
-        cart.clear();
-    }
 
     protected void updateInventory(Cart cart, ProductRepository productRepo) {
         for (CartItem item : cart.getItems().values()) {
@@ -38,7 +32,6 @@ public abstract class BaseCartController {
     }
 
     protected void clearCart(HttpSession session, Cart cart) {
-        cart.clear();
         session.setAttribute("cart", cart);
     }
 
@@ -46,10 +39,12 @@ public abstract class BaseCartController {
     protected Map<Long, CartItem> getCartFromSession(HttpSession session) {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
         if (cartItems == null) {
-            cartItems = cart.getItems(); // Giỏ hàng mới nếu chưa có trong session
+            cartItems = new HashMap<>();
+            session.setAttribute("cart", cartItems); // <-- Cập nhật luôn nếu mới
         }
         return cartItems;
     }
+
 
     // Thêm sản phẩm vào giỏ
     protected void addToCart(HttpSession session, CartItem cartItem) {
@@ -61,7 +56,14 @@ public abstract class BaseCartController {
     // Xóa sản phẩm khỏi giỏ
     protected void removeFromCart(HttpSession session, Long productId) {
         Map<Long, CartItem> cartItems = getCartFromSession(session);
-        cartItems.remove(productId); // Xóa sản phẩm khỏi giỏ
+        CartItem item = cartItems.get(productId);
+        if (item != null) {
+            if (item.getQuantity() > 1) {
+                item.setQuantity(item.getQuantity() - 1); // Giảm số lượng
+            } else {
+                cartItems.remove(productId); // Xóa nếu còn 1 thì bỏ khỏi giỏ luôn
+            }
+        }
         session.setAttribute("cart", cartItems); // Cập nhật giỏ hàng trong session
     }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${pageTitle} ?: 'Danh mục sản phẩm'">Sản phẩm</title>
-    <link rel="stylesheet" th:href="@{/css/search-product.css}">
+    <link rel="stylesheet" th:href="@{/css/search-result.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -83,10 +83,10 @@
     <div class = "best_sellers">
 
         <h2>Sản phẩm trong kho: </h2>
-        <nav>
+        <nav id = "best_sellers">
             <ul>
                 <li th:each="product : ${products}">
-                    <img th:src="@{'/css/imgs_oop/' + ${product.imageName}}" alt="Ảnh" style="width:100px; height:auto">
+                    <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:100px; height:auto">
                     <h3 th:text="${product.title}">Tên sản phẩm</h3>
                     <p th:text="'Giá: ' + ${product.price} + ' VNĐ'">Giá</p>
                 </li>

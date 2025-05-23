@@ -17,7 +17,7 @@ public class TabletComputer extends Product {
     }
 
     // Constructor with parameters
-    public TabletComputer(int id, String title, String description, double price, String imageUrl, String brand, int stock,
+    public TabletComputer(int id, String title, String description, int price, String imageUrl, String brand, int stock,
                           String screenSize, String batteryLife, String storageCapacity, String operatingSystem) {
         super(id, title, description, price, imageUrl, brand, stock); // Calls the parent Product constructor
         this.screenSize = screenSize;

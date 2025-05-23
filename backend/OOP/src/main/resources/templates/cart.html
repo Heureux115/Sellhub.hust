@@ -29,10 +29,9 @@
     <h3>Sản phẩm</h3>
     <div class="product-list">
       <div class="product-item" th:each="item : ${cart.values()}">
-        <img th:src="${item.product.imageUrl}" alt="Hình ảnh sản phẩm" />
+        <img th:src="@{'/css/imgs_oop/' + ${item.product.imageUrl}}" alt="Hình ảnh sản phẩm" />
         <div class="product-info">
           <h4 th:text="${item.product.title}">Tên sản phẩm</h4>
-          <p th:text="${item.product.description}">Mô tả</p>
           <span class="product-price" th:text="'Giá: ' + ${item.product.price} + '₫'">Giá</span>
           <form th:action="@{/cart/remove}" method="post">
             <input type="hidden" name="productId" th:value="${item.product.id}" />
@@ -45,16 +44,12 @@
 
   <div class="total-section">
     <h4>Tổng cộng: <span th:text="${total} + '₫'">0₫</span></h4>
-    <form th:action="@{/checkout}" method="post">
+    <form th:action="@{/payment}" method="post">
       <button type="submit">Thanh toán</button>
     </form>
     <div th:if="${message}">
       <p th:text="${message}" style="color: green;"></p>
     </div>
   </div>
-
-
 </body>
-
-
 </html>
