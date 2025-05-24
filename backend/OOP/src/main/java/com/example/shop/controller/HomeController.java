@@ -49,7 +49,7 @@ public class HomeController {
 
     //hàm tạo trang brand name
     @GetMapping("/brand/{name}")
-    public String viewByBrand(@PathVariable String name, Model model) {
+    public String viewByBrand(@PathVariable String name,  Model model) {
         List<Product> productsByBrand = productRepo.findByBrandIgnoreCase(name);
         model.addAttribute("products", productsByBrand);
         model.addAttribute("brand", name);

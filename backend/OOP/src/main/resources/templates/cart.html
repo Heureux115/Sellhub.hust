@@ -51,7 +51,7 @@
 
   <div class="total-section">
     <h4>Tổng cộng: <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + '₫'">0₫</span></h4>
-    <form th:action="@{/payment}" method="post">
+    <form th:action="@{/payment}" method="get">
       <button type="submit">Thanh toán</button>
     </form>
     <div th:if="${message}">

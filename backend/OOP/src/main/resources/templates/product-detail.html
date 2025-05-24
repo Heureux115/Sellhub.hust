@@ -17,22 +17,27 @@
         </a>
     </div>
 
-    <div class="search">
+    <div class = "search">
         <form th:action="@{/search}" method="get">
-            <input placeholder="Tìm kiếm sản phẩm" name="keyword" id="tim_kiem" size="80">
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    name = "keyword"
+                    id = "tim_kiem"
+                    size = "80"
+            />
             <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
         </form>
     </div>
 
-    <div class="extra">
+    <div class = "extra">
         <span class="hotline">Hotline:<br> 0834784586</span>
 
-        <div class="cart_button">
+        <div class ="cart_button">
             <a th:href="@{/cart}">
-                <button type="button" id="cart_button" class="fa-solid fa-cart-plus"></button>
+                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
             </a>
         </div>
-        <div class="log_out">
+        <div class = "log_out">
             <form th:action="@{/logout}" method="post">
                 <button type="submit">Đăng xuất</button>
             </form>

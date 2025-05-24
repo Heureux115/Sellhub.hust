@@ -11,24 +11,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header class="header">
+<header class="header">
     <div class="logo">
-        <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo">
+        <a th:href="@{/back-to-home}">
+            <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo" />
+        </a>
     </div>
 
     <div class = "search">
-     <form>
-        <input
-            placeholder = "Tìm kiếm sản phẩm"
-            id = "tim_kiem"
-            size = "80"
-        >
-     </form>
-     <button id = "search_button" class="fa-solid fa-magnifying-glass"></button>
+        <form th:action="@{/search}" method="get">
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    name = "keyword"
+                    id = "tim_kiem"
+                    size = "80"
+            />
+            <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
+        </form>
     </div>
 
     <div class = "extra">
         <span class="hotline">Hotline:<br> 0834784586</span>
+
         <div class ="cart_button">
             <a th:href="@{/cart}">
                 <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
@@ -39,8 +43,9 @@
                 <button type="submit">Đăng xuất</button>
             </form>
         </div>
-    </div>    
-  </header>
+
+    </div>
+</header>
  
   <nav id="brand_list">
       <ul>

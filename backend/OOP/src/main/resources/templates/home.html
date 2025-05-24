@@ -42,7 +42,9 @@
         
     </div>    
   </header>
- 
+  <div th:if="${message}" class="success-message" style="color: green; font-weight: bold; margin: 10px;">
+      <p th:text="${message}"></p>
+  </div>
   <nav id="brand_list">
       <ul>
           <li id="ten_hang">Danh mục sản phẩm</li>

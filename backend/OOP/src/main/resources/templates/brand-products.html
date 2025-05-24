@@ -9,7 +9,9 @@
 <body>
 <header class="header">
     <div class="logo">
-        <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo">
+        <a th:href="@{/back-to-home}">
+            <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo" />
+        </a>
     </div>
 
     <div class = "search">
@@ -26,6 +28,7 @@
 
     <div class = "extra">
         <span class="hotline">Hotline:<br> 0834784586</span>
+
         <div class ="cart_button">
             <a th:href="@{/cart}">
                 <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
@@ -36,6 +39,7 @@
                 <button type="submit">Đăng xuất</button>
             </form>
         </div>
+
     </div>
 </header>
 
@@ -85,7 +89,7 @@
                         <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:100px; height:auto">
                     </a>
                     <h3 th:text="${product.title}">Tên sản phẩm</h3>
-                    <p th:text="'Giá: ' + ${product.price} + ' VNĐ'">Giá</p>
+                    <p th:text="'Giá: ' +${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'VNĐ'">Giá</p>
                 </li>
             </ul>
         </nav>
