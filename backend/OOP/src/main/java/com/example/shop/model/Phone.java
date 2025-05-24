@@ -18,7 +18,7 @@ public class Phone extends Product {
     }
 
     // Constructor with parameters
-    public Phone(int id, String title, String description, double price, String imageUrl, String brand, int stock,
+    public Phone(int id, String title, String description, int price, String imageUrl, String brand, int stock,
                  String batteryLife, String cameraQuality, String screenSize, String operatingSystem) {
         super(id, title, description, price, imageUrl, brand, stock); // Calls the parent Product constructor
         this.batteryLife = batteryLife;

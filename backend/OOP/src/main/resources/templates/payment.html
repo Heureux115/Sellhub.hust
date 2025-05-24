@@ -1,66 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thanh toán</title>
-    <link rel="stylesheet" th:href="@{/css/payment.css}" />
+    <link rel="stylesheet" th:href="@{/css/payment.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
+
 <body>
-<div class="header">
-    <button class="return" onclick="window.location.href= 'cart.html'">Quay lại giỏ hàng</button>
+<header class="header">
+    <div class="logo">
+        <a th:href="@{/back-to-home}">
+            <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo" />
+        </a>
+    </div>
+
+    <div class = "search">
+        <form th:action="@{/search}" method="get">
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    name = "keyword"
+                    id = "tim_kiem"
+                    size = "80"
+            >
+            <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
+        </form>
+    </div>
+
+    <div class = "extra">
+        <span class="hotline">Hotline:<br> 0834784586</span>
+
+        <div class ="cart_button">
+            <a th:href="@{/cart}">
+                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+            </a>
+        </div>
+        <div class = "log_out">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Đăng xuất</button>
+            </form>
+        </div>
+
+    </div>
+</header>
+
+
+
+<div class="underhead">
+    <a th:href="@{/cart}">
+        <button class="return">Quay lại giỏ hàng</button>
+    </a>
+
+    <form th:action="@{/checkout}" method="post">
+        <button type="submit" class="paymethod">Tiến Hành Thanh Toán</button>
+    </form>
 </div>
 
-<!-- Loop through Cart Items -->
-<div id="cart-list">
-    <h3>Sản phẩm trong giỏ hàng</h3>
-    <div class="product-list">
-        <!-- Example of Thymeleaf iteration -->
+<div class="cart-container">
+    <h2>SẢN PHẨM BẠN ĐÃ CHỌN MUA</h2>
+    <div id="product-list-container">
         <div class="product-item" th:each="item : ${cart.values()}">
-            <img th:src="${item.product.imageUrl}" alt="Hình ảnh sản phẩm" />
-            <div class="product-info">
+            <img th:src="@{'/css/imgs_oop/' + ${item.product.imageUrl}}" alt="Hình ảnh sản phẩm" />
+            <div class="product-details">
                 <h4 th:text="${item.product.title}">Tên sản phẩm</h4>
-                <p th:text="${item.product.description}">Mô tả</p>
-                <span class="product-price" th:text="'Giá: ' + ${item.product.price} + '₫'">Giá</span>
-                <form th:action="@{/cart/remove}" method="post">
-                    <input type="hidden" name="productId" th:value="${item.product.id}" />
-                    <button type="submit" class="remove-button">Xóa</button>
-                </form>
+                <span class="product-price" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + '₫'">Giá</span>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Payment Methods -->
-<h3>Vui lòng chọn 1 phương thức thanh toán</h3>
-<div class="select1">
-    <button id="select1" onclick="window.location.href='thank.html'">
-        <h3> Thanh toán khi nhận hàng </h3>
-    </button>
-</div>
-
-<div class="select2">
-    <button id="select2" onclick="showBankTransferPopup()">
-        <h3> Thanh toán bằng chuyển khoản ngân hàng</h3>
-    </button>
-</div>
-
-<!-- Popup for Bank Transfer -->
-<div id="image-popup" class="popup-overlay">
-    <div class="popup-content">
-        <img src="qr.jpg" alt="QR Code" class="popup-image" />
-        <button id="finish" onclick="window.location.href='thank.html'">Đã hoàn thành thanh toán</button>
+    <div class="total-section">
+        <h4>Tổng cộng: <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + '₫'">0₫</span></h4>
     </div>
 </div>
-
-<!-- Scripts -->
-<script>
-    function showBankTransferPopup() {
-        document.getElementById('image-popup').style.display = 'flex';
-    }
-</script>
 </body>
 
 </html>

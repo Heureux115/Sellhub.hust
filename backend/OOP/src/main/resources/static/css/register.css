@@ -38,14 +38,6 @@ div{
     margin-top: 5px;
 }
 
-#error{
-    width: 331.3px;
-    height: 17.6px;
-    padding-top: 1px;
-    font-size: 15px;
-    margin-left: 25px;
-}
-
 .signup_form{
     border: 2px none #000000;
     border-bottom-style: solid;
@@ -54,7 +46,6 @@ div{
     margin-left: 25px;
     margin-bottom: 10px;
 }
-
 button {
     cursor: pointer;
 }

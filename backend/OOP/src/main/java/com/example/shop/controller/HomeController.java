@@ -35,7 +35,7 @@ public class HomeController {
         List<Product> matchingProducts = productRepo.findByTitleContainingIgnoreCase(keyword);
         if (matchingProducts.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp");
-            return "redirect:/search-result";
+            return "search-result";
         }
 
         if (matchingProducts.size() == 1) {
@@ -44,17 +44,21 @@ public class HomeController {
         }
 
         model.addAttribute("products", matchingProducts);
-        return "redirect:/search-result";
+        return "search-result";
     }
 
     //hàm tạo trang brand name
-    @GetMapping("/brand/{name}")
-    public String viewByBrand(@PathVariable String name, Model model) {
-        List<Product> productsByBrand = productRepo.findByBrandIgnoreCase(name);
-        model.addAttribute("products", productsByBrand);
-        model.addAttribute("brand", name);
+    @GetMapping("/category/{category}/brand/{brand}")
+    public String viewByBrandAndCategory(@PathVariable String category, @PathVariable String brand, Model model) {
+        // Lấy sản phẩm theo category và brand
+        List<Product> products = productRepo.findByCategoryIgnoreCaseAndBrandIgnoreCase(category, brand);
+
+        model.addAttribute("products", products);
+        model.addAttribute("brand", brand);
+        model.addAttribute("category", category);
         return "brand-products";
     }
+
 
     //hàm tạo trang theo giá tiền
     @GetMapping("/price/{minPrice}/{maxPrice}")
@@ -63,22 +67,9 @@ public class HomeController {
         model.addAttribute("products", productsByPrice);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
-        return "redirect:/price-products";
+        return "price-products";
     }
 
-    //tạo trang hot product
-    @GetMapping("/product/{id}")
-    public String viewHotProduct(@PathVariable Long id, Model model) {
-        Product product = productRepo.findById(id).orElse(null);
-
-        if (product == null) {
-            model.addAttribute("message", "Không tìm thấy sản phẩm.");
-            return "redirect:/error";
-        }
-
-        model.addAttribute("product", product);
-        return "redirect:/hot-product";
-    }
 
     @GetMapping("/sort")
     public String sortProducts(@RequestParam String by, Model model) {
@@ -113,24 +104,43 @@ public class HomeController {
         List<String> brands = getBrandsByCategory(name);
         List<String> images = getItemsByBrand(name);
         List<String> names = getNameByBrand(name);
+        String pageTitle = getTitleByCategory(name);
         model.addAttribute("images", images);
         model.addAttribute("names", names);
         model.addAttribute("category", name);
         model.addAttribute("brands", brands);
+        model.addAttribute("pageTitle", pageTitle);
 
         return "category"; // trả về category.html để hiển thị danh sách hãng
+    }
+
+    private String getTitleByCategory(String category) {
+        switch (category.toLowerCase()) {
+            case "phone":
+                return "Điện thoại";
+            case "laptop":
+                return "Laptop";
+            case "accessories":
+                return "Phụ kiện";
+            case "tablet":
+                return "Máy tính bảng";
+            case "secondhand":
+                return "Hàng đã qua sử dụng";
+            default:
+                return "Danh mục sản phẩm";
+        }
     }
 
     private List<String> getNameByBrand(String category) {
         switch(category.toLowerCase()) {
             case "phone":
-                return List.of("Iphone16ProMax", "HuaweiPura70", "SamsungGalaxyZFold6", "XiaomiRedmiNote11", "VertuSignatureCobra");
+                return List.of("Iphone 16 Pro Max", "Huawei Pura 70", "Samsung Galaxy ZFold 6", "Xiaomi Redmi Note 11", "Vertu Signature Cobra");
             case "laptop":
-                return List.of("Apple", "Dell", "Lenovo", "Asus", "HP", "MSI", "Acer", "Razer");
+                return List.of("Macbook Air M1 2020", "Macbook Air M2 2022", "Lenovo ThinkPad X1 Carbon Gen 10", "Asus Vivobook 15");
             case "accessories":
-                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech");
+                return List.of("Airpod 4", "Havit H663BT", "Marshall Major V", "Sony WH-CH520", "Apple MagSafe 25W","Xiaomi Router AC 12004A");
             case "tablet":
-                return List.of("Apple", "Samsung", "Xiaomi", "Sony", "Huawei");
+                return List.of("iPad A16 WiFi", "iPad Air M3 11 inch WiFi", "Oppo Pad 3", "Samsung Galaxy Tab S10 5G", "Xiaomi Pad 7 WiFi");
             case "secondhand":
                 return List.of();
             default:
@@ -143,11 +153,11 @@ public class HomeController {
             case "phone":
                 return List.of("Iphone16ProMax.jpg", "HuaweiPura70.jpg", "SamsungGalaxyZFold6.jpg", "XiaomiRedmiNote11.jpg", "VertuSignatureCobra.jpg");
             case "laptop":
-                return List.of("Apple", "Dell", "Lenovo", "Asus", "HP", "MSI", "Acer", "Razer");
+                return List.of("MacbookAirM12020.jpg", "MacbookAirM22022.jpg", "LenovoThinkPadX1CarbonGen10.jpg", "AsusVivobook15.jpg");
             case "accessories":
-                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech");
+                return List.of("Airpod4.jpg", "HavitH663BT.jpg", "MarshallMajorV.jpg", "SonyWH-CH520.jpg", "AppleMagSafe25W.jpg","XiaomiRouterAC12004A.jpg" );
             case "tablet":
-                return List.of("Apple", "Samsung", "Xiaomi", "Sony", "Huawei");
+                return List.of("iPadA16WiFi.jpg", "iPadAirM311inchWiFi.jpg", "OppoPad3.jpg", "SamsungGalaxyTabS105G.jpg", "XiaomiPad7WiFi.jpg");
             case "secondhand":
                 return List.of();
             default:
@@ -162,15 +172,13 @@ public class HomeController {
             case "laptop":
                 return List.of("Apple", "Dell", "Lenovo", "Asus", "HP", "MSI", "Acer", "Razer");
             case "accessories":
-                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech");
+                return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech", "Marshall", "Oppo", "Huawei");
             case "tablet":
-                return List.of("Apple", "Samsung", "Xiaomi", "Sony", "Huawei");
+                return List.of("Apple", "Samsung", "Xiaomi", "Oppo", "Huawei");
             case "secondhand":
                 return List.of();
             default:
                 return List.of();
         }
     }
-
-
 }

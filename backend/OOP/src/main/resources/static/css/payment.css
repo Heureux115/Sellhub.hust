@@ -1,151 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial'; /* Giữ Poppins như yêu cầu trước */
+    background-image: linear-gradient(-90deg, #333, #ccc); /* Màu nền gốc */
+    /* color: #333;  Màu chữ mặc định của body có thể để trình duyệt tự xử lý hoặc theo style gốc */
+    line-height: 1.6;
+}
+
 button {
     cursor: pointer;
 }
 
-body {
-    margin: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.return {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: rgb(237, 61, 61);
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    padding: 10px 20px;
     color: white;
-    font-size: large;
+}
+.logo img{
+    width: 200px;
+    height: auto;
+
+}
+.search{
+    margin-left: 50px;
+    margin-top: 10px;
+    width: 600px;
+    height: 50px;
+    display: flex;
+}
+#tim_kiem{
+    height: 40px;
+    width: 500px;
+}
+#search_button{
+    height: 40px;
+    width: 40px;
+}
+.extra{
+    display: flex;
+}
+
+.hotline{
+    justify-content: center;
+    padding-top: 5px;
+}
+
+#cart_button{
+    height: 40px;
+    width: 40px;
+    margin-left: 40px;
+}
+.log_out button{
+    width: 80px;
+    height: 40px;
+    background-color:#FFA500;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: #FFA500;
+}
+
+.content{
+    display: flex;
+    width: 100%;
+}
+
+
+.underhead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 20px;
+    padding: 20px 40px;
+}
+
+.return,
+.paymethod {
+    background-color: orange;
     border: none;
-}
-
-#list h3 {
-    margin-inline-start: 30px;
-    text-align: center;
-    font-size: 24px; /* Tăng kích thước chữ */
+    border-radius: 8px;
+    padding: 10px 20px;
     font-weight: 600;
-    color: #333;
+    width: 400px;
+    height: 60px;
 }
 
-.product-list {
+.cart-container {
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: #ffffff; /* Nền trắng cho container chính */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+.cart-container h2 {
+    text-align: center;
+    margin: 20px 0; /* Giữ margin gốc */
+    font-size: 24px;
+    font-weight: 600;
+    /* color: #FFA500;  Bỏ màu cam cho H2 để giữ màu mặc định */
+}
+
+#product-list-container { /* Tên mới cho div#list */
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 20px 30px;
+    gap: 15px; /* Khoảng cách gốc giữa các product-item */
+    /* padding: 20px 30px;  Padding này sẽ do cart-container quản lý */
+    max-height: calc(100vh - 350px); /* Giới hạn chiều cao để có scroll, điều chỉnh nếu cần */
+    overflow-y: auto;
+    overflow-x: hidden; /* Tránh scroll ngang không cần thiết */
+    /* border: 1px solid #ccc;  Border gốc của #list, có thể giữ hoặc bỏ */
+    padding-right: 10px; /* Không gian cho thanh cuộn nếu hiện */
 }
+
+/* Custom scrollbar (optional) */
+#product-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+#product-list-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+#product-list-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+#product-list-container::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
 
 .product-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Giữ hướng gốc */
     align-items: center;
-    border: 1px solid #555454;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #fefefe;
-    transition: transform 0.3s ease; /* Thêm hiệu ứng hover */
+    gap: 15px; /* Giữ khoảng cách giữa các thành phần con */
+    padding: 10px; /* Padding gốc */
+    border: 1px solid #555454; /* Border gốc */
+    border-radius: 10px; /* Bo tròn gốc */
+    background-color: #fefefe; /* Màu nền product-item gốc */
+    transition: box-shadow 0.3s ease;
 }
 
 .product-item:hover {
-    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.product-check {
+    margin-right: 15px; /* Margin gốc */
+    width: 20px;
+    height: 20px;
+    /* accent-color: #FFA500; Bỏ accent-color để giữ màu checkbox mặc định hoặc theo trình duyệt */
+    cursor: pointer;
 }
 
 .product-item img {
-    width: 100px;
+    width: 100px; /* Kích thước ảnh gốc */
     height: 100px;
     object-fit: cover;
-    margin-right: 15px;
-    border-radius: 8px;
+    margin-right: 15px; /* Margin gốc */
+    border-radius: 8px; /* Bo tròn ảnh gốc */
+    /* border: 1px solid #eee; */ /* Bỏ border thêm này */
 }
 
-.product-info {
+.product-details { /* Tên mới cho .product-info */
+    flex-grow: 1;
+}
+
+.product-details h4 {
+    margin: 0 0 5px 0; /* Điều chỉnh margin, gốc là 10px */
+    font-size: 18px; /* Font-size gốc */
+    font-weight: 600; /* Font-weight gốc */
+    /* color: #333; */ /* Để màu mặc định */
+}
+
+.product-price { /* class gốc là span.product-price */
+    /* margin: 5px 0 0; */ /* CSS gốc không có margin riêng cho price */
+    /* color: #555; */ /* Màu gốc của <p> trong .product-info, giờ span nên có thể không cần */
+    font-size: 16px; /* Điều chỉnh nếu cần, gốc là 14px cho p */
+    font-weight: 500;
+    /* color: #e74c3c; Bỏ màu đỏ nổi bật này */
+}
+
+.total-section {
     display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-}
-
-.product-info h4 {
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-}
-
-.product-info p {
-    margin: 5px 0 0;
-    color: #555;
-    font-size: 14px;
-}
-
-.product-price {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2374ab;
-}
-
-h3 {
-    text-align: center;
-}
-
-.select1, .select2 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
-}
-
-#select1, #select2 {
-    padding: 10px 20px;
-    background-color: #2374ab;
-    color: white;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-#select1:hover, #select2:hover {
-    background-color: #1b5d8a; /* Thêm hiệu ứng hover */
-}
-
-.popup-overlay {
-    display: none; /* Ẩn mặc định */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8); /* Nền mờ đen */
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    z-index: 999;
-    flex-direction: column;
-    gap: 20px;
+    padding: 20px 0px; /* Gốc là 20px 30px, nhưng container đã có padding */
+    border-top: 2px solid #cbc8c8; /* Border top gốc */
+    font-size: 20px; /* Font-size gốc */
+    font-weight: 600; /* Font-weight gốc */
+    /* text-align: right;  Không cần nữa vì dùng flex */
+    background-color: #f8f8f8; /* Màu nền total-section gốc */
+    margin-top: 20px;
 }
 
-.popup-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    justify-content: center;
-}
-
-.popup-image {
-    max-width: 50%;
-    max-height: 150%;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-}
-
-#finish {
-    padding: 10px 20px;
-    background-color: #2374ab;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#finish:hover {
-    background-color: #1b5d8a; /* Thêm hiệu ứng hover */
+#total-price {
+    margin: 0;
+    color: #FFA500; /* Màu total-price gốc */
+    font-weight: 700;
 }

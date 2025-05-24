@@ -3,21 +3,22 @@ package com.example.shop.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "[product]")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "[product]")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
-    private double price;
+    private int price;
     private String imageUrl;
     private String brand;
     private int stock;
+    private String category;
 
-    public Product(int id, String title,String description ,double price, String imageUrl,String brand, int stock) {
+    public Product(int id, String title,String description ,int price, String imageUrl,String brand, int stock) {
         this.id = (long) id;
         this.title = title;
         this.price = price;
@@ -25,6 +26,7 @@ public class Product {
         this.imageUrl = imageUrl;
         this.brand = brand;
         this.stock = stock;
+        this.category = category;
     }
 
     public Product() {
@@ -47,7 +49,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -74,4 +76,8 @@ public class Product {
     public int getStock() { return stock; }
 
     public void setStock(int stock) { this.stock = stock; }
+
+    public String getCategory() {return category;}
+
+    public void setCategory(String category) { this.category = category; }
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/product-detail.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+<header class="header">
+    <div class="logo">
+        <a th:href="@{/back-to-home}">
+            <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo" />
+        </a>
+    </div>
+
+    <div class = "search">
+        <form th:action="@{/search}" method="get">
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    name = "keyword"
+                    id = "tim_kiem"
+                    size = "80"
+            />
+            <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
+        </form>
+    </div>
+
+    <div class = "extra">
+        <span class="hotline">Hotline:<br> 0834784586</span>
+
+        <div class ="cart_button">
+            <a th:href="@{/cart}">
+                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+            </a>
+        </div>
+        <div class = "log_out">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Đăng xuất</button>
+            </form>
+        </div>
+
+    </div>
+</header>
+
+<div class="product">
+
+    <div class="product-item">
+        <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:300px; height:auto">
+    </div>
+
+    <div class="productdetails">
+
+        <div class="product-info">
+            <p th:text="${product.title}">Tên sản phẩm</p>
+            <p th:text="'Hãng: ' + ${product.brand}">Giá</p>
+            <p th:text=" 'Giá: ' +${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'VNĐ'">Giá</p>
+            <p>Đặc điểm sản phẩm:</p>
+            <br/>
+            <p th:text="${product.description}">Giá</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="select">
+    <form th:action="@{/product/addToCart/{id}(id = ${product.id})}" method="post">
+        <button type="submit" class = "add">Thêm vào giỏ hàng</button>
+    </form>
+    <form th:action="@{/product/buyNow/{id}(id = ${product.id})}" method="post">
+        <button type="submit" class = "buy">Mua ngay</button>
+    </form>
+</div>
+</body>
+
+</html>

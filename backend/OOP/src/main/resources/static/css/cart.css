@@ -21,6 +21,7 @@ body {
 
 .remove-button {
   margin-top: 10px;
+  margin-bottom: 10px;
   background-color: #ff4d4d;
   color: white;
   border: none;
@@ -96,10 +97,10 @@ body {
   font-weight: 600;
 }
 
-.product-info p {
-  margin: 5px 0 0;
+.product-info .product-price {
+  margin-left: 10px;
   color: #555;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .list {
@@ -130,4 +131,22 @@ body {
   margin: 0;
   color: #e53935;
 }
+.product-item {
+  display: flex;
+  align-items: center;
+}
 
+.product-info {
+  flex: 1; /* Cho phần info chiếm hết phần còn lại */
+  margin-right: 600px;
+}
+
+.remove-wrapper {
+  margin-left: 20px;
+  margin-right: 50px;
+}
+
+.product-item .product-quantity {
+  display: block;
+  margin: 8px 0;
+}

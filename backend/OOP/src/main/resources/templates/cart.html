@@ -11,6 +11,44 @@
 </head>
 
 <body>
+<div th:if="${message}" id="popup-message"
+style="
+position: fixed;
+top: 20%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: #4caf50;
+color: white;
+padding: 20px 40px;
+border-radius: 8px;
+font-size: 18px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+z-index: 9999;">
+<p th:text="${message}">Message</p>
+</div>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var message = /*[[${message}]]*/ null;
+
+  if(message != null && message.trim() !== '') {
+    var popup = document.getElementById('popup-message');
+
+    if(message.toLowerCase().includes('thất bại')) {
+      popup.style.backgroundColor = '#f44336'; // màu đỏ lỗi
+    } else {
+      popup.style.backgroundColor = '#4caf50'; // màu xanh thành công
+    }
+
+    popup.style.display = 'block';
+
+    setTimeout(function() {
+      popup.style.display = 'none';
+    }, 3000);
+  }
+  /*]]>*/
+</script>
+
   <div class="header">
     <div class="home-button">
       <a th:href="@{/back-to-home}">
@@ -25,15 +63,22 @@
       <h5>Giỏ hàng của bạn</h5>
     </div>
   </div>
+
   <div id="list">
     <h3>Sản phẩm</h3>
     <div class="product-list">
+
       <div class="product-item" th:each="item : ${cart.values()}">
-        <img th:src="${item.product.imageUrl}" alt="Hình ảnh sản phẩm" />
+        <img th:src="@{'/css/imgs_oop/' + ${item.product.imageUrl}}" alt="Hình ảnh sản phẩm" />
         <div class="product-info">
           <h4 th:text="${item.product.title}">Tên sản phẩm</h4>
-          <p th:text="${item.product.description}">Mô tả</p>
-          <span class="product-price" th:text="'Giá: ' + ${item.product.price} + '₫'">Giá</span>
+          <span class="product-price" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + '₫'">Giá</span>
+
+        </div>
+
+        <span class="product-quantity">Số lượng: <span th:text="${item.quantity}">1</span></span>
+
+        <div class="remove-wrapper">
           <form th:action="@{/cart/remove}" method="post">
             <input type="hidden" name="productId" th:value="${item.product.id}" />
             <button type="submit" class="remove-button">Xóa</button>
@@ -44,17 +89,10 @@
   </div>
 
   <div class="total-section">
-    <h4>Tổng cộng: <span th:text="${total} + '₫'">0₫</span></h4>
-    <form th:action="@{/checkout}" method="post">
+    <h4>Tổng cộng: <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + '₫'">0₫</span></h4>
+    <form th:action="@{/payment}" method="get">
       <button type="submit">Thanh toán</button>
     </form>
-    <div th:if="${message}">
-      <p th:text="${message}" style="color: green;"></p>
-    </div>
   </div>
-
-
 </body>
-
-
 </html>

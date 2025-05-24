@@ -15,7 +15,7 @@ public class Accessories extends Product {
     }
 
     // Constructor with parameters
-    public Accessories(int id, String title, String description, double price, String imageUrl, String brand, int stock, String material, String color) {
+    public Accessories(int id, String title, String description, int price, String imageUrl, String brand, int stock, String material, String color) {
         super(id, title, description, price, imageUrl, brand, stock); // Calls the constructor of the parent Product class
         this.material = material;
         this.color = color;

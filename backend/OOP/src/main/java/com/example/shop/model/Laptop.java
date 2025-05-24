@@ -17,7 +17,7 @@ public class Laptop extends Product {
     }
 
     // Constructor with parameters
-    public Laptop(int id, String title, String description, double price, String imageUrl, String brand, int stock,
+    public Laptop(int id, String title, String description, int price, String imageUrl, String brand, int stock,
                   String processor, String ram, String screenSize, String storage) {
         super(id, title, description, price, imageUrl, brand, stock); // Calls the constructor of the parent Product class
         this.processor = processor;
