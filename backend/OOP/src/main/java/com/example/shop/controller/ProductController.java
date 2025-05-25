@@ -28,7 +28,7 @@ public class ProductController extends BaseCartController {
     public String buyNow(@PathVariable Long id, HttpSession session) {
         Product product = productRepo.findById(id).orElse(null);
         if (product != null) {
-            clearCart(session, cart);
+            clearCart(session);
             addToCart(session, new CartItem(product, 1));
             return "payment";
         }
@@ -71,4 +71,3 @@ public class ProductController extends BaseCartController {
         return "redirect:/home";
     }
 }
-

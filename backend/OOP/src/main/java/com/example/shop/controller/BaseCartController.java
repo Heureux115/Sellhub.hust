@@ -17,8 +17,8 @@ public abstract class BaseCartController {
     }
 
 
-    protected void updateInventory(Cart cart, ProductRepository productRepo) {
-        for (CartItem item : cart.getItems().values()) {
+    protected void updateInventory(Map<Long, CartItem> cartItems, ProductRepository productRepo) {
+        for (CartItem item : cartItems.values()) {
             Product product = item.getProduct();
             if (product.getStock() >= item.getQuantity()) {
                 product.setStock(product.getStock() - item.getQuantity());
@@ -27,13 +27,15 @@ public abstract class BaseCartController {
         }
     }
 
+    protected void clearCart(HttpSession session) {
+        session.setAttribute("cart", new HashMap<Long, CartItem>());
+    }
+
+
     protected boolean isCartEmpty(Cart cart) {
         return cart == null || cart.getItems().isEmpty();
     }
 
-    protected void clearCart(HttpSession session, Cart cart) {
-        session.setAttribute("cart", cart);
-    }
 
     @SuppressWarnings("unchecked")
     protected Map<Long, CartItem> getCartFromSession(HttpSession session) {

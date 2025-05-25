@@ -31,7 +31,6 @@ public class CartController extends BaseCartController {
                 .sum();
         model.addAttribute("cart", cartItems);
         model.addAttribute("total", total);
-        model.addAttribute("message", null);
     }
 
     @GetMapping("/cart")
@@ -57,4 +56,3 @@ public class CartController extends BaseCartController {
         return "redirect:/home"; // Điều hướng về trang chủ
     }
 }
-
