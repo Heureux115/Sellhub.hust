@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.model.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,14 @@ public class HomeController {
 
     //tạo trang home
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         model.addAttribute("products", productRepo.findAll());
+
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+
         return "home";
     }
 

@@ -31,7 +31,7 @@ class AuthController {
         User user = userService.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
-            return "home"; // hoặc return "redirect:/home";
+            return "redirect:/home"; // hoặc return "redirect:/home";
         } else {
             model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
             return "login"; // phải forward về login, không redirect
@@ -85,5 +85,39 @@ class AuthController {
         session.invalidate();
         return "login";
     }
+
+    @GetMapping("/change-password")
+    public String changePasswordForm() {
+        return "change-password"; // view name
+    }
+
+    @PostMapping("/change-password")
+    public String changePassword(@RequestParam String currentPassword,
+                                 @RequestParam String newPassword,
+                                 @RequestParam String confirmNewPassword,
+                                 HttpSession session,
+                                 Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login"; // chưa đăng nhập
+        }
+
+        if (!user.getPassword().equals(currentPassword)) {
+            model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+            return "change-password";
+        }
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            model.addAttribute("error", "Mật khẩu mới không trùng khớp");
+            return "change-password";
+        }
+
+        user.setPassword(newPassword);
+        userService.save(user); // cập nhật lại user
+
+        model.addAttribute("message", "Đổi mật khẩu thành công");
+        return "home";
+    }
+
 }
 
