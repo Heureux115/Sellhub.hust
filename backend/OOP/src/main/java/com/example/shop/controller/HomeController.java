@@ -112,6 +112,7 @@ public class HomeController {
         List<String> images = getItemsByBrand(name);
         List<String> names = getNameByBrand(name);
         String pageTitle = getTitleByCategory(name);
+
         model.addAttribute("images", images);
         model.addAttribute("names", names);
         model.addAttribute("category", name);

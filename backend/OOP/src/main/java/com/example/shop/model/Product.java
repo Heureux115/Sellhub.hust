@@ -26,7 +26,6 @@ public class Product {
         this.imageUrl = imageUrl;
         this.brand = brand;
         this.stock = stock;
-        this.category = category;
     }
 
     public Product() {
