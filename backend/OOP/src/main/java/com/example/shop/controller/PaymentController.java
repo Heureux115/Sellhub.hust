@@ -28,15 +28,15 @@ public class PaymentController extends BaseCartController {
     public String checkout(HttpSession session, RedirectAttributes redirectAttributes) {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
 
-        if (cartItems == null || cartItems.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Không có gì trong giỏ hàng!");
-            return "redirect:/cart";
-        }
-
         User user = (User) session.getAttribute("user");
         if (user == null) {
             redirectAttributes.addFlashAttribute("message", "Bạn cần đăng nhập để thanh toán.");
             return "redirect:/login";
+        }
+
+        if (cartItems == null || cartItems.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Không có gì trong giỏ hàng!");
+            return "redirect:/cart";
         }
 
         List<OrderItems> orderItemsList = new ArrayList<>();

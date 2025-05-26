@@ -68,14 +68,39 @@ public class HomeController {
 
 
     //hàm tạo trang theo giá tiền
-    @GetMapping("/price/{minPrice}/{maxPrice}")
-    public String viewByPrice(@PathVariable double minPrice, @PathVariable double maxPrice,Model model) {
-        List<Product> productsByPrice = productRepo.findByPriceBetween(minPrice, maxPrice);
-        model.addAttribute("products", productsByPrice);
+    @GetMapping("/category/{category}/price/{minPrice}/{maxPrice}")
+    public String viewByPrice(
+            @PathVariable String category,
+            @PathVariable double minPrice,
+            @PathVariable double maxPrice,
+            Model model) {
+
+        List<Product> products = productRepo.findByCategoryAndPriceBetween(
+                category, minPrice, maxPrice);
+
+        model.addAttribute("products", products);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
         return "price-products";
     }
+    @GetMapping("/category/{category}/brand/{brand}/price/{minPrice}/{maxPrice}")
+    public String viewByPrice(
+            @PathVariable String category,
+            @PathVariable String brand,
+            @PathVariable double minPrice,
+            @PathVariable double maxPrice,
+            Model model) {
+
+        List<Product> products = productRepo.findByCategoryAndBrandAndPriceBetween(
+                category, brand, minPrice, maxPrice);
+
+        model.addAttribute("products", products);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        return "price-products";
+    }
+
+
 
 
     @GetMapping("/sort")
@@ -112,7 +137,6 @@ public class HomeController {
         List<String> images = getItemsByBrand(name);
         List<String> names = getNameByBrand(name);
         String pageTitle = getTitleByCategory(name);
-
         model.addAttribute("images", images);
         model.addAttribute("names", names);
         model.addAttribute("category", name);

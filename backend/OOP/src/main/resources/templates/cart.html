@@ -29,10 +29,10 @@ z-index: 9999;">
 
 <script th:inline="javascript">
   /*<![CDATA[*/
-  var message = /*[[${message}]]*/ null;
+  let message = /*[[${message}]]*/ null;
 
   if(message != null && message.trim() !== '') {
-    var popup = document.getElementById('popup-message');
+    let popup = document.getElementById('popup-message');
 
     if(message.toLowerCase().includes('thất bại')) {
       popup.style.backgroundColor = '#f44336'; // màu đỏ lỗi
@@ -48,6 +48,7 @@ z-index: 9999;">
   }
   /*]]>*/
 </script>
+
 
   <div class="header">
     <div class="home-button">

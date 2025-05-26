@@ -37,7 +37,6 @@ public abstract class BaseCartController {
     }
 
 
-    @SuppressWarnings("unchecked")
     protected Map<Long, CartItem> getCartFromSession(HttpSession session) {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
         if (cartItems == null) {
