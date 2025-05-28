@@ -31,7 +31,7 @@ class AuthController {
         User user = userService.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
-            return "home"; // hoặc return "redirect:/home";
+            return "redirect:/home"; // hoặc return "redirect:/home";
         } else {
             model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
             return "login"; // phải forward về login, không redirect
@@ -68,7 +68,7 @@ class AuthController {
             model.addAttribute("error", "Số điện thoại đã tồn tại");
             return "register";
         } else if (!password.equals(confirmpassword)) {
-            model.addAttribute("error", "mật khẩu không trùng nhau");
+            model.addAttribute("error", "Mật khẩu không trùng nhau");
             return "register";
         }
         User user = new User();

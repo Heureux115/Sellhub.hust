@@ -31,5 +31,13 @@ public class Cart {
         items.clear();
     }
 
+    public long calculateTotalPrice() {
+        long total = 0L;
+        for (CartItem item : items.values()) {
+            total += (long) (item.getProduct().getPrice() * item.getQuantity());
+        }
+        return total;
+    }
+
 }
 

@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.model.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,18 @@ public class HomeController {
 
     //tạo trang home
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(HttpSession session, Model model) {
+        // Thêm sản phẩm vào model như cũ
         model.addAttribute("products", productRepo.findAll());
+
+        // Lấy user từ session
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         return "home";
     }
+
 
     //hàm tìm sản phẩm
     @GetMapping("/search")
@@ -48,12 +57,14 @@ public class HomeController {
     }
 
     //hàm tạo trang brand name
-    @GetMapping("/brand/{name}")
-    public String viewByBrand(@PathVariable String name,  Model model) {
-        List<Product> productsByBrand = productRepo.findByBrandIgnoreCase(name);
-        model.addAttribute("products", productsByBrand);
-        model.addAttribute("brand", name);
-        model.addAttribute("category", name);
+    @GetMapping("/category/{category}/brand/{brand}")
+    public String viewByBrandAndCategory(@PathVariable String category, @PathVariable String brand, Model model) {
+        // Lấy sản phẩm theo category và brand
+        List<Product> products = productRepo.findByCategoryIgnoreCaseAndBrandIgnoreCase(category, brand);
+
+        model.addAttribute("products", products);
+        model.addAttribute("brands", brand);
+        model.addAttribute("category", category);
         return "brand-products";
     }
 
@@ -63,6 +74,38 @@ public class HomeController {
     public String viewByPrice(@PathVariable double minPrice, @PathVariable double maxPrice,Model model) {
         List<Product> productsByPrice = productRepo.findByPriceBetween(minPrice, maxPrice);
         model.addAttribute("products", productsByPrice);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        return "price-products";
+    }
+
+    @GetMapping("/category/{category}/price/{minPrice}/{maxPrice}")
+    public String viewByPrice(
+            @PathVariable String category,
+            @PathVariable double minPrice,
+            @PathVariable double maxPrice,
+            Model model) {
+
+        List<Product> products = productRepo.findByCategoryAndPriceBetween(
+                category, minPrice, maxPrice);
+
+        model.addAttribute("products", products);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        return "price-products";
+    }
+    @GetMapping("/category/{category}/brand/{brand}/price/{minPrice}/{maxPrice}")
+    public String viewByPrice(
+            @PathVariable String category,
+            @PathVariable String brand,
+            @PathVariable double minPrice,
+            @PathVariable double maxPrice,
+            Model model) {
+
+        List<Product> products = productRepo.findByCategoryAndBrandAndPriceBetween(
+                category, brand, minPrice, maxPrice);
+
+        model.addAttribute("products", products);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
         return "price-products";
@@ -122,8 +165,6 @@ public class HomeController {
                 return "Phụ kiện";
             case "tablet":
                 return "Máy tính bảng";
-            case "secondhand":
-                return "Hàng đã qua sử dụng";
             default:
                 return "Danh mục sản phẩm";
         }
@@ -139,8 +180,6 @@ public class HomeController {
                 return List.of("Airpod 4", "Havit H663BT", "Marshall Major V", "Sony WH-CH520", "Apple MagSafe 25W","Xiaomi Router AC 12004A");
             case "tablet":
                 return List.of("iPad A16 WiFi", "iPad Air M3 11 inch WiFi", "Oppo Pad 3", "Samsung Galaxy Tab S10 5G", "Xiaomi Pad 7 WiFi");
-            case "secondhand":
-                return List.of();
             default:
                 return List.of();
         }
@@ -156,8 +195,6 @@ public class HomeController {
                 return List.of("Airpod4.jpg", "HavitH663BT.jpg", "MarshallMajorV.jpg", "SonyWH-CH520.jpg", "AppleMagSafe25W.jpg","XiaomiRouterAC12004A.jpg" );
             case "tablet":
                 return List.of("iPadA16WiFi.jpg", "iPadAirM311inchWiFi.jpg", "OppoPad3.jpg", "SamsungGalaxyTabS105G.jpg", "XiaomiPad7WiFi.jpg");
-            case "secondhand":
-                return List.of();
             default:
                 return List.of();
         }
@@ -173,8 +210,6 @@ public class HomeController {
                 return List.of("Apple", "Samsung", "Sony", "Xiaomi", "Logitech", "Marshall", "Oppo", "Huawei");
             case "tablet":
                 return List.of("Apple", "Samsung", "Xiaomi", "Oppo", "Huawei");
-            case "secondhand":
-                return List.of();
             default:
                 return List.of();
         }

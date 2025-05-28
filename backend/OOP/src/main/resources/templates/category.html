@@ -51,7 +51,7 @@
       <ul>
           <li id="ten_hang">Hãng</li>
           <li th:each="brand : ${brands}">
-              <form th:action="@{/brand/{name}(name=${brand})}" method="get">
+              <form th:action="@{/category/{category}/brand/{brand}(category=${category}, brand=${brand})}" method="get">
                   <button type="submit" th:text="${brand}">Brand</button>
               </form>
           </li>
@@ -63,32 +63,32 @@
     <ul>
       <li id = "muc_gia">Mức giá</li>
       <li>
-        <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=3000000, maxPrice=5000000)}" method = "get">
+        <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=3000000, maxPrice=5000000)}" method = "get">
           <button type = "submit">Từ 3-5 triệu</button>
         </form>
       </li>
       <li>
-        <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=5000000, maxPrice=8000000)}" method = "get">
+        <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=5000000, maxPrice=8000000)}" method = "get">
           <button type = "submit">Từ 5-8 triệu</button>
         </form>
       </li>
       <li>
-        <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=8000000, maxPrice=11000000)}" method = "get">
+        <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=8000000, maxPrice=11000000)}" method = "get">
           <button type = "submit">Từ 8-11 triệu</button>
         </form>
       </li>
       <li>
-        <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=11000000, maxPrice=15000000)}" method = "get">
+        <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=11000000, maxPrice=15000000)}" method = "get">
           <button type = "submit">Từ 11-15 triệu</button>
         </form>
       </li>
       <li>
-        <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=15000000, maxPrice=20000000)}" method = "get">
+        <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=15000000, maxPrice=20000000)}" method = "get">
           <button type = "submit">Từ 15-20 triệu</button>
         </form>
       </li>
       <li>
-        <form th:action = "@{/price/{minPrice}/{maxPrice}(minPrice=20000000, maxPrice=999900000)}" method = "get">
+        <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category},minPrice=20000000, maxPrice=999900000)}" method = "get">
           <button type = "submit">Trên 20 triệu</button>
         </form>
       </li>

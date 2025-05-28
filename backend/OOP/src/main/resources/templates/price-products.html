@@ -82,7 +82,7 @@
     </nav>
     <div class = "best_sellers">
         <h2>Sản phẩm trong mức giá: </h2>
-        <nav>
+        <nav id = "best_sellers">
             <ul>
                 <li th:each="product : ${products}">
                     <a th:href="@{'/product/' + ${product.id}}">

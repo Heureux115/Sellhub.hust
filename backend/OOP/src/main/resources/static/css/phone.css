@@ -87,6 +87,11 @@
     border-bottom:none;
     box-sizing: border-box;
 }
+
+#brand_list ul button:hover{
+    background-color: #ccc;
+}
+
 #brand_list ul #ten_hang{
     height: 36px;
     width: 14%;
@@ -99,6 +104,7 @@
     border-bottom: none;
     box-sizing: border-box;
 }
+
 
 
 
