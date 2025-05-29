@@ -24,10 +24,12 @@ public class PaymentController extends BaseCartController {
     public String checkout(HttpSession session, RedirectAttributes redirectAttributes) {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
 
+
         if (cartItems == null || cartItems.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Không có gì trong giỏ hàng!");
             return "redirect:/cart";
         }
+
 
         updateInventory(cartItems, productRepo);  // updateInventory mới nhận Map chứ không phải Cart
         clearCart(session);                       // clearCart không cần cart đầu vào nữa
