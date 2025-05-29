@@ -1,52 +1,79 @@
 package com.example.shop.service;
 
+import com.example.shop.model.CartItem;
 import com.example.shop.model.Order;
 import com.example.shop.model.OrderItems;
 import com.example.shop.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.shop.repository.OrderRepository;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
-    private final List<Order> orders = new ArrayList<>();
+
+    private final OrderRepository orderRepo;
+
+    @Autowired
+    public OrderService(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
 
     public List<Order> getOrdersByUser(User user) {
-        return orders.stream()
-                .filter(o -> o.getUser().getUsername().equals(user.getUsername()))
-                .collect(Collectors.toList());
+        return orderRepo.findByUser(user);
     }
 
     public void addOrder(Order order) {
-        orders.add(order);
+        orderRepo.save(order); // Lưu vào DB
     }
 
     public void cancelOrder(int orderId, User user) {
-        orders.stream()
-                .filter(o -> o.getOrderId() == orderId && o.getUser().equals(user))
-                .findFirst()
-                .ifPresent(Order::cancelOrder);
+        Order order = orderRepo.findByorderIdAndUser(orderId, user);
+        if (order != null) {
+            order.cancelOrder(); // logic business
+            orderRepo.save(order); // cập nhật lại DB
+        }
     }
 
     public void confirmOrder(int orderId, User user) {
-        orders.stream()
-                .filter(o -> o.getOrderId() == orderId && o.getUser().equals(user))
-                .findFirst()
-                .ifPresent(Order::confirmReceived);
+        Order order = orderRepo.findByorderIdAndUser(orderId, user);
+        if (order != null) {
+            order.confirmReceived();
+            orderRepo.save(order);
+        }
     }
 
     public void addReview(int orderId, int productId, String review, User user) {
-        orders.stream()
-                .filter(o -> o.getOrderId() == orderId && o.getUser().equals(user))
-                .findFirst()
-                .ifPresent(order -> {
-                    order.getOrderItems().stream()
-                            .map(OrderItems::getProduct)
-                            .filter(p -> p.getId() == productId)
-                            .findFirst()
-                            .ifPresent(p -> order.addReview(p, review));
-                });
+        Order order = orderRepo.findByorderIdAndUser(orderId, user);
+        if (order != null) {
+            order.getOrderItems().stream()
+                    .filter(item -> item.getProduct().getId() == productId)
+                    .findFirst()
+                    .ifPresent(item -> order.addReview(item.getProduct(), review));
+            orderRepo.save(order);
+        }
+    }
+
+    public void createOrder(User user, Map<Long, CartItem> cartItems) {
+        Order order = new Order();
+        order.setUser(user);
+        order.setOrderDate(LocalDateTime.now());
+        order.setStatus(Order.Status.DANG_GIAO);
+
+        List<OrderItems> items = cartItems.values().stream().map(cartItem -> {
+            OrderItems item = new OrderItems();
+            item.setOrder(order);
+            item.setProduct(cartItem.getProduct());
+            item.setQuantity(cartItem.getQuantity());
+            return item;
+        }).collect(Collectors.toList());
+
+        order.setOrderItems(items);
+
+        orderRepo.save(order); // Lưu cả order + items (cascade)
     }
 }
