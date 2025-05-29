@@ -71,4 +71,3 @@ public class ProductController extends BaseCartController {
         return "redirect:/home";
     }
 }
-

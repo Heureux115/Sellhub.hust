@@ -68,7 +68,7 @@ class AuthController {
             model.addAttribute("error", "Số điện thoại đã tồn tại");
             return "register";
         } else if (!password.equals(confirmpassword)) {
-            model.addAttribute("error", "mật khẩu không trùng nhau");
+            model.addAttribute("error", "Mật khẩu không trùng nhau");
             return "register";
         }
         User user = new User();
@@ -85,6 +85,5 @@ class AuthController {
         session.invalidate();
         return "login";
     }
-
 }
 

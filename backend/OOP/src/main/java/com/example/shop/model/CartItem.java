@@ -8,7 +8,6 @@
             this.product = product;
             this.quantity = quantity;
         }
-
         public double getPrice() {
             return product.getPrice();
         }

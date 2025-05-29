@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.model.CartItem;
+import com.example.shop.model.Product;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.example.shop.model.Cart;
@@ -55,4 +56,3 @@ public class CartController extends BaseCartController {
         return "redirect:/home"; // Điều hướng về trang chủ
     }
 }
-

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ của tôi</title>
+    <link rel="stylesheet" th:href="@{/css/personal-acc.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+<header class="header">
+    <div class="logo">
+        <a th:href="@{/back-to-home}">
+            <img th:src="@{/css/imgs_oop/Logo.png}" alt="Logo" />
+        </a>
+    </div>
+
+    <div class = "search">
+        <form th:action="@{/search}" method="get">
+            <input
+                    placeholder = "Tìm kiếm sản phẩm"
+                    name = "keyword"
+                    id = "tim_kiem"
+                    size = "80"
+            />
+            <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
+        </form>
+    </div>
+
+    <div class = "extra">
+        <span class="hotline">Hotline:<br> 0834784586</span>
+
+        <div class ="cart_button">
+            <a th:href="@{/cart}">
+                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+            </a>
+        </div>
+        <div th:if="${username != null}" class="user_section">
+            <span style="margin-right: 10px;margin-top: 10px;">Xin chào, <strong th:text="${username}">Username</strong></span>
+            <div class="log_out">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Nếu chưa đăng nhập: hiện Đăng nhập / Đăng ký -->
+        <div th:if="${username == null}" style ="margin-top:10px;">
+            <a th:href="@{/login}" style="color: white;">Đăng nhập</a> |
+            <a th:href="@{/register}" style="color: white;">Đăng ký</a>
+        </div>
+
+    </div>
+</header>
+<div class = "content">
+<h2>Hồ Sơ Của Tôi</h2>
+<div class="desc">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+
+<form>
+    <div th:if="${message}" class="success-message" style="color: green; font-weight: bold; margin: 10px;">
+        <p th:text="${message}"></p>
+    </div>
+
+    <div class="row">
+        <label>Id của bạn</label>
+        <span class="readonly"><strong th:text="${id}">Id</strong></span>
+    </div>
+
+    <div class="row">
+        <label>Tên đăng nhập</label>
+        <span class="readonly"><strong th:text="${username}">Username</strong></span>
+        <a class="change-link">Thay Đổi</a>
+    </div>
+
+    <div class="row">
+        <label>Email</label>
+        <span class="readonly"><strong th:text="${email}">Email</strong></span>
+        <a class="change-link" th:href = "@{/change-email}">Thay Đổi</a>
+    </div>
+
+    <div class="row">
+        <label>Số điện thoại</label>
+        <span class="readonly"><strong th:text="${phone}">Phone</strong></span>
+        <a class="change-link" th:href = "@{/change-phone}">Thay Đổi</a>
+    </div>
+
+    <div class="row">
+        <label>Mật khẩu</label>
+        <span class="readonly"><strong th:text="${password}">Password</strong></span>
+        <a class="change-link" th:href = "@{/change-password}">Thay Đổi</a>
+    </div>
+
+</form>
+</div>
+</body>
+</html>

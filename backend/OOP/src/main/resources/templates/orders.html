@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đơn hàng của bạn</title>
+    <link rel="stylesheet" th:href="@{/css/orders.css}">
+</head>
+<body>
+
+<h2>LỊCH SỬ GIAO DỊCH</h2>
+
+<div th:if="${orders.isEmpty()}">
+    <p>Bạn chưa có đơn hàng nào.</p>
+</div>
+
+<div th:each="order : ${orders}" class="order-card">
+    <h3>Đơn hàng #<span th:text="${order.orderId}"></span></h3>
+    <p>Ngày đặt: <span th:text="${#temporals.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></span></p>
+    <p>Trạng thái: <strong th:text="${order.status}"></strong></p>
+
+    <ul>
+        <li th:each="item : ${order.orderItems}">
+            <span th:text="${item.product.title}">Tên sản phẩm</span> -
+            Số lượng: <span th:text="${item.quantity}"></span> -
+            Giá: <span th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + '₫'"></span>
+        </li>
+    </ul>
+
+    <p><strong>Tổng cộng:</strong> <span th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT')} + '₫'"></span></p>
+
+    <!-- Các nút thao tác -->
+    <form th:action="@{/order/confirm}" method="post" th:if="${order.status.name() == 'DANG_GIAO'}">
+        <input type="hidden" name="orderId" th:value="${order.orderId}" />
+        <button type="submit">Đã nhận hàng</button>
+    </form>
+
+    <form th:action="@{/order/cancel}" method="post" th:if="${order.status.name() == 'DANG_GIAO'}">
+        <input type="hidden" name="orderId" th:value="${order.orderId}" />
+        <button type="submit">Hủy đơn</button>
+    </form>
+
+    <!-- Đánh giá sản phẩm -->
+    <div th:if="${order.status.name() == 'DA_GIAO'}">
+        <h4>Đánh giá sản phẩm</h4>
+        <div th:each="item : ${order.orderItems}">
+            <form th:action="@{/order/review}" method="post">
+                <input type="hidden" name="orderId" th:value="${order.orderId}" />
+                <input type="hidden" name="productId" th:value="${item.product.id}" />
+                <label th:text="${item.product.title}">Sản phẩm</label><br>
+                < textarea name="review" placeholder="Nhập đánh giá của bạn" required></textarea><br>
+                <button type="submit">Gửi đánh giá</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

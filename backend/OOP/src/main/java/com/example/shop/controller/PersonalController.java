@@ -21,9 +21,22 @@ public class PersonalController {
     public String home(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
+            model.addAttribute("id", user.getId());
             model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("password", "*".repeat(user.getPassword().length()));
         }
         return "personal-acc";
+    }
+
+    @GetMapping("/change-password")
+    public String showChangePasswordForm(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+        return "change-password"; // Trả về file change-password.html
     }
 
     @PostMapping("/change-password")
@@ -46,14 +59,28 @@ public class PersonalController {
             model.addAttribute("error", "Mật khẩu mới không trùng khớp");
             return "change-password";
         }
-
         user.setPassword(newPassword);
         userService.save(user); // cập nhật lại user
 
+        if (user != null) {
+            model.addAttribute("id", user.getId());
+            model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("password", "*".repeat(user.getPassword().length()));
+        }
         model.addAttribute("message", "Đổi mật khẩu thành công");
-        return "home";
+        return "personal-acc";
     }
 
+    @GetMapping("/change-email")
+    public String showChangeEmailForm(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+        return "change-email"; // Trả về file change-email.html
+    }
     @PostMapping("/change-email")
     public String changeEmail(@RequestParam String newEmail,
                               @RequestParam String oldEmail,
@@ -83,17 +110,39 @@ public class PersonalController {
         user.setEmail(newEmail);
         userService.save(user);
 
+        if (user != null) {
+            model.addAttribute("id", user.getId());
+            model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("password", "*".repeat(user.getPassword().length()));
+        }
         model.addAttribute("message", "Cập nhật email thành công");
         return "personal-acc";
     }
 
+    @GetMapping("/change-phone")
+    public String showChangePhoneForm(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+        return "change-phone"; // Trả về file change-password.html
+    }
     @PostMapping("/change-phone")
-    public String changePhone(@RequestParam String newPhone,
-                              @RequestParam String oldPhone,
+    public String changePhone(@RequestParam String oldPhone,
+                              @RequestParam String newPhone,
                               @RequestParam String password,
                               HttpSession session,
                               Model model) {
         User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("id", user.getId());
+            model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("password", "*".repeat(user.getPassword().length()));
+        }
         if (user == null) {
             return "redirect:/login";
         }
@@ -112,10 +161,16 @@ public class PersonalController {
             model.addAttribute("error", "Số điện thoại mới không được để trống");
             return "change-phone";
         }
-
         user.setPhone(newPhone);
         userService.save(user);
 
+        if (user != null) {
+            model.addAttribute("id", user.getId());
+            model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("password", "*".repeat(user.getPassword().length()));
+        }
         model.addAttribute("message", "Cập nhật số điện thoại thành công");
         return "personal-acc";
     }

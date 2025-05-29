@@ -16,7 +16,9 @@ public class Product {
     private String imageUrl;
     private String brand;
     private int stock;
+    @Column(name = "product_type", insertable = false, updatable = false)
     private String category;
+
 
     public Product(int id, String title,String description ,int price, String imageUrl,String brand, int stock) {
         this.id = (long) id;
@@ -26,6 +28,7 @@ public class Product {
         this.imageUrl = imageUrl;
         this.brand = brand;
         this.stock = stock;
+        this.category = category;
     }
 
     public Product() {

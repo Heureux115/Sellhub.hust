@@ -15,7 +15,12 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-div{
+#error{
+    padding-top: 1px;
+    font-size: 15px;
+    margin-left: 25px;
+}
+#big{
     margin:auto;
     justify-content: center;
     width: 400px;

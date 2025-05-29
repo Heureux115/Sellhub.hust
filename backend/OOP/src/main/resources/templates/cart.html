@@ -4,52 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SELLHUB - Giỏ hàng</title>
+  <title>Giỏ hàng</title>
   <link rel="stylesheet" th:href="@{/css/cart.css}" />
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<div th:if="${message}" id="popup-message"
-style="
-position: fixed;
-top: 20%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: #4caf50;
-color: white;
-padding: 20px 40px;
-border-radius: 8px;
-font-size: 18px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-z-index: 9999;">
-<p th:text="${message}">Message</p>
-</div>
-
-<script th:inline="javascript">
-  /*<![CDATA[*/
-  let message = /*[[${message}]]*/ null;
-
-  if(message != null && message.trim() !== '') {
-    let popup = document.getElementById('popup-message');
-
-    if(message.toLowerCase().includes('thất bại')) {
-      popup.style.backgroundColor = '#f44336'; // màu đỏ lỗi
-    } else {
-      popup.style.backgroundColor = '#4caf50'; // màu xanh thành công
-    }
-
-    popup.style.display = 'block';
-
-    setTimeout(function() {
-      popup.style.display = 'none';
-    }, 3000);
-  }
-  /*]]>*/
-</script>
-
-
   <div class="header">
     <div class="home-button">
       <a th:href="@{/back-to-home}">
@@ -64,7 +25,6 @@ z-index: 9999;">
       <h5>Giỏ hàng của bạn</h5>
     </div>
   </div>
-
   <div id="list">
     <h3>Sản phẩm</h3>
     <div class="product-list">
@@ -94,6 +54,9 @@ z-index: 9999;">
     <form th:action="@{/payment}" method="get">
       <button type="submit">Thanh toán</button>
     </form>
+    <div th:if="${message}">
+      <p th:text="${message}" style="color: green;"></p>
+    </div>
   </div>
 </body>
 </html>
