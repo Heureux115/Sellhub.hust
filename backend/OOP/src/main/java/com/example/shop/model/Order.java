@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "[order]")
@@ -28,18 +26,15 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItems> orderItems = new ArrayList<>();
 
-    private double total;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    private int total;
 
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     private Status status;
-
-    @ElementCollection
-    @CollectionTable(name = "order_reviews", joinColumns = @JoinColumn(name = "order_id"))
-    @MapKeyJoinColumn(name = "product_id")
-    @Column(name = "review")
-    private Map<Product, String> reviews = new HashMap<>();
 
     public Order() {
         this.total = 0;
@@ -47,7 +42,7 @@ public class Order {
         this.status = Status.DANG_GIAO;
     }
 
-    public Order(User user, List<OrderItems> orderItems, double total) {
+    public Order(User user, List<OrderItems> orderItems, int total) {
         this.user = user;
         this.orderItems = orderItems;
         this.total = total;
@@ -80,6 +75,38 @@ public class Order {
         return orderDate;
     }
 
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setOrderItems(List<OrderItems> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -100,22 +127,6 @@ public class Order {
         return false;
     }
 
-    public boolean addReview(Product product, String review) {
-        // Kiểm tra sản phẩm trong orderItems
-        boolean productExists = orderItems.stream()
-                .anyMatch(item -> item.getProduct().equals(product));
-
-        if (status == Status.DA_GIAO && productExists) {
-            reviews.put(product, review);
-            return true;
-        }
-        return false;
-    }
-
-    public Map<Product, String> getReviews() {
-        return reviews;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -132,4 +143,20 @@ public class Order {
         sb.append("Total: $").append(total);
         return sb.toString();
     }
+    public boolean addReview(Product product, String reviewText) {
+        boolean productExists = orderItems.stream()
+                .anyMatch(item -> item.getProduct().equals(product));
+
+        if (status == Status.DA_GIAO && productExists) {
+            Review review = new Review();
+            review.setOrder(this);
+            review.setProduct(product);
+            review.setReviewText(reviewText);
+            reviews.add(review);
+            return true;
+        }
+        return false;
+    }
+
+
 }

@@ -3,8 +3,10 @@ package com.example.shop.controller;
 import com.example.shop.model.Cart;
 import com.example.shop.model.CartItem;
 import com.example.shop.model.Product;
+import com.example.shop.model.User;
 import com.example.shop.repository.ProductRepository;
 import jakarta.servlet.http.HttpSession;
+import org.aspectj.apache.bcel.generic.ClassGen;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +27,16 @@ public class ProductController extends BaseCartController {
 
 
     @PostMapping("/product/buyNow/{id}")
-    public String buyNow(@PathVariable Long id, HttpSession session) {
+    public String buyNow(@PathVariable Long id, HttpSession session, Model model) {
         Product product = productRepo.findById(id).orElse(null);
-        if (product != null) {
+        if (product != null && product.getId() != null) {
             clearCart(session);
             addToCart(session, new CartItem(product, 1));
+            model.addAttribute("cart", getCartFromSession(session));
             return "payment";
+        }else {
+            throw new IllegalArgumentException("Product or Product ID is null");
         }
-        return "redirect:/home";
     }
 
     @PostMapping("/product/addToCart/{id}")
@@ -62,8 +66,12 @@ public class ProductController extends BaseCartController {
 
 
     @GetMapping("/product/{id}")
-    public String viewProduct(@PathVariable Long id, Model model) {
+    public String viewProduct(@PathVariable Long id, Model model, HttpSession session) {
         Product product = productRepo.findById(id).orElse(null);
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         if (product != null) {
             model.addAttribute("product", product);
             return "product-detail";

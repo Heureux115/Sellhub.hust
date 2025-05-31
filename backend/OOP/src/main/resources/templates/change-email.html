@@ -37,6 +37,11 @@
                 <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
             </a>
         </div>
+        <div class="order_history_button">
+            <a th:href="@{/order/my-orders}">
+                <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title = "Lịch sử mua hàng" />
+            </a>
+        </div>
         <div th:if="${username != null}" class="user_section">
             <a th:href="@{/personal}" id = "account" style="color: white; text-decoration: none;">
                 <span>
@@ -61,6 +66,10 @@
 
 <div class = "content">
     <h1 id="dang_nhap" class="top">Đổi email</h1>
+    <br/>
+    <div id = "error" th:if="${error}" style="color: red;">
+        <p th:text="${error}">Lỗi đăng nhập</p>
+    </div >
     <br/>
     <!-- Form đổi mật khẩu -->
     <form th:action="@{/change-email}" method="post">

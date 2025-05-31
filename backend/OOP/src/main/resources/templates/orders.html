@@ -13,8 +13,8 @@
     <p>Bạn chưa có đơn hàng nào.</p>
 </div>
 
-<div th:each="order : ${orders}" class="order-card">
-    <h3>Đơn hàng #<span th:text="${order.orderId}"></span></h3>
+<div th:each="order, iterStat : ${orders}" class="order-card">
+    <h3>Đơn hàng #<span th:text="${iterStat.index + 1}"></span></h3>
     <p>Ngày đặt: <span th:text="${#temporals.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></span></p>
     <p>Trạng thái: <strong th:text="${order.status}"></strong></p>
 
@@ -22,11 +22,13 @@
         <li th:each="item : ${order.orderItems}">
             <span th:text="${item.product.title}">Tên sản phẩm</span> -
             Số lượng: <span th:text="${item.quantity}"></span> -
-            Giá: <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '₫'"></span>
+            Giá: <span th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + '₫'"></span>
         </li>
     </ul>
 
-    <p><strong>Tổng cộng:</strong> <span th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT')} + '₫'"></span></p>
+    <h4>Tổng cộng:
+        <span th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT')} + '₫'">0₫</span>
+    </h4>
 
     <!-- Các nút thao tác -->
     <form th:action="@{/order/confirm}" method="post" th:if="${order.status.name() == 'DANG_GIAO'}">

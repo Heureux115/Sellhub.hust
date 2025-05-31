@@ -37,10 +37,28 @@
                 <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
             </a>
         </div>
-        <div class = "log_out">
-            <form th:action="@{/logout}" method="post">
-                <button type="submit">Đăng xuất</button>
-            </form>
+        <div class="order_history_button">
+            <a th:href="@{/order/my-orders}">
+                <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title = "Lịch sử mua hàng" />
+            </a>
+        </div>
+        <div th:if="${username != null}" class="user_section">
+            <a th:href="@{/personal}" id = "account" style="color: white; text-decoration: none;">
+                <span>
+                    Xin chào, <strong th:text="${username}">Username</strong>
+                </span>
+            </a>
+            <div class="log_out">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Nếu chưa đăng nhập: hiện Đăng nhập / Đăng ký -->
+        <div th:if="${username == null}" style ="margin-top:10px;">
+            <a th:href="@{/login}" style="color: white;">Đăng nhập</a> |
+            <a th:href="@{/register}" style="color: white;">Đăng ký</a>
         </div>
 
     </div>
@@ -60,7 +78,7 @@
             <p th:text=" 'Giá: ' +${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'VNĐ'">Giá</p>
             <p>Đặc điểm sản phẩm:</p>
             <br/>
-            <p th:text="${product.description}">Giá</p>
+            <p th:utext="${#strings.replace(product.description, '; ', '.<br/>')}">Đặc điểm</p>
         </div>
     </div>
 

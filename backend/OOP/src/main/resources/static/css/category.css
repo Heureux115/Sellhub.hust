@@ -39,7 +39,14 @@ body {
 .extra{
     display: flex;
 }
-
+.extra .user_section{
+    display: flex;
+}
+.extra .user_section #account{
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
 .hotline{
     justify-content: center;
     padding-top: 5px;
@@ -49,12 +56,20 @@ body {
     height: 40px;
     width: 40px;
     margin-left: 40px;
+    margin-right: 30px;
 }
+
+.order_history_button img{
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+
 .log_out button{
     width: 80px;
     height: 40px;
     background-color:#FFA500;
-    margin-left: 50px;
     border-radius: 6px;
     border: #FFA500;
 }
@@ -65,3 +80,63 @@ body {
 }
 
 
+#price_list{
+    width: 220px;
+}
+#price_list ul button{
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-bottom:2px solid #000000;
+    box-sizing: border-box;
+}
+
+#price_list ul button:hover{
+    background-color: #777777;
+}
+#price_list ul #muc_gia{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #000000;
+    background-color: white;
+}
+
+.best_seller{
+    display: block;
+}
+.best_sellers h2{
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.best_sellers #best_sellers {
+    width: 100%;
+    margin-left: 10px;
+}
+.best_sellers #best_sellers ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+.best_sellers #best_sellers li img {
+    width: 250px;
+    height: 250px;;
+    border-radius: 8px;
+}
+.best_sellers #best_sellers li {
+    background-color: white;       /* Màu nền box */
+    padding: 10px;                 /* Khoảng cách bên trong box */
+    border-radius: 8px;            /* Bo góc nhẹ */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Bóng đổ nhẹ */
+    width: 270px;                  /* Đảm bảo box gọn gàng */
+    text-align: center;           /* Căn giữa nội dung */
+}
+.best_sellers #best_sellers li h3 {
+    font-size: 16px;
+    color: #333;
+}

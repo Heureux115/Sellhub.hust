@@ -36,11 +36,11 @@ public class HomeController {
 
     //hàm tìm sản phẩm
     @GetMapping("/search")
-    public String searchProduct(@RequestParam(required = false) String keyword, Model model) {
+    public String searchProduct(@RequestParam(required = false) String keyword, Model model, HttpSession session) {
         if (keyword == null || keyword.trim().isEmpty()) {
             return "redirect:/home";
         }
-
+        User user = (User) session.getAttribute("user");
         List<Product> matchingProducts = productRepo.findByTitleContainingIgnoreCase(keyword);
         if (matchingProducts.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp");
@@ -51,17 +51,22 @@ public class HomeController {
             Long id = matchingProducts.get(0).getId();
             return "redirect:/product/" + id;
         }
-
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         model.addAttribute("products", matchingProducts);
         return "search-result";
     }
 
     //hàm tạo trang brand name
     @GetMapping("/category/{category}/brand/{brand}")
-    public String viewByBrandAndCategory(@PathVariable String category, @PathVariable String brand, Model model) {
+    public String viewByBrandAndCategory(@PathVariable String category, @PathVariable String brand, Model model, HttpSession session) {
         // Lấy sản phẩm theo category và brand
         List<Product> products = productRepo.findByCategoryIgnoreCaseAndBrandIgnoreCase(category, brand);
-
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         model.addAttribute("products", products);
         model.addAttribute("brands", brand);
         model.addAttribute("category", category);
@@ -71,81 +76,65 @@ public class HomeController {
 
     //hàm tạo trang theo giá tiền
     @GetMapping("/price/{minPrice}/{maxPrice}")
-    public String viewByPrice(@PathVariable double minPrice, @PathVariable double maxPrice,Model model) {
+    public String viewByPrice(@PathVariable int minPrice, @PathVariable int maxPrice, Model model, HttpSession session) {
         List<Product> productsByPrice = productRepo.findByPriceBetween(minPrice, maxPrice);
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         model.addAttribute("products", productsByPrice);
-        model.addAttribute("minPrice", minPrice);
-        model.addAttribute("maxPrice", maxPrice);
         return "price-products";
     }
 
     @GetMapping("/category/{category}/price/{minPrice}/{maxPrice}")
     public String viewByPrice(
             @PathVariable String category,
-            @PathVariable double minPrice,
-            @PathVariable double maxPrice,
-            Model model) {
-
+            @PathVariable int minPrice,
+            @PathVariable int maxPrice,
+            Model model,
+            HttpSession session) {
+        User user = (User) session.getAttribute("user");
         List<Product> products = productRepo.findByCategoryAndPriceBetween(
                 category, minPrice, maxPrice);
-
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         model.addAttribute("products", products);
-        model.addAttribute("minPrice", minPrice);
-        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("category", category);
         return "price-products";
     }
     @GetMapping("/category/{category}/brand/{brand}/price/{minPrice}/{maxPrice}")
     public String viewByPrice(
             @PathVariable String category,
             @PathVariable String brand,
-            @PathVariable double minPrice,
-            @PathVariable double maxPrice,
-            Model model) {
-
+            @PathVariable int minPrice,
+            @PathVariable int maxPrice,
+            Model model,
+            HttpSession session) {
+    User user = (User) session.getAttribute("user");
         List<Product> products = productRepo.findByCategoryAndBrandAndPriceBetween(
                 category, brand, minPrice, maxPrice);
-
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         model.addAttribute("products", products);
-        model.addAttribute("minPrice", minPrice);
-        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("category", category);
+        model.addAttribute("brand", brand);
         return "price-products";
     }
 
-
-    @GetMapping("/sort")
-    public String sortProducts(@RequestParam String by, Model model) {
-        List<Product> sortedProducts;
-
-        switch (by.toLowerCase()) {
-            case "price-desc":
-                sortedProducts = productRepo.findAllByOrderByPriceDesc();
-                break;
-            case "price-asc":
-                sortedProducts = productRepo.findAllByOrderByPriceAsc();
-                break;
-            case "title-desc":
-                sortedProducts = productRepo.findAllByOrderByTitleDesc();
-                break;
-            case "title-asc":
-                sortedProducts = productRepo.findAllByOrderByTitleAsc();
-                break;
-            default:
-                sortedProducts = productRepo.findAll(); // mặc định không sắp xếp
-                break;
-        }
-
-        model.addAttribute("products", sortedProducts);
-        model.addAttribute("sortBy", by);
-        return "home"; // hoặc một view cụ thể khác nếu bạn muốn
-    }
-
     @GetMapping("/category/{name}")
-    public String showCategory(@PathVariable("name") String name, Model model) {
+    public String showCategory(@PathVariable("name") String name, Model model, HttpSession session) {
         // Truy vấn danh sách hãng theo category (phone, laptop, ipad)
         List<String> brands = getBrandsByCategory(name);
         List<String> images = getItemsByBrand(name);
         List<String> names = getNameByBrand(name);
         String pageTitle = getTitleByCategory(name);
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+
         model.addAttribute("images", images);
         model.addAttribute("names", names);
         model.addAttribute("category", name);

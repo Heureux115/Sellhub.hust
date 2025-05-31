@@ -105,29 +105,6 @@
     box-sizing: border-box;
 }
 
-
-
-
-#price_list{
-    width: 220px;
-}
-#price_list ul button{
-    width: 200px;
-    height: 50px;
-    border: none;
-    border-bottom:2px solid #000000;
-    box-sizing: border-box;
-}
-#price_list ul #muc_gia{
-    height: 50px;
-    width: 200px;
-    text-align: center;
-    padding: 15px;
-    box-sizing: border-box;
-    border-bottom: 2px solid #000000;
-    background-color: white;
-}
-
 .best_seller{
     display: block;
 }

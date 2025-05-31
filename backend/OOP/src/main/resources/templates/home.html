@@ -31,7 +31,12 @@
 
         <div class ="cart_button">
             <a th:href="@{/cart}">
-                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus" title = "Giỏ hàng"></button>
+            </a>
+        </div>
+        <div class="order_history_button">
+            <a th:href="@{/order/my-orders}">
+                <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title = "Lịch sử mua hàng" />
             </a>
         </div>
         <div th:if="${username != null}" class="user_section">
@@ -90,9 +95,24 @@
   <h2>Gợi ý cho bạn: </h2>  
   <nav id = "best_sellers">
         <ul>
-           <li>
-                
-           </li>
+            <li>
+                <a th:href="@{'/product/' + ${12}}">
+                    <img th:src="@{/css/imgs_oop/Iphone16ProMax.jpg}" alt="Iphone 16 Pro Max"/>
+                </a>
+                <h3>Iphone 16 Pro Max</h3>
+            </li>
+            <li>
+                <a th:href="@{'/product/' + ${9}}">
+                    <img th:src="@{/css/imgs_oop/HuaweiPura70.jpg}" alt="Huawei Pura 70"/>
+                </a>
+                <h3>Huawei Pura 70</h3>
+            </li>
+            <li>
+                <a th:href="@{'/product/' + ${19}}">
+                    <img th:src="@{/css/imgs_oop/SamsungGalaxyZFold6.jpg}" alt="Samsung Galaxy ZFold 6"/>
+                </a>
+                <h3>Samsung Galaxy ZFold 6</h3>
+            </li>
         </ul>
   </nav>
   </div>

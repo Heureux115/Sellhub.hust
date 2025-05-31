@@ -47,7 +47,7 @@ public class Product {
         this.title = title;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 

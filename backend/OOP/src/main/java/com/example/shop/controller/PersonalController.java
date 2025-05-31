@@ -20,6 +20,7 @@ public class PersonalController {
     @GetMapping("/personal")
     public String home(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+
         if (user != null) {
             model.addAttribute("id", user.getId());
             model.addAttribute("username", user.getUsername());
@@ -46,6 +47,9 @@ public class PersonalController {
                                  HttpSession session,
                                  Model model) {
         User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         if (user == null) {
             return "redirect:/login"; // chưa đăng nhập
         }
@@ -88,6 +92,9 @@ public class PersonalController {
                               HttpSession session,
                               Model model) {
         User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         if (user == null) {
             return "redirect:/login";
         }
@@ -137,6 +144,9 @@ public class PersonalController {
                               Model model) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+        if (user != null) {
             model.addAttribute("id", user.getId());
             model.addAttribute("username", user.getUsername());
             model.addAttribute("email", user.getEmail());
@@ -174,5 +184,4 @@ public class PersonalController {
         model.addAttribute("message", "Cập nhật số điện thoại thành công");
         return "personal-acc";
     }
-
 }

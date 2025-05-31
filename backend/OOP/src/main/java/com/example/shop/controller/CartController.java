@@ -1,7 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.model.CartItem;
-import com.example.shop.model.Product;
+import com.example.shop.model.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.example.shop.model.Cart;
@@ -41,7 +41,11 @@ public class CartController extends BaseCartController {
 
     @GetMapping("/payment")
     public String viewPayment(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         prepareCartModel(model, session);
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
         return "payment";
     }
 

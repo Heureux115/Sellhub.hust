@@ -38,6 +38,11 @@
                 <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
             </a>
         </div>
+        <div class="order_history_button">
+            <a th:href="@{/order/my-orders}">
+                <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title = "Lịch sử mua hàng" />
+            </a>
+        </div>
         <div th:if="${username != null}" class="user_section">
             <span style="margin-right: 10px;margin-top: 10px;">Xin chào, <strong th:text="${username}">Username</strong></span>
             <div class="log_out">

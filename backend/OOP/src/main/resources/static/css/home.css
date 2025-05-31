@@ -1,13 +1,13 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-image: linear-gradient(-90deg, #333, #ccc);
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: linear-gradient(-90deg, #333, #ccc);
+}
 
 .header {
   display: flex;
@@ -52,83 +52,91 @@
   padding-top: 5px;
 }
 
-  #cart_button{
-    height: 40px;
-    width: 40px;
-    margin-left: 40px;
-    margin-right: 50px;
-  }
-  .log_out button{
-    width: 80px;
-    height: 40px;
-    background-color:#FFA500;
-    border-radius: 6px;
-    border: #FFA500;
-  }
+#cart_button{
+  height: 40px;
+  width: 40px;
+  margin-left: 40px;
+  margin-right: 30px;
+}
 
-  .content{
-    display: flex;
-    width: 100%;
-  }
+.order_history_button img{
+  height: 40px;
+  width: 40px;
+  border-radius: 6px;
+  margin-right: 20px;
+}
 
-  #brand_list{
-    background-color: #000000;
-    border-top: 2px solid white;
-    height: 40px;
-    width: 100%;
-  }
-  #brand_list ul{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    list-style-type: none;
-    width: 100%;
-  }
-  #brand_list ul li{
-    width: calc(86%/4);
-  }
-  #brand_list ul button{
-    height: 36px;
-    width: 100%;
-    color: white;
-    background-color: #000000;
-    border-right: 2px solid white;
-    border-top: none;
-    border-left: none;
-    border-bottom:none;
-    box-sizing: border-box;
-  }
-  #brand_list ul button:hover{
-    background-color: #ccc;
-  }
-  #brand_list ul #ten_hang{
-    height: 36px;
-    width: 14%;
-    color: white;
-    text-align: center;
-    padding-top: 10px;
-    border-right: 2px solid white;
-    border-top: none;
-    border-left: none;
-    border-bottom: none;
-    box-sizing: border-box;
-  }
+.log_out button{
+  width: 80px;
+  height: 40px;
+  background-color:#FFA500;
+  border-radius: 6px;
+  border: #FFA500;
+}
 
-  
-  .best_seller{
-    display: block;
-  }
-  .best_sellers h2{
-    height: 50px;
-    margin-left: 10px;
-    margin-top: 5px;
-  }
-  .best_sellers #best_sellers {
+.content{
+  display: flex;
+  width: 100%;
+}
+
+#brand_list{
+  background-color: #000000;
+  border-top: 2px solid white;
+  height: 40px;
+  width: 100%;
+}
+#brand_list ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  list-style-type: none;
+  width: 100%;
+}
+#brand_list ul li{
+  width: calc(86%/4);
+}
+#brand_list ul button{
+  height: 36px;
+  width: 100%;
+  color: white;
+  background-color: #000000;
+  border-right: 2px solid white;
+  border-top: none;
+  border-left: none;
+  border-bottom:none;
+  box-sizing: border-box;
+}
+#brand_list ul button:hover{
+  background-color: #ccc;
+}
+#brand_list ul #ten_hang{
+  height: 36px;
+  width: 14%;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  border-right: 2px solid white;
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+  box-sizing: border-box;
+}
+
+
+.best_seller{
+  display: block;
+}
+.best_sellers h2{
+  height: 50px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.best_sellers #best_sellers {
   width: 100%;
   margin-left: 10px;
-  }
-  .best_sellers #best_sellers ul {
+}
+.best_sellers #best_sellers ul {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -136,21 +144,25 @@
   padding: 0;
 }
 .best_sellers #best_sellers li img {
-  width: 350px;
+  width: 250px;
   height: 250px;;
   border-radius: 8px;
 }
 .best_sellers #best_sellers li {
   background-color: white;       /* Màu nền box */
-  padding: 10px;                 /* Khoảng cách bên trong box */
+  padding: 10px;/* Khoảng cách bên trong box */
+  margin-left: 10px;
   border-radius: 8px;            /* Bo góc nhẹ */
   box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Bóng đổ nhẹ */
-  width: 380px;                  /* Đảm bảo box gọn gàng */
+  width: 300px;                  /* Đảm bảo box gọn gàng */
   text-align: center;           /* Căn giữa nội dung */
 }
 .best_sellers #best_sellers li h3 {
   font-size: 16px;
   color: #333;
 }
+
+
+
 
 
