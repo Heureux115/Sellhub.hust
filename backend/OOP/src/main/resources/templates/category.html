@@ -117,8 +117,10 @@
   <nav id = "best_sellers">
       <ul>
           <li th:each="img, stat : ${images}">
-              <img th:src="@{'/css/imgs_oop/' + ${img}}" alt="img"/>
-              <h3 th:text="${names[stat.index]}">Tên sản phẩm</h3>
+              <a th:href="@{'/product/' + ${id[stat.index]}}">
+                  <img th:src="@{'/css/imgs_oop/' + ${img}}" alt="img"/>
+                  <h3 th:text="${names[stat.index]}">Tên sản phẩm</h3>
+              </a>
           </li>
       </ul>
   </nav>

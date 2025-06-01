@@ -129,6 +129,7 @@ public class HomeController {
         List<String> brands = getBrandsByCategory(name);
         List<String> images = getItemsByBrand(name);
         List<String> names = getNameByBrand(name);
+        List<Integer> id = getIdByBrand(name);
         String pageTitle = getTitleByCategory(name);
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -140,7 +141,7 @@ public class HomeController {
         model.addAttribute("category", name);
         model.addAttribute("brands", brands);
         model.addAttribute("pageTitle", pageTitle);
-
+        model.addAttribute("id", id);
         return "category"; // trả về category.html để hiển thị danh sách hãng
     }
 
@@ -173,6 +174,22 @@ public class HomeController {
                 return List.of();
         }
     }
+
+    private List<Integer> getIdByBrand(String category) {
+        switch(category.toLowerCase()) {
+            case "phone":
+                return List.of(12, 9, 19, 2, 21);
+            case "laptop":
+                return List.of(14, 15, 13, 7);
+            case "accessories":
+                return List.of(4, 8, 16, 20, 6, 22);
+            case "tablet":
+                return List.of(10, 11, 17, 18, 3);
+            default:
+                return List.of();
+        }
+    }
+
 
     private List<String> getItemsByBrand(String category) {
         switch(category.toLowerCase()) {
