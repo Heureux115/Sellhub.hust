@@ -29,6 +29,10 @@ public class ProductController extends BaseCartController {
     @PostMapping("/product/buyNow/{id}")
     public String buyNow(@PathVariable Long id, HttpSession session, Model model) {
         Product product = productRepo.findById(id).orElse(null);
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            return "login";
+        }
         if (product != null && product.getId() != null) {
             clearCart(session);
             addToCart(session, new CartItem(product, 1));
@@ -41,6 +45,10 @@ public class ProductController extends BaseCartController {
 
     @PostMapping("/product/addToCart/{id}")
     public String addToCartHandler(@PathVariable Long id, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            return "login";
+        }
         productRepo.findById(id).ifPresent(product -> {
             addToCart(session, product); // gọi addToCart từ ProductController hoặc BaseCartController
         });

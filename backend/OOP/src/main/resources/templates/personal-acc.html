@@ -44,11 +44,16 @@
             </a>
         </div>
         <div th:if="${username != null}" class="user_section">
-            <span style="margin-right: 10px;margin-top: 10px;">Xin chào, <strong th:text="${username}">Username</strong></span>
-            <div class="log_out">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit">Đăng xuất</button>
-                </form>
+            <div class="username">
+                👤 <span th:text="${username}">Username</span>
+                <div class="dropdown">
+                    <a th:href="@{/personal}">Hồ sơ</a>
+                    <form th:action="@{/logout}" class = "log_out" method="post" style="display:inline;">
+                        <button type="submit">
+                            Đăng xuất
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -77,7 +82,7 @@
     <div class="row">
         <label>Tên đăng nhập</label>
         <span class="readonly"><strong th:text="${username}">Username</strong></span>
-        <a class="change-link">Thay Đổi</a>
+        <a class="change-link" th:href = "@{/change-username}">Thay Đổi</a>
     </div>
 
     <div class="row">

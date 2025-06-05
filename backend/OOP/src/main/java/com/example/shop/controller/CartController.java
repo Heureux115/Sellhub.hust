@@ -36,6 +36,7 @@ public class CartController extends BaseCartController {
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
         prepareCartModel(model, session);
+        User user = (User) session.getAttribute("user");
         return "cart";
     }
 

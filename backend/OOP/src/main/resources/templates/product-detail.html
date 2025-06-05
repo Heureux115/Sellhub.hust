@@ -43,15 +43,16 @@
             </a>
         </div>
         <div th:if="${username != null}" class="user_section">
-            <a th:href="@{/personal}" id = "account" style="color: white; text-decoration: none;">
-                <span>
-                    Xin chào, <strong th:text="${username}">Username</strong>
-                </span>
-            </a>
-            <div class="log_out">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit">Đăng xuất</button>
-                </form>
+            <div class="username">
+                👤 <span th:text="${username}">Username</span>
+                <div class="dropdown">
+                    <a th:href="@{/personal}">Hồ sơ</a>
+                    <form th:action="@{/logout}" class = "log_out" method="post" style="display:inline;">
+                        <button type="submit">
+                            Đăng xuất
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -76,6 +77,8 @@
             <p th:text="${product.title}">Tên sản phẩm</p>
             <p th:text="'Hãng: ' + ${product.brand}">Giá</p>
             <p th:text=" 'Giá: ' +${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'VNĐ'">Giá</p>
+        </div>
+        <div class="details">
             <p>Đặc điểm sản phẩm:</p>
             <br/>
             <p th:utext="${#strings.replace(product.description, '; ', '.<br/>')}">Đặc điểm</p>

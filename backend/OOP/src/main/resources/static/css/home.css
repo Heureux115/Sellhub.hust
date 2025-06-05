@@ -39,14 +39,8 @@ body {
 .extra{
   display: flex;
 }
-.extra .user_section{
-  display: flex;
-}
-.extra .user_section #account{
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-right: 10px;
-}
+
+
 .hotline{
   justify-content: center;
   padding-top: 5px;
@@ -66,14 +60,55 @@ body {
   margin-right: 20px;
 }
 
-.log_out button{
-  width: 80px;
+.extra .user_section{
+  display: flex;
+  margin-left: 40px;
+}
+
+.dropdown .log_out button{
+  width: 100%;
   height: 40px;
   background-color:#FFA500;
-  border-radius: 6px;
   border: #FFA500;
 }
 
+.username {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  width: 80px;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.username span{
+  color: #000000;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  min-width: 82px;
+  z-index: 1;
+}
+
+.dropdown a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown a:hover {
+  background-color: #f2f2f2;
+}
+
+.username:hover .dropdown {
+  display: block;
+}
 .content{
   display: flex;
   width: 100%;

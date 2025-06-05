@@ -20,6 +20,9 @@ public class PersonalController {
     @GetMapping("/personal")
     public String home(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        if (user == null){
+            return "redirect:/login";
+        }
 
         if (user != null) {
             model.addAttribute("id", user.getId());
@@ -28,6 +31,58 @@ public class PersonalController {
             model.addAttribute("phone", user.getPhone());
             model.addAttribute("password", "*".repeat(user.getPassword().length()));
         }
+        return "personal-acc";
+    }
+
+    @GetMapping("/change-username")
+    public String showChangeUsernameForm(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+        return "change-username"; // Trả về file change-password.html
+    }
+
+    @PostMapping("/change-username")
+    public String changUsername(@RequestParam String newUsername,
+                                 @RequestParam String oldUsername,
+                                 @RequestParam String password,
+                                 HttpSession session,
+                                 Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("username", user.getUsername());
+        }
+        if (user == null) {
+            return "redirect:/login"; // chưa đăng nhập
+        }
+
+        if (!user.getUsername().equals(oldUsername)) {
+            model.addAttribute("error", "Tên người dùng hiện tại không đúng");
+            return "change-username";
+        }
+
+        if (!user.getPassword().equals(password)) {
+            model.addAttribute("error", "Mật khẩu không đúng");
+            return "change-username";
+        }
+
+        if (newUsername == null || newUsername.isEmpty()) {
+            model.addAttribute("error", "Tên người dùng mới không được để trống");
+            return "change-username";
+        }
+
+        user.setEmail(newUsername);
+        userService.save(user);
+
+        if (user != null) {
+            model.addAttribute("id", user.getId());
+            model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("password", "*".repeat(user.getPassword().length()));
+        }
+        model.addAttribute("message", "Cập nhật tên người dùng thành công");
         return "personal-acc";
     }
 

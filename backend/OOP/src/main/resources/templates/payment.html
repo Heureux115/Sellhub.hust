@@ -45,15 +45,16 @@
             </a>
         </div>
         <div th:if="${username != null}" class="user_section">
-            <a th:href="@{/personal}" id = "account" style="color: white; text-decoration: none;">
-                <span>
-                    Xin chào, <strong th:text="${username}">Username</strong>
-                </span>
-            </a>
-            <div class="log_out">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit">Đăng xuất</button>
-                </form>
+            <div class="username">
+                👤 <span th:text="${username}">Username</span>
+                <div class="dropdown">
+                    <a th:href="@{/personal}">Hồ sơ</a>
+                    <form th:action="@{/logout}" class = "log_out" method="post" style="display:inline;">
+                        <button type="submit">
+                            Đăng xuất
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 

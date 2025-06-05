@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SELLHUB - Đăng nhập tài khoản</title>
-    <link rel="stylesheet" th:href="@{/css/change-email.css}" />
+    <link rel="stylesheet" th:href="@{/css/change-email-username.css}" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -43,15 +43,16 @@
             </a>
         </div>
         <div th:if="${username != null}" class="user_section">
-            <a th:href="@{/personal}" id = "account" style="color: white; text-decoration: none;">
-                <span>
-                    Xin chào, <strong th:text="${username}">Username</strong>
-                </span>
-            </a>
-            <div class="log_out">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit">Đăng xuất</button>
-                </form>
+            <div class="username">
+                👤 <span th:text="${username}">Username</span>
+                <div class="dropdown">
+                    <a th:href="@{/personal}">Hồ sơ</a>
+                    <form th:action="@{/logout}" class = "log_out" method="post" style="display:inline;">
+                        <button type="submit">
+                            Đăng xuất
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 

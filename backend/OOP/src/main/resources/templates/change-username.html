@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SELLHUB - Đăng nhập tài khoản</title>
-    <link rel="stylesheet" th:href="@{/css/change-password.css}" />
+    <link rel="stylesheet" th:href="@{/css/change-email-username.css}" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -66,47 +66,47 @@
 </header>
 
 <div class = "content">
-    <h1 id="dang_nhap" class="top">Đổi mật khẩu</h1>
+    <h1 id="dang_nhap" class="top">Đổi tên người dùng</h1>
+    <br/>
     <div id = "error" th:if="${error}" style="color: red;">
         <p th:text="${error}">Lỗi đăng nhập</p>
     </div >
     <br/>
     <!-- Form đổi mật khẩu -->
-    <form th:action="@{/change-password}" method="post">
+    <form th:action="@{/change-username}" method="post">
         <label for= "mat_khau_cu"></label><input
             type="text"
             id="mat_khau_cu"
-            name="currentPassword"
+            name="oldEmail"
             class="login_form"
             size="40"
-            placeholder="Nhập mật khẩu cũ"
+            placeholder="Nhập tên người dùng cũ"
             required
     />
         <br/>
         <label for="mat_khau_moi"></label><input
             type="text"
             id = "mat_khau_moi"
-            name="newPassword"
+            name="newEmail"
             class="login_form"
             size="40"
-            placeholder="Nhập mật khẩu mới"
+            placeholder="Nhập tên người dùng mới"
             required
     />
         <br/>
         <label for="xac_nhan"></label><input
-            type="text"
+            type="password"
             id="xac_nhan"
-            name="confirmNewPassword"
+            name="password"
             class="login_form"
             size="40"
-            placeholder="Xác nhận mật khẩu mới"
+            placeholder="Xác nhận mật khẩu"
             required
     />
         <p class="top">
             <button type="submit" id="save_button">Lưu</button>
         </p>
     </form>
-
 </div>
 </body>
 </html>

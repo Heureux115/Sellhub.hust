@@ -39,19 +39,22 @@
                 <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title = "Lịch sử mua hàng" />
             </a>
         </div>
-        <div th:if="${username != null}" class="user_section">
-            <a th:href="@{/personal}" id = "account" style="color: white; text-decoration: none;">
-                <span>
-                    Xin chào, <strong th:text="${username}">Username</strong>
-                </span>
-            </a>
-            <div class="log_out">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit">Đăng xuất</button>
-                </form>
-            </div>
-        </div>
 
+
+
+        <div th:if="${username != null}" class="user_section">
+                <div class="username">
+                    👤 <span th:text="${username}">Username</span>
+                    <div class="dropdown">
+                        <a th:href="@{/personal}">Hồ sơ</a>
+                        <form th:action="@{/logout}" class = "log_out" method="post" style="display:inline;">
+                            <button type="submit">
+                                Đăng xuất
+                            </button>
+                        </form>
+                    </div>
+                </div>
+        </div>
         <!-- Nếu chưa đăng nhập: hiện Đăng nhập / Đăng ký -->
         <div th:if="${username == null}" style ="margin-top:10px;">
             <a th:href="@{/login}" style="color: white;">Đăng nhập</a> |
