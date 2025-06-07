@@ -49,10 +49,4 @@ public class SalaryController {
         return "salary_view";
     }
 
-
-
-
-
-
-
 }

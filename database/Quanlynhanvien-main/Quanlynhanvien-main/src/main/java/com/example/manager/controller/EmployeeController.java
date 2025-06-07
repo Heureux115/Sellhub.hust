@@ -57,28 +57,44 @@ public class EmployeeController {
     }
 
     @PostMapping("/update/salary")
-    public String addEmployee(@ModelAttribute Employee employee,
-                              @RequestParam String username,
-                              @RequestParam("hesoluong") double hesoluong,
-                              @RequestParam("thue") double thue,
-                              Model model) {
-        Employee savedEmployee = employeeService.saveEmployeeWithUser(employee, username);
+    public String updateSalary(
+            @RequestParam("employeeId") Long employeeId,
+            @RequestParam("ngaylam") int ngaylam,
+            @RequestParam("ngaynghi") int ngaynghi,
+            @RequestParam("hesoluong") double hesoluong,
+            @RequestParam("thue") double thue,
+            @RequestParam("month") int month,
+            @RequestParam("year") int year,
+            Model model) {
 
-        Salary salary = new Salary();
-        salary.setEmployee(savedEmployee);
+        // Tìm nhân viên theo ID
+        Optional<Employee> empOpt = salaryService.findEmployeeById(employeeId);
+        if (empOpt.isEmpty()) {
+            model.addAttribute("message", "Không tìm thấy nhân viên với ID " + employeeId);
+            return "salary_update";
+        }
+
+        Employee employee = empOpt.get();
+
+        Salary salary = salaryService.findByEmployeeAndMonthYear(employee, month, year)
+                .orElse(new Salary());
+
+        salary.setEmployee(employee);
+        salary.setNgaylam(ngaylam);
+        salary.setNgaynghi(ngaynghi);
         salary.setHesoluong(hesoluong);
         salary.setThue(thue);
+        salary.setMonth(month);
+        salary.setYear(year);
 
-        salary.setNgaylam(0);
-        salary.setNgaynghi(0);
         salary.setLuongcoban(0);
 
         salaryService.saveSalary(salary);
 
-        model.addAttribute("message", "Thêm nhân viên thành công");
-        model.addAttribute("employee", new Employee());
-        return "employee_add";
+        model.addAttribute("message", "Cập nhật bảng lương thành công cho nhân viên " + employee.getName());
+        return "salary_update";
     }
+
 
     @GetMapping("/employeeName")
     @ResponseBody

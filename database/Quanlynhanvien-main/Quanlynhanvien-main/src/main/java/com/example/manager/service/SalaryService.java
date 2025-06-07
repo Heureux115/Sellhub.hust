@@ -34,6 +34,8 @@ public class SalaryService {
                     s.setLuongcoban(100000);
                     s.setThue(0.05);
                     s.setHesoluong(1);
+                    s.setMonth(0);
+                    s.setYear(0);
                     return s;
                 });
 
@@ -44,4 +46,9 @@ public class SalaryService {
     public Salary saveSalary(Salary salary) {
         return salaryRepository.save(salary);
     }
+
+    public Optional<Salary> findByEmployeeAndMonthYear(Employee employee, int month, int year) {
+        return salaryRepository.findByEmployeeAndMonthAndYear(employee, month, year);
+    }
+
 }
