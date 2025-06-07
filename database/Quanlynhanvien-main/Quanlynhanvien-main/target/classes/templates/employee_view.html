@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Nhân Viên</title>
+    <style>
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #888;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align: center;">Danh Sách NHÂN VIÊN</h2>
+<div th:if="${message}" style="text-align:center; color: green; font-weight: bold;">
+    <p th:text="${message}"></p>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID nhân viên </th>
+        <th>Họ tên</th>
+        <th>Tuổi</th>
+        <th>Giới tính</th>
+        <th>Đơn vị công tác</th>
+        <th>Chức vụ</th>
+        <th th:if="${isManager}">Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}">1</td>
+        <td th:text="${employee.name}">Anh</td>
+        <td th:text="${employee.age}">20</td>
+        <td th:text="${employee.gender}">Nam</td>
+        <td th:text="${employee.donvicongtac}">ke toan</td>
+        <td th:text="${employee.chucvu}">quan ly</td>
+        <td th:if="${isManager}">
+            <form th:action="@{'/delete/' + ${employee.id}}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn xóa nhân viên này?');">
+                <button type="submit">Xóa</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="back-home">
+    <a th:href="@{/}">Quay lại trang chính</a>
+</div>
+</body>
+</html>

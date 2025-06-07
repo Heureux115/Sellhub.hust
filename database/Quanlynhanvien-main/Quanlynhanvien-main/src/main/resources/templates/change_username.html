@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Thay đổi Username</title>
+</head>
+<body>
+<h2>Thay đổi Username</h2>
+<form th:action="@{/user/change-username}" method="post">
+  <label>Username mới:</label>
+  <input type="text" name="newUsername" required />
+  <button type="submit">Cập nhật</button>
+</form>
+<p th:if="${message}" th:text="${message}" style="color:green"></p>
+<div class="back-home">
+  <a th:href="@{/}">Quay lại trang chính</a>
+</div>
+</body>
+</html>

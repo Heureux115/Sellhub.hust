@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cập nhật ngày làm và ngày nghỉ</title>
+  <script>
+    function fetchEmployeeName() {
+      const employeeId = document.getElementById("employeeId").value;
+      if (employeeId.trim() === "") {
+        document.getElementById("employeeName").innerText = "";
+        return;
+      }
+      fetch(`/employee/employeeName?employeeId=${employeeId}`)
+              .then(response => response.json())
+              .then(data => {
+                if (data.exists) {
+                  document.getElementById("employeeName").innerText = data.name;
+                } else {
+                  document.getElementById("employeeName").innerText = "Không tìm thấy nhân viên";
+                }
+              })
+              .catch(err => {
+                document.getElementById("employeeName").innerText = "Lỗi lấy dữ liệu";
+              });
+    }
+  </script>
+</head>
+<body>
+<h2>Cập nhật ngày làm và ngày nghỉ của nhân viên</h2>
+
+<form th:action="@{/salary/update}" method="post">
+  <label>ID nhân viên:</label>
+  <input type="number" id="employeeId" name="employeeId" oninput="fetchEmployeeName()" required />
+  <span id="employeeName" style="margin-left: 10px; font-weight: bold; color: blue;"
+        th:text="${employeeName}"></span>
+  <br/><br/>
+
+  <label>Số ngày làm:</label>
+  <input type="number" name="ngaylam" required min="0" />
+  <br/><br/>
+
+  <label>Số ngày nghỉ:</label>
+  <input type="number" name="ngaynghi" required min="0" />
+  <br/><br/>
+
+  <label>Hệ số lương:</label>
+  <input type="number" step="0.01" name="hesoluong" required min="0" />
+  <br/><br/>
+
+  <label>Thuế (%):</label>
+  <input type="number" step="0.01" name="thue" required min="0" max="100" />
+  <br/><br/>
+
+  <button type="submit">Cập nhật</button>
+</form>
+
+<p th:text="${message}" style="color: green; font-weight: bold;"></p>
+<div class="back-home">
+  <a th:href="@{/}">Quay lại trang chính</a>
+</div>
+</body>
+</html>
