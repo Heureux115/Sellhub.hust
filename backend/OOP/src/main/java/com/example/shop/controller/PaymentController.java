@@ -8,6 +8,7 @@ import com.example.shop.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -26,7 +27,7 @@ public class PaymentController extends BaseCartController {
     }
 
     @PostMapping("/checkout")
-    public String checkout(HttpSession session, RedirectAttributes redirectAttributes) {
+    public String checkout(@RequestParam("address") String address, HttpSession session, RedirectAttributes redirectAttributes) {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
         User user = (User) session.getAttribute("user");
 
@@ -44,7 +45,7 @@ public class PaymentController extends BaseCartController {
         updateInventory(cartItems, productRepo);
 
         // 2. Lưu đơn hàng vào DB
-        orderService.createOrder(user, cartItems);
+        orderService.createOrder(user, cartItems, address);
 
         // 3. Xóa giỏ hàng
         clearCart(session);

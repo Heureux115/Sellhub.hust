@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/payment.css}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet" />
+    <link rel="icon" th:href="@{/css/imgs_oop/Icontilte.png}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
@@ -72,10 +73,23 @@
         <button class="return">Quay lại giỏ hàng</button>
     </a>
 
-    <form th:action="@{/checkout}" method="post">
-        <button type="submit" class="paymethod">Tiến Hành Thanh Toán</button>
+    <button type="submit" form="dia_chi" class="paymethod">Tiến Hành Thanh Toán</button>
+</div>
+</br>
+<div id = "big">
+    <form th:action="@{/checkout}" method="post" id = "dia_chi">
+        <label></label>
+        <input
+                type="text"
+                name="address"
+                class="address_form"
+                size="60"
+                placeholder="Xác nhận địa chỉ nhận hàng"
+                required
+        />
     </form>
 </div>
+
 
 <div class="cart-container">
     <h2>SẢN PHẨM BẠN ĐÃ CHỌN MUA</h2>

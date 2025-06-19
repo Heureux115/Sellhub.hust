@@ -58,12 +58,12 @@ public class OrderService {
         }
     }
 
-    public void createOrder(User user, Map<Long, CartItem> cartItems) {
+    public void createOrder(User user, Map<Long, CartItem> cartItems, String address) {
         Order order = new Order();
         order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
         order.setStatus(Order.Status.DANG_GIAO);
-
+        order.setOrder_address(address);
         List<OrderItems> items = cartItems.values().stream().map(cartItem -> {
             OrderItems item = new OrderItems();
             item.setOrder(order);

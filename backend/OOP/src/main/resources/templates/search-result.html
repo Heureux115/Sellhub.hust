@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title th:text="${pageTitle} ?: 'Danh mục sản phẩm'">Sản phẩm</title>
     <link rel="stylesheet" th:href="@{/css/search-result.css}">
+    <link rel="icon" th:href="@{/css/imgs_oop/Icontilte.png}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -105,7 +106,9 @@
         <nav id = "best_sellers">
             <ul>
                 <li th:each="product : ${products}">
-                    <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:100px; height:auto">
+                    <a th:href="@{'/product/' + ${product.id}}">
+                        <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:100px; height:auto">
+                    </a>
                     <h3 th:text="${product.title}">Tên sản phẩm</h3>
                     <p th:text="'Giá: ' +${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'VNĐ'">Giá</p>
                 </li>

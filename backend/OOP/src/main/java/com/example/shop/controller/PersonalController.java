@@ -50,6 +50,11 @@ public class PersonalController {
                                  HttpSession session,
                                  Model model) {
         User user = (User) session.getAttribute("user");
+        User existingUser = userService.findByUsername(newUsername);
+        if (existingUser != null) {
+            model.addAttribute("error", "Tên người dùng mới đã tồn tại");
+            return "change-username";
+        }
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
@@ -62,6 +67,10 @@ public class PersonalController {
             return "change-username";
         }
 
+        if (newUsername.equals(oldUsername)) {
+            model.addAttribute("error", "Tên người dùng bị trùng với hiện tại");
+            return "change-username";
+        }
         if (!user.getPassword().equals(password)) {
             model.addAttribute("error", "Mật khẩu không đúng");
             return "change-username";
@@ -72,7 +81,7 @@ public class PersonalController {
             return "change-username";
         }
 
-        user.setEmail(newUsername);
+        user.setUsername(newUsername);
         userService.save(user);
 
         if (user != null) {
@@ -102,6 +111,7 @@ public class PersonalController {
                                  HttpSession session,
                                  Model model) {
         User user = (User) session.getAttribute("user");
+
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
@@ -147,6 +157,11 @@ public class PersonalController {
                               HttpSession session,
                               Model model) {
         User user = (User) session.getAttribute("user");
+        User existingUser = userService.findByEmail(newEmail);
+        if (existingUser != null) {
+            model.addAttribute("error", "Email mới đã tồn tại");
+            return "change-username";
+        }
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
@@ -198,6 +213,11 @@ public class PersonalController {
                               HttpSession session,
                               Model model) {
         User user = (User) session.getAttribute("user");
+        User existingUser = userService.findByPhone(newPhone);
+        if (existingUser != null) {
+            model.addAttribute("error", "Số điện thoại mới đã tồn tại");
+            return "change-username";
+        }
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }

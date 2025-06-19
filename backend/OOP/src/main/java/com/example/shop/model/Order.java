@@ -30,9 +30,8 @@ public class Order {
     private List<Review> reviews = new ArrayList<>();
 
     private int total;
-
     private LocalDateTime orderDate;
-
+    private String order_address;
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -42,12 +41,13 @@ public class Order {
         this.status = Status.DANG_GIAO;
     }
 
-    public Order(User user, List<OrderItems> orderItems, int total) {
+    public Order(User user, List<OrderItems> orderItems, int total, String order_address) {
         this.user = user;
         this.orderItems = orderItems;
         this.total = total;
         this.orderDate = LocalDateTime.now();
         this.status = Status.DANG_GIAO;
+        this.order_address = order_address;
         for (OrderItems item : orderItems) {
             item.setOrder(this);
         }
@@ -111,6 +111,15 @@ public class Order {
         return status;
     }
 
+    public String getOrder_address() {
+        return order_address;
+    }
+
+    public void setOrder_address(String order_address) {
+        this.order_address = order_address;
+    }
+
+
     public boolean cancelOrder() {
         if (status == Status.DANG_GIAO) {
             status = Status.DA_HUY;
@@ -134,6 +143,7 @@ public class Order {
         sb.append("User: ").append(user.getUsername()).append("\n");
         sb.append("Date: ").append(orderDate).append("\n");
         sb.append("Status: ").append(status).append("\n");
+        sb.append("Order Address: ").append(order_address).append("\n");
         sb.append("Items:\n");
         for (OrderItems item : orderItems) {
             sb.append("- ").append(item.getProduct().getTitle())

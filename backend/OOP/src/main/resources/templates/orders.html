@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Đơn hàng của bạn</title>
     <link rel="stylesheet" th:href="@{/css/orders.css}">
+    <link rel="icon" th:href="@{/css/imgs_oop/Icontilte.png}" type="image/png">
 </head>
 <body>
 
@@ -17,7 +18,7 @@
     <h3>Đơn hàng #<span th:text="${iterStat.index + 1}"></span></h3>
     <p>Ngày đặt: <span th:text="${#temporals.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></span></p>
     <p>Trạng thái: <strong th:text="${order.status}"></strong></p>
-
+    <p>Địa chỉ: <strong th:text="${order.order_address}"></strong></p>
     <ul>
         <li th:each="item : ${order.orderItems}">
             <span th:text="${item.product.title}">Tên sản phẩm</span> -
@@ -56,6 +57,5 @@
     </div>
 
 </div>
-
 </body>
 </html>

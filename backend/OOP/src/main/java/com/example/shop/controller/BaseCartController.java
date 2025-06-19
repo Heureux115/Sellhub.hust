@@ -37,7 +37,7 @@ public abstract class BaseCartController {
     }
 
 
-    @SuppressWarnings("unchecked")
+
     protected Map<Long, CartItem> getCartFromSession(HttpSession session) {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
         if (cartItems == null) {
@@ -48,25 +48,25 @@ public abstract class BaseCartController {
     }
 
 
-    // Thêm sản phẩm vào giỏ
+
     protected void addToCart(HttpSession session, CartItem cartItem) {
         Map<Long, CartItem> cartItems = getCartFromSession(session);
-        cartItems.put(cartItem.getProduct().getId(), cartItem); // Thêm sản phẩm vào giỏ
-        session.setAttribute("cart", cartItems); // Cập nhật giỏ hàng trong session
+        cartItems.put(cartItem.getProduct().getId(), cartItem);
+        session.setAttribute("cart", cartItems);
     }
 
-    // Xóa sản phẩm khỏi giỏ
+
     protected void removeFromCart(HttpSession session, Long productId) {
         Map<Long, CartItem> cartItems = getCartFromSession(session);
         CartItem item = cartItems.get(productId);
         if (item != null) {
             if (item.getQuantity() > 1) {
-                item.setQuantity(item.getQuantity() - 1); // Giảm số lượng
+                item.setQuantity(item.getQuantity() - 1);
             } else {
-                cartItems.remove(productId); // Xóa nếu còn 1 thì bỏ khỏi giỏ luôn
+                cartItems.remove(productId);
             }
         }
-        session.setAttribute("cart", cartItems); // Cập nhật giỏ hàng trong session
+        session.setAttribute("cart", cartItems);
     }
 
 }
