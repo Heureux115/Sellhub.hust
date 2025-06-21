@@ -37,11 +37,12 @@ public class ProductController extends BaseCartController {
             clearCart(session);
             addToCart(session, new CartItem(product, 1));
             model.addAttribute("cart", getCartFromSession(session));
-            return "payment";
+            return "redirect:/payment";
         }else {
             throw new IllegalArgumentException("Product or Product ID is null");
         }
     }
+
 
     @PostMapping("/product/addToCart/{id}")
     public String addToCartHandler(@PathVariable Long id, HttpSession session) {
