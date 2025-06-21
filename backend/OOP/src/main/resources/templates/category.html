@@ -82,6 +82,11 @@
   <nav id = "price_list">
     <ul>
       <li id = "muc_gia">Mức giá</li>
+        <li>
+            <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=0, maxPrice=3000000)}" method = "get">
+                <button type = "submit">Dưới 3 triệu</button>
+            </form>
+        </li>
       <li>
         <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=3000000, maxPrice=5000000)}" method = "get">
           <button type = "submit">Từ 3-5 triệu</button>

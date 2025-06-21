@@ -69,6 +69,11 @@
         <ul>
             <li class = "muc_gia">Mức giá</li>
             <li>
+                <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=0, maxPrice=3000000)}" method = "get">
+                    <button type = "submit">Dưới 3 triệu</button>
+                </form>
+            </li>
+            <li>
                 <form th:action = "@{/category/{category}/price/{minPrice}/{maxPrice}(category=${category}, minPrice=3000000, maxPrice=5000000)}" method = "get">
                     <button type = "submit">Từ 3-5 triệu</button>
                 </form>
@@ -103,6 +108,11 @@
     <nav class = "price_list" th:if="${brand!=null}">
         <ul>
             <li class = "muc_gia">Mức giá</li>
+            <li>
+                <form th:action = "@{/category/{category}/brand/{brand}/price/{minPrice}/{maxPrice}(category=${category},brand=${brand},minPrice=0, maxPrice=3000000)}" method = "get">
+                    <button type = "submit">Dưới 3 triệu</button>
+                </form>
+            </li>
             <li>
                 <form th:action = "@{/category/{category}/brand/{brand}/price/{minPrice}/{maxPrice}(category=${category},brand=${brand},minPrice=3000000, maxPrice=5000000)}" method = "get">
                     <button type = "submit">Từ 3-5 triệu</button>
