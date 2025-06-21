@@ -13,7 +13,7 @@ public class Review {
 
     @ManyToOne
     private Product product;
-
+    @Column(name = "review_text", columnDefinition = "NVARCHAR(MAX)")
     private String reviewText;
 
     public Long getId() {

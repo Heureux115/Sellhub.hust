@@ -31,7 +31,7 @@ public class Order {
 
     private int total;
     private LocalDateTime orderDate;
-    @Column(name = "order_address", columnDefinition = "NVARCHAR(1000)")
+    @Column(name = "order_address", columnDefinition = "NVARCHAR(MAX)")
     private String order_address;
     @Enumerated(EnumType.STRING)
     private Status status;

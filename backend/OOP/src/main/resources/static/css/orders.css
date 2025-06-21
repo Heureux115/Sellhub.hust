@@ -17,14 +17,14 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Tiêu đề */
+
 .order-container h2 {
     text-align: center;
     margin-bottom: 30px;
     color: #2c3e50;
 }
 
-/* Mỗi đơn hàng */
+
 .order-card {
     border: 1px solid #ddd;
     padding: 20px;
@@ -33,7 +33,7 @@ body {
     background-color: #fafafa;
 }
 
-/* Thông tin đơn hàng */
+
 .order-info {
     margin-bottom: 15px;
 }
@@ -44,7 +44,7 @@ body {
     font-weight: 500;
 }
 
-/* Danh sách sản phẩm */
+
 .product-list {
     padding-left: 20px;
     margin-top: 10px;
@@ -54,21 +54,21 @@ body {
     margin-bottom: 8px;
 }
 
-/* Tổng tiền */
+
 .order-total {
     font-weight: bold;
     color: #27ae60;
     margin-top: 10px;
 }
 
-/* Trạng thái */
+
 .order-status {
     margin-top: 10px;
     font-style: italic;
     color: #2980b9;
 }
 
-/* Các nút thao tác */
+
 .order-actions {
     margin-top: 15px;
 }
@@ -78,44 +78,16 @@ body {
     margin-right: 10px;
 }
 
-.order-actions button {
-    background-color: #3498db;
-    color: white;
+.home-button{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.home-button #home-button{
+    background-color: #FFA500;
     padding: 8px 16px;
-    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #FFA500;
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.order-actions button:hover {
-    background-color: #2980b9;
-}
-
-/* Nút cancel */
-.order-actions .cancel-btn {
-    background-color: #e74c3c;
-}
-
-.order-actions .cancel-btn:hover {
-    background-color: #c0392b;
-}
-
-/* Nút confirm */
-.order-actions .confirm-btn {
-    background-color: #2ecc71;
-}
-
-.order-actions .confirm-btn:hover {
-    background-color: #27ae60;
-}
-
-/* Nút review */
-.order-actions .review-btn {
-    background-color: #f39c12;
-}
-
-.order-actions .review-btn:hover {
-    background-color: #d68910;
+    width: 120px;
 }
