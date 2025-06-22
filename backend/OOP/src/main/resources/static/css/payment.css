@@ -155,7 +155,7 @@ body {
 .cart-container {
     max-width: 900px;
     margin: 30px auto;
-    background-color: #ffffff; /* Nền trắng cho container chính */
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 25px;
@@ -163,25 +163,25 @@ body {
 
 .cart-container h2 {
     text-align: center;
-    margin: 20px 0; /* Giữ margin gốc */
+    margin: 20px 0;
     font-size: 24px;
     font-weight: 600;
-    /* color: #FFA500;  Bỏ màu cam cho H2 để giữ màu mặc định */
+
 }
 
-#product-list-container { /* Tên mới cho div#list */
+#product-list-container {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Khoảng cách gốc giữa các product-item */
-    /* padding: 20px 30px;  Padding này sẽ do cart-container quản lý */
-    max-height: calc(100vh - 350px); /* Giới hạn chiều cao để có scroll, điều chỉnh nếu cần */
+    gap: 15px;
+
+    max-height: calc(100vh - 350px);
     overflow-y: auto;
-    overflow-x: hidden; /* Tránh scroll ngang không cần thiết */
-    /* border: 1px solid #ccc;  Border gốc của #list, có thể giữ hoặc bỏ */
-    padding-right: 10px; /* Không gian cho thanh cuộn nếu hiện */
+    overflow-x: hidden;
+
+    padding-right: 10px;
 }
 
-/* Custom scrollbar (optional) */
+
 #product-list-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -200,13 +200,13 @@ body {
 
 .product-item {
     display: flex;
-    flex-direction: row; /* Giữ hướng gốc */
+    flex-direction: row;
     align-items: center;
-    gap: 15px; /* Giữ khoảng cách giữa các thành phần con */
-    padding: 10px; /* Padding gốc */
-    border: 1px solid #555454; /* Border gốc */
-    border-radius: 10px; /* Bo tròn gốc */
-    background-color: #fefefe; /* Màu nền product-item gốc */
+    gap: 15px;
+    padding: 10px;
+    border: 1px solid #555454;
+    border-radius: 10px;
+    background-color: #fefefe;
     transition: box-shadow 0.3s ease;
 }
 
@@ -215,56 +215,54 @@ body {
 }
 
 .product-check {
-    margin-right: 15px; /* Margin gốc */
+    margin-right: 15px;
     width: 20px;
     height: 20px;
-    /* accent-color: #FFA500; Bỏ accent-color để giữ màu checkbox mặc định hoặc theo trình duyệt */
     cursor: pointer;
 }
 
 .product-item img {
-    width: 100px; /* Kích thước ảnh gốc */
+    width: 100px;
     height: 100px;
     object-fit: cover;
-    margin-right: 15px; /* Margin gốc */
-    border-radius: 8px; /* Bo tròn ảnh gốc */
-    /* border: 1px solid #eee; */ /* Bỏ border thêm này */
+    margin-right: 15px;
+    border-radius: 8px;
+
 }
 
-.product-details { /* Tên mới cho .product-info */
+.product-details {
     flex-grow: 1;
 }
 
 .product-details h4 {
-    margin: 0 0 5px 0; /* Điều chỉnh margin, gốc là 10px */
-    font-size: 18px; /* Font-size gốc */
-    font-weight: 600; /* Font-weight gốc */
-    /* color: #333; */ /* Để màu mặc định */
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
-.product-price { /* class gốc là span.product-price */
-    /* margin: 5px 0 0; */ /* CSS gốc không có margin riêng cho price */
-    /* color: #555; */ /* Màu gốc của <p> trong .product-info, giờ span nên có thể không cần */
-    font-size: 16px; /* Điều chỉnh nếu cần, gốc là 14px cho p */
+.product-price {
+
+    font-size: 16px;
     font-weight: 500;
-    /* color: #e74c3c; Bỏ màu đỏ nổi bật này */
+
 }
 
 .total-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0px; /* Gốc là 20px 30px, nhưng container đã có padding */
-    border-top: 2px solid #cbc8c8; /* Border top gốc */
-    font-size: 20px; /* Font-size gốc */
-    font-weight: 600; /* Font-weight gốc */
-    /* text-align: right;  Không cần nữa vì dùng flex */
-    background-color: #f8f8f8; /* Màu nền total-section gốc */
+    padding: 20px 0px;
+    border-top: 2px solid #cbc8c8;
+    font-size: 20px;
+    font-weight: 600;
+
+    background-color: #f8f8f8;
     margin-top: 20px;
 }
 
 #total-price {
     margin: 0;
-    color: #FFA500; /* Màu total-price gốc */
+    color: #FFA500;
     font-weight: 700;
 }

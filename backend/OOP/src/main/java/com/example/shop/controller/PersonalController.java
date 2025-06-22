@@ -40,7 +40,7 @@ public class PersonalController {
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
-        return "change-username"; // Trả về file change-password.html
+        return "change-username";
     }
 
     @PostMapping("/change-username")
@@ -59,7 +59,7 @@ public class PersonalController {
             model.addAttribute("username", user.getUsername());
         }
         if (user == null) {
-            return "redirect:/login"; // chưa đăng nhập
+            return "redirect:/login";
         }
 
         if (!user.getUsername().equals(oldUsername)) {
@@ -101,7 +101,7 @@ public class PersonalController {
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
-        return "change-password"; // Trả về file change-password.html
+        return "change-password";
     }
 
     @PostMapping("/change-password")
@@ -129,7 +129,7 @@ public class PersonalController {
             return "change-password";
         }
         user.setPassword(newPassword);
-        userService.save(user); // cập nhật lại user
+        userService.save(user);
 
         if (user != null) {
             model.addAttribute("id", user.getId());
@@ -148,7 +148,7 @@ public class PersonalController {
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
-        return "change-email"; // Trả về file change-email.html
+        return "change-email";
     }
     @PostMapping("/change-email")
     public String changeEmail(@RequestParam String newEmail,
@@ -204,7 +204,7 @@ public class PersonalController {
         if (user != null) {
             model.addAttribute("username", user.getUsername());
         }
-        return "change-phone"; // Trả về file change-password.html
+        return "change-phone";
     }
     @PostMapping("/change-phone")
     public String changePhone(@RequestParam String oldPhone,

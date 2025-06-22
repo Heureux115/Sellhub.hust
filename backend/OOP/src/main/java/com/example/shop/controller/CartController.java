@@ -53,12 +53,12 @@ public class CartController extends BaseCartController {
 
     @PostMapping("/cart/remove")
     public String removeFromCart(@RequestParam("productId") Long productId, HttpSession session) {
-        removeFromCart(session, productId); // Gọi phương thức xóa sản phẩm trong lớp cha
-        return "redirect:/cart"; // Quay lại trang giỏ hàng sau khi xóa sản phẩm
+        removeFromCart(session, productId);
+        return "redirect:/cart";
     }
 
     @GetMapping("/back-to-home")
     public String backToHome() {
-        return "redirect:/home"; // Điều hướng về trang chủ
+        return "redirect:/home";
     }
 }

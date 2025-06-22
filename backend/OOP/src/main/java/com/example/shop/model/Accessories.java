@@ -6,35 +6,33 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("Accessories")
 public class Accessories extends Product {
-    private String material; // Material of the accessory
-    private String color;    // Color of the accessory
+    private String material;
+    private String color;
 
-    // Default constructor
+
     public Accessories() {
         super();
     }
 
-    // Constructor with parameters
+
     public Accessories(int id, String title, String description, int price, String imageUrl, String brand, int stock, String material, String color) {
-        super(id, title, description, price, imageUrl, brand, stock); // Calls the constructor of the parent Product class
+        super(id, title, description, price, imageUrl, brand, stock);
         this.material = material;
         this.color = color;
     }
 
-    // Getter and Setter for material
+
     public String getMaterial() {
         return material;
     }
-
     public void setMaterial(String material) {
         this.material = material;
     }
 
-    // Getter and Setter for color
+
     public String getColor() {
         return color;
     }
-
     public void setColor(String color) {
         this.color = color;
     }

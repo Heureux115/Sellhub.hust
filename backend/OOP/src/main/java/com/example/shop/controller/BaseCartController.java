@@ -42,7 +42,7 @@ public abstract class BaseCartController {
         Map<Long, CartItem> cartItems = (Map<Long, CartItem>) session.getAttribute("cart");
         if (cartItems == null) {
             cartItems = new HashMap<>();
-            session.setAttribute("cart", cartItems); // <-- Cập nhật luôn nếu mới
+            session.setAttribute("cart", cartItems); //
         }
         return cartItems;
     }

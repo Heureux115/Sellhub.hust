@@ -164,12 +164,12 @@ body {
     border-radius: 8px;
 }
 .best_sellers #best_sellers li {
-    background-color: white;       /* Màu nền box */
-    padding: 10px;                 /* Khoảng cách bên trong box */
-    border-radius: 8px;            /* Bo góc nhẹ */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Bóng đổ nhẹ */
-    width: 270px;                  /* Đảm bảo box gọn gàng */
-    text-align: center;           /* Căn giữa nội dung */
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 270px;
+    text-align: center;
 }
 .best_sellers #best_sellers li h3 {
     font-size: 16px;

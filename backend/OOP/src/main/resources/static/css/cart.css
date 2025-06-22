@@ -137,7 +137,7 @@ body {
 }
 
 .product-info {
-  flex: 1; /* Cho phần info chiếm hết phần còn lại */
+  flex: 1;
   margin-right: 600px;
 }
 

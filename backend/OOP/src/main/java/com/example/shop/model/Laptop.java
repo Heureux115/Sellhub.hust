@@ -6,10 +6,10 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("Laptop")
 public class Laptop extends Product {
-    private String processor;   // Type of processor (e.g., Intel i7, AMD Ryzen 5)
-    private String ram;         // Amount of RAM (e.g., 16GB)
-    private String screenSize;  // Screen size (e.g., 15.6 inches)
-    private String storage;     // Storage capacity (e.g., 512GB SSD)
+    private String processor;
+    private String ram;
+    private String screenSize;
+    private String storage;
 
     // Default constructor
     public Laptop() {
@@ -26,7 +26,7 @@ public class Laptop extends Product {
         this.storage = storage;
     }
 
-    // Getters and setters for the new fields
+
     public String getProcessor() {
         return processor;
     }

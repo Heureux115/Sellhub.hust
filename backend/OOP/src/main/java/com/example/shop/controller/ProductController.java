@@ -51,7 +51,7 @@ public class ProductController extends BaseCartController {
             return "login";
         }
         productRepo.findById(id).ifPresent(product -> {
-            addToCart(session, product); // gọi addToCart từ ProductController hoặc BaseCartController
+            addToCart(session, product);
         });
         return "redirect:/product/{id}";
     }
@@ -59,7 +59,7 @@ public class ProductController extends BaseCartController {
     private void addToCart(HttpSession session, Product product) {
         Map<Long, CartItem> cartItems = getCartFromSession(session);
 
-        // Nếu sản phẩm đã tồn tại trong giỏ thì tăng số lượng, ngược lại thêm mới
+
         CartItem cartItem = cartItems.get(product.getId());
         if (cartItem == null) {
             cartItem = new CartItem(product, 1);

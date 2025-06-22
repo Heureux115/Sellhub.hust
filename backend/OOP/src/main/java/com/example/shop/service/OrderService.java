@@ -34,7 +34,7 @@ public class OrderService {
     public void cancelOrder(int orderId, User user) {
         Order order = orderRepo.findByorderIdAndUser(orderId, user);
         if (order != null) {
-            order.cancelOrder(); // logic business
+            order.cancelOrder();
             orderRepo.save(order); // cập nhật lại DB
         }
     }

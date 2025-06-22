@@ -21,14 +21,14 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    // Tìm kiếm người dùng theo username
+
     public User findByUsername(String username) {
         try {
             return userRepo.findByUsername(username);
         } catch (Exception e) {
-            // Log lỗi khi tìm kiếm người dùng
+
             logger.error("Error retrieving user by username", e);
-            return null;  // Hoặc throw một ngoại lệ tùy thuộc vào yêu cầu của bạn
+            return null;
         }
     }
 
@@ -36,9 +36,9 @@ public class UserService {
         try {
             return userRepo.findByEmail(email);
         } catch (Exception e) {
-            // Log lỗi khi tìm kiếm người dùng
+
             logger.error("Error retrieving user by username", e);
-            return null;  // Hoặc throw một ngoại lệ tùy thuộc vào yêu cầu của bạn
+            return null;
         }
     }
 
@@ -46,15 +46,15 @@ public class UserService {
         try {
             return userRepo.findByPhone(phone);
         } catch (Exception e) {
-            // Log lỗi khi tìm kiếm người dùng
+
             logger.error("Error retrieving user by username", e);
-            return null;  // Hoặc throw một ngoại lệ tùy thuộc vào yêu cầu của bạn
+            return null;
         }
     }
 
     public User save(User user) {
         try {
-            return userRepo.save(user); // Gọi phương thức save từ UserRepository
+            return userRepo.save(user);
         } catch (Exception e) {
             logger.error("Error saving user", e);
             return null;

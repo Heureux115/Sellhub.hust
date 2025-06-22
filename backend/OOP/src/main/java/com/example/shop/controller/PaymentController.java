@@ -41,13 +41,13 @@ public class PaymentController extends BaseCartController {
             return "redirect:/login";
         }
 
-        // 1. Trừ số lượng tồn kho
+
         updateInventory(cartItems, productRepo);
 
-        // 2. Lưu đơn hàng vào DB
+
         orderService.createOrder(user, cartItems, address);
 
-        // 3. Xóa giỏ hàng
+
         clearCart(session);
 
         redirectAttributes.addFlashAttribute("message", "Thanh toán thành công!");

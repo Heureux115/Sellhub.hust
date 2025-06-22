@@ -31,10 +31,10 @@ class AuthController {
         User user = userService.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
-            return "redirect:/home"; // hoặc return "redirect:/home";
+            return "redirect:/home";
         } else {
             model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
-            return "login"; // phải forward về login, không redirect
+            return "login";
         }
     }
 
