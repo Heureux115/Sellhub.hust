@@ -51,7 +51,7 @@ public class CartController extends BaseCartController {
         return "payment";
     }
 
-    @PostMapping("/cart/remove")
+    @PostMapping("/cart/remove")//loai bo san pham
     public String removeFromCart(@RequestParam("productId") Long productId, HttpSession session) {
         removeFromCart(session, productId);
         return "redirect:/cart";
