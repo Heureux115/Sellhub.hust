@@ -183,6 +183,7 @@ body {
   height: 250px;;
   border-radius: 8px;
 }
+
 .best_sellers #best_sellers li {
   background-color: white;
   padding: 10px;
@@ -191,12 +192,20 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   width: 300px;
   text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .best_sellers #best_sellers li h3 {
   font-size: 16px;
   color: #333;
 }
+.best_sellers #best_sellers li:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
 
+.best_sellers #best_sellers li:hover h3{
+  color: #0000FF;
+}
 
 
 

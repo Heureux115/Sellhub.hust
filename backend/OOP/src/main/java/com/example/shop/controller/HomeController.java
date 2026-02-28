@@ -19,6 +19,11 @@ public class HomeController {
         this.productRepo = productRepo;
     }
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/home";
+    }
+
     //tạo trang home
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
