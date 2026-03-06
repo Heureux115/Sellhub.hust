@@ -18,84 +18,170 @@
         </a>
     </div>
 
-    <div class = "search">
+    <div class="search">
         <form th:action="@{/search}" method="get">
             <input
-                    placeholder = "Tìm kiếm sản phẩm"
-                    name = "keyword"
-                    id = "tim_kiem"
-                    size = "80"
+                    placeholder="Tìm kiếm sản phẩm"
+                    name="keyword"
+                    id="tim_kiem"
+                    size="80"
             />
             <button type="submit" id="search_button" class="fa-solid fa-magnifying-glass"></button>
         </form>
     </div>
 
-    <div class = "extra">
+    <div class="extra">
         <span class="hotline">Hotline:<br> 0834784586</span>
 
-        <div class ="cart_button">
+        <div class="cart_button">
             <a th:href="@{/cart}">
-                <button type="button" id = "cart_button" class="fa-solid fa-cart-plus"></button>
+                <button type="button" id="cart_button" class="fa-solid fa-cart-plus"></button>
             </a>
         </div>
+
         <div class="order_history_button">
             <a th:href="@{/order/my-orders}">
-                <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title = "Lịch sử mua hàng" />
+                <img th:src="@{/css/imgs_oop/order-history.png}" alt="Order-History" title="Lịch sử mua hàng" />
             </a>
         </div>
+
         <div th:if="${username != null}" class="user_section">
             <div class="username">
                 👤 <span th:text="${username}">Username</span>
                 <div class="dropdown">
                     <a th:href="@{/personal}">Hồ sơ</a>
-                    <form th:action="@{/logout}" class = "log_out" method="post" style="display:inline;">
-                        <button type="submit">
-                            Đăng xuất
-                        </button>
+                    <form th:action="@{/logout}" class="log_out" method="post" style="display:inline;">
+                        <button type="submit">Đăng xuất</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Nếu chưa đăng nhập: hiện Đăng nhập / Đăng ký -->
-        <div th:if="${username == null}" style ="margin-top:10px;">
+        <div th:if="${username == null}" style="margin-top:10px;">
             <a th:href="@{/login}" style="color: white;">Đăng nhập</a> |
             <a th:href="@{/register}" style="color: white;">Đăng ký</a>
         </div>
-
     </div>
 </header>
 
 <div class="product">
-
     <div class="product-item">
-        <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh" style="width:300px; height:auto">
+        <div class="img-wrapper">
+            <img th:src="@{'/css/imgs_oop/' + ${product.imageUrl}}" alt="Ảnh">
+        </div>
     </div>
 
     <div class="productdetails">
-
         <div class="product-info">
             <p th:text="${product.title}">Tên sản phẩm</p>
-            <p th:text="'Hãng: ' + ${product.brand}">Giá</p>
-            <p th:text=" 'Giá: ' +${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'VNĐ'">Giá</p>
+            <p th:text="'Hãng: ' + ${product.brand}">Hãng</p>
+
+            <p>
+                Giá:
+                <span id="priceDisplay"
+                      th:data-price="${product.price}"
+                      th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">
+                    0
+                </span> VNĐ
+            </p>
+
+            <p>
+                Còn lại:
+                <span id="maxStock" th:text="${product.stock}">0</span> sản phẩm
+            </p>
+
+            <div class="quantity-section">
+                <span class="quantity-label">Số lượng</span>
+                <div class="quantity-box">
+                    <button type="button" onclick="decreaseQty()">-</button>
+                    <input type="number"
+                           id="quantityInput"
+                           value="1"
+                           min="1"
+                           th:attr="max=${product.stock}">
+                    <button type="button" onclick="increaseQty()">+</button>
+                </div>
+            </div>
         </div>
+
         <div class="details">
             <p>Đặc điểm sản phẩm:</p>
             <br/>
             <p th:utext="${#strings.replace(product.description, '; ', '.<br/>')}">Đặc điểm</p>
         </div>
     </div>
-
 </div>
 
 <div class="select">
-    <form th:action="@{/product/addToCart/{id}(id = ${product.id})}" method="post">
-        <button type="submit" class = "add">Thêm vào giỏ hàng</button>
+    <form th:action="@{/product/addToCart/{id}(id=${product.id})}" method="post" onsubmit="syncQuantity()">
+        <input type="hidden" name="quantity" id="cartQuantity" value="1">
+        <button type="submit" class="add">Thêm vào giỏ hàng</button>
     </form>
-    <form th:action="@{/product/buyNow/{id}(id = ${product.id})}" method="post">
-        <button type="submit" class = "buy">Mua ngay</button>
+
+    <form th:action="@{/product/buyNow/{id}(id=${product.id})}" method="post" onsubmit="syncQuantity()">
+        <input type="hidden" name="quantity" id="buyQuantity" value="1">
+        <button type="submit" class="buy">Mua ngay</button>
     </form>
 </div>
-</body>
 
+<script>
+    function getMaxStock() {
+        return parseInt(document.getElementById("maxStock").textContent.trim(), 10);
+    }
+
+    function getUnitPrice() {
+        return parseInt(document.getElementById("priceDisplay").dataset.price, 10);
+    }
+
+    function formatPrice(number) {
+        return number.toLocaleString("vi-VN");
+    }
+
+    function syncQuantity() {
+        const quantityInput = document.getElementById("quantityInput");
+        const cartQuantity = document.getElementById("cartQuantity");
+        const buyQuantity = document.getElementById("buyQuantity");
+        const priceDisplay = document.getElementById("priceDisplay");
+
+        let quantity = parseInt(quantityInput.value, 10);
+        const maxStock = getMaxStock();
+        const unitPrice = getUnitPrice();
+
+        if (isNaN(quantity) || quantity < 1) quantity = 1;
+        if (quantity > maxStock) quantity = maxStock;
+
+        quantityInput.value = quantity;
+        cartQuantity.value = quantity;
+        buyQuantity.value = quantity;
+        priceDisplay.textContent = formatPrice(unitPrice * quantity);
+    }
+
+    function increaseQty() {
+        const quantityInput = document.getElementById("quantityInput");
+        let quantity = parseInt(quantityInput.value, 10);
+        const maxStock = getMaxStock();
+
+        if (isNaN(quantity)) quantity = 1;
+        if (quantity < maxStock) {
+            quantityInput.value = quantity + 1;
+        }
+        syncQuantity();
+    }
+
+    function decreaseQty() {
+        const quantityInput = document.getElementById("quantityInput");
+        let quantity = parseInt(quantityInput.value, 10);
+
+        if (isNaN(quantity)) quantity = 1;
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
+        }
+        syncQuantity();
+    }
+
+    window.onload = function () {
+        syncQuantity();
+    };
+</script>
+</body>
 </html>

@@ -19,7 +19,10 @@ body {
 .logo img{
     width: 200px;
     height: auto;
-
+    transition: transform 0.25s ease;
+}
+.logo img:hover{
+    transform: scale(1.08);
 }
 .search{
     margin-left: 50px;
@@ -93,7 +96,27 @@ body {
     min-width: 82px;
     z-index: 1;
 }
+.img-wrapper img:hover{
+    transform: scale(1.08);
+}
 
+.img-wrapper:hover{
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+.img-wrapper{
+    width:350px;
+    height:350px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.img-wrapper img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+}
 .dropdown a {
     display: block;
     padding: 10px;
@@ -112,12 +135,7 @@ body {
     display: flex;
     width: 100%;
 }
-.product .product-item img{
-    height: 80%;
-    width: auto;
-    object-fit: contain;
-    border-radius: 10px;
-}
+
 
 .product {
     width: 90%;
@@ -195,4 +213,90 @@ h3{
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+
+.quantity-section {
+    margin-top: 16px;
+    display: inline-flex;      /* thay vì flex */
+    align-items: center;
+    gap: 15px;
+    width: fit-content;        /* chỉ ôm nội dung */
+    position: relative;
+    z-index: 20;
+}
+
+.quantity-label {
+    font-size: 17px;
+    min-width: 100px;
+    color: #666;
+}
+
+.quantity-box {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+    z-index: 21;
+}
+
+.quantity-box button {
+    width: 48px;
+    height: 38px;
+    border: none;
+    background: #fff;
+    color: #777;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    position: relative;
+    z-index: 22;
+    pointer-events: auto;
+}
+
+.quantity-box button:first-child {
+    border-right: 1px solid #dcdcdc;
+}
+
+.quantity-box button:last-child {
+    border-left: 1px solid #dcdcdc;
+}
+
+.quantity-box button:hover {
+    background: #f5f5f5;
+}
+
+.quantity-box input {
+    width: 70px;
+    height: 38px;
+    border: none;
+    text-align: center;
+    font-size: 24px;
+    color: #ff5a36;
+    background: #fff;
+    outline: none;
+    position: relative;
+    z-index: 22;
+}
+
+.quantity-box input::-webkit-outer-spin-button,
+.quantity-box input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity-box input[type="number"] {
+    -moz-appearance: textfield;
+}
+.productdetails {
+    position: relative;
+    z-index: 1;
+}
+
+.details {
+    position: relative;
+    z-index: 1;
 }

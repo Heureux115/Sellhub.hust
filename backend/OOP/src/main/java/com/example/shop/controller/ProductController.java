@@ -27,51 +27,86 @@ public class ProductController extends BaseCartController {
 
 
     @PostMapping("/product/buyNow/{id}")
-    public String buyNow(@PathVariable Long id, HttpSession session, Model model) {
+    public String buyNow(@PathVariable Long id,
+                         @org.springframework.web.bind.annotation.RequestParam int quantity,
+                         HttpSession session,
+                         Model model) {
         Product product = productRepo.findById(id).orElse(null);
         User user = (User) session.getAttribute("user");
-        if (user == null){
+
+        if (user == null) {
             return "login";
         }
-        if (product != null && product.getId() != null) {
-            clearCart(session);
-            addToCart(session, new CartItem(product, 1));
-            model.addAttribute("cart", getCartFromSession(session));
-            return "redirect:/payment";
-        }else {
+
+        if (product == null || product.getId() == null) {
             throw new IllegalArgumentException("Product or Product ID is null");
         }
+
+        if (quantity < 1) {
+            quantity = 1;
+        }
+
+        if (quantity > product.getStock()) {
+            quantity = product.getStock();
+        }
+
+        clearCart(session);
+        addToCart(session, product, quantity);
+        model.addAttribute("cart", getCartFromSession(session));
+        return "redirect:/payment";
     }
 
 
     @PostMapping("/product/addToCart/{id}")
-    public String addToCartHandler(@PathVariable Long id, HttpSession session) {
+    public String addToCartHandler(@PathVariable Long id,
+                                   @org.springframework.web.bind.annotation.RequestParam int quantity,
+                                   HttpSession session) {
+        System.out.println("=== ADD TO CART ===");
+        System.out.println("Quantity nhận từ request = " + quantity);
+
         User user = (User) session.getAttribute("user");
-        if (user == null){
+        if (user == null) {
             return "login";
         }
+
         productRepo.findById(id).ifPresent(product -> {
-            addToCart(session, product);
+            addToCart(session, product, quantity);
         });
-        return "redirect:/product/{id}";
-    }
 
-    private void addToCart(HttpSession session, Product product) {
         Map<Long, CartItem> cartItems = getCartFromSession(session);
-
-
-        CartItem cartItem = cartItems.get(product.getId());
-        if (cartItem == null) {
-            cartItem = new CartItem(product, 1);
-            cartItems.put(product.getId(), cartItem);
-        } else {
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
+        CartItem item = cartItems.get(id);
+        if (item != null) {
+            System.out.println("Quantity trong session sau khi add = " + item.getQuantity());
         }
 
-        // Cập nhật lại giỏ hàng trong session
+        return "redirect:/product/" + id;
+    }
+    private void addToCart(HttpSession session, Product product, int quantity) {
+        Map<Long, CartItem> cartItems = getCartFromSession(session);
+
+        if (quantity < 1) {
+            quantity = 1;
+        }
+
+        if (quantity > product.getStock()) {
+            quantity = product.getStock();
+        }
+
+        CartItem cartItem = cartItems.get(product.getId());
+
+        if (cartItem == null) {
+            cartItem = new CartItem(product, quantity);
+            cartItems.put(product.getId(), cartItem);
+        } else {
+            int newQuantity = cartItem.getQuantity() + quantity;
+            if (newQuantity > product.getStock()) {
+                newQuantity = product.getStock();
+            }
+            cartItem.setQuantity(newQuantity);
+        }
+
         session.setAttribute("cart", cartItems);
     }
-
 
 
     @GetMapping("/product/{id}")

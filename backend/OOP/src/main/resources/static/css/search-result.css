@@ -19,7 +19,10 @@ body {
 .logo img{
     width: 200px;
     height: auto;
-
+    transition: transform 0.25s ease;
+}
+.logo img:hover{
+    transform: scale(1.08);
 }
 .search{
     margin-left: 50px;
@@ -170,4 +173,13 @@ body {
 .best_sellers #best_sellers li h3 {
     font-size: 16px;
     color: #333;
+}
+
+.best_sellers #best_sellers li:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+.best_sellers #best_sellers li:hover h3{
+    color: #0000FF;
 }

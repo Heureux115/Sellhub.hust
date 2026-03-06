@@ -19,7 +19,10 @@ body {
 .logo img{
   width: 200px;
   height: auto;
-
+  transition: transform 0.25s ease;
+}
+.logo img:hover{
+  transform: scale(1.08);
 }
 .search{
   margin-left: 50px;
